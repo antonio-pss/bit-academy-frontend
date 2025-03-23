@@ -1,0 +1,53 @@
+<app-default-auth-layout>
+  <section class="flex flex-col items-center p-2 gap-2.5">
+    <h2 class=" text-center font-medium ">
+      Entrar
+    </h2>
+
+  </section>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- Campo de E-mail -->
+    <mat-form-field appearance="outline" class="w-full">
+      <input
+        matInput
+        placeholder="Digite seu e-mail"
+        formControlName="email"
+        type="email"
+        required
+      />
+
+    </mat-form-field>
+
+    <!-- Campo de Senha -->
+    <mat-form-field appearance="outline" class="w-full">
+      <input
+        matInput
+        placeholder="Digite sua senha"
+        formControlName="password"
+        type="password"
+        required
+      />
+
+    </mat-form-field>
+
+    <!-- Botão de Submit -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="w-full"
+      [disabled]="!loginForm.valid"
+      (click)="onSubmit()"
+    >
+      Entrar
+    </button>
+
+    <!-- Botão ir ao cadastro-->
+    <button
+      mat-raised-button
+      class="w-full"
+      (click)="onNavigate(['/register'])">
+      Cadastrar
+    </button>
+  </form>
+</app-default-auth-layout>
