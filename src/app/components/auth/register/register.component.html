@@ -16,13 +16,29 @@
     </mat-form-field>
 
     <!-- Campo de E-mail -->
-    <mat-form-field appearance="outline" class="w-full">
+    <mat-form-field appearance="outline" class="w-full"
+
+    >
       <input matInput placeholder="Digite seu e-mail" formControlName="email" type="email" required />
       @if (registerForm.get('email')?.touched) {
         @if (registerForm.get('email')?.hasError('required')) {
           <small class="text-red-600">E-mail é obrigatório</small>
         } @else if (registerForm.get('email')?.hasError('email')) {
           <small class="text-red-600">E-mail inválido</small>
+        }
+      }
+    </mat-form-field>
+
+    <!-- Campo de Username -->
+    <mat-form-field appearance="outline" class="w-full"
+
+    >
+      <input matInput placeholder="Digite seu apelido" formControlName="username" type="username" required />
+      @if (registerForm.get('username')?.touched) {
+        @if (registerForm.get('username')?.hasError('required')) {
+          <small class="text-red-600">Apelido é obrigatório</small>
+        } @else if (registerForm.get('username')?.hasError('username')) {
+          <small class="text-red-600">Apelido inválido</small>
         }
       }
     </mat-form-field>

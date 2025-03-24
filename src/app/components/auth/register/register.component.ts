@@ -64,6 +64,7 @@ export class RegisterComponent {
     this.registerForm = fb.group({
         name: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
+        username: ['', [Validators.required, Validators.min(3), Validators.maxLength(20)]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required]
       },
@@ -76,6 +77,7 @@ export class RegisterComponent {
       console.log(
         this.registerForm.controls['name'].value,
         this.registerForm.controls['email'].value,
+        this.registerForm.controls['username'].value,
         this.registerForm.controls['password'].value,
         this.registerForm.controls['confirmPassword'].value
       );
