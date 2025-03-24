@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {DefaultAuthLayoutComponent} from '../../../views/default-auth-layout/default-auth-layout.component';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -20,6 +20,9 @@ import {MatButton} from '@angular/material/button';
 })
 export class LoginComponent {
   public loginForm: FormGroup;
+  public formTitleTxt: string = "Entrar";
+  public primaryBtnTxt: string = "Entrar";
+  public secondaryBtnTxt: string = "Registrar";
 
   constructor(private readonly fb: FormBuilder, private readonly router: Router) {
     this.loginForm = fb.group({
@@ -36,7 +39,7 @@ export class LoginComponent {
     }
   }
 
-  public onNavigate(action:any[]){
+  public onNavigate(action: any[]) {
     return this.router.navigate(action).then();
   }
 }
