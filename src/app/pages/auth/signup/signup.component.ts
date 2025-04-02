@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { DefaultAuthLayoutComponent } from "../../../views/default-auth-layout/default-auth-layout.component";
-import { MatButton } from "@angular/material/button";
-import { MatFormField } from "@angular/material/form-field";
-import { MatInput } from "@angular/material/input";
+import {Component} from '@angular/core';
+import {MatButton} from "@angular/material/button";
+import {MatFormField} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
 import {
   AbstractControl,
   FormBuilder,
@@ -12,7 +11,10 @@ import {
   ValidatorFn,
   Validators
 } from "@angular/forms";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
+import {GeneralService} from '../../../shared/services/general.service';
+import {DefaultAuthLayoutComponent} from '../../../templates/default-auth-layout/default-auth-layout.component';
+import {ToastrService} from 'ngx-toastr';
 
 export function confirmPasswordValidator(passwordField: string, confirmPasswordField: string): ValidatorFn {
   return (group: AbstractControl): ValidationErrors | null => {
@@ -24,7 +26,7 @@ export function confirmPasswordValidator(passwordField: string, confirmPasswordF
     }
 
     if (password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ passwordMismatch: true });
+      confirmPassword.setErrors({passwordMismatch: true});
     } else {
       const errors = confirmPassword.errors;
       if (errors) {
@@ -42,7 +44,7 @@ export function confirmPasswordValidator(passwordField: string, confirmPasswordF
 }
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-signup',
   standalone: true,
   imports: [
     DefaultAuthLayoutComponent,
@@ -51,41 +53,62 @@ export function confirmPasswordValidator(passwordField: string, confirmPasswordF
     MatInput,
     ReactiveFormsModule
   ],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class RegisterComponent {
+export class SignupComponent {
   public registerForm: FormGroup;
+
   public formTitleTxt: string = "Registrar";
-  public primaryBtnTxt: string = "Registrar";
+  public primaryBtnTxt: string = "Salvar";
   public secondaryBtnTxt: string = "Voltar";
 
-  constructor(private readonly fb: FormBuilder, private readonly router: Router) {
-    this.registerForm = fb.group({
+  constructor(private readonly fb: FormBuilder,
+              private readonly router: Router,
+              private readonly generalServices: GeneralService,
+              private readonly toastr: ToastrService) {
+
+    this.registerForm = this.fb.group({
         name: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         username: ['', [Validators.required, Validators.min(3), Validators.maxLength(20)]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required]
       },
-      { validators: confirmPasswordValidator('password', 'confirmPassword') }
+      {validators: confirmPasswordValidator('password', 'confirmPassword')}
     );
   }
 
   public onSubmit() {
+    console.log(
+      this.registerForm.controls['name'].value,
+      this.registerForm.controls['email'].value,
+      this.registerForm.controls['username'].value,
+      this.registerForm.controls['password'].value,
+      this.registerForm.controls['confirmPassword'].value
+    );
     if (this.registerForm.valid) {
-      console.log(
+      this.generalServices.signup(
         this.registerForm.controls['name'].value,
         this.registerForm.controls['email'].value,
         this.registerForm.controls['username'].value,
-        this.registerForm.controls['password'].value,
-        this.registerForm.controls['confirmPassword'].value
-      );
+        this.registerForm.controls['password'].value
+      ).subscribe({
+
+        next: (response) => {
+          console.log(response);
+          this.router.navigate(['auth/login']).then();
+        },
+        error: (error) => {
+          console.error(error);
+          this.toastr.error('Erro ao registrar usuário')
+        }
+      })
     }
   }
 
-  public onNavigate(action: any[]) {
-    return this.router.navigate(action).then();
+  public onNavigate(action: string) {
+    return this.router.navigate([action]).then();
   }
 
   get password() {
