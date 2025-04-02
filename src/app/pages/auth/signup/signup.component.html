@@ -1,0 +1,80 @@
+<app-default-auth-layout>
+  <section class="flex flex-col items-center p-2 gap-2.5">
+    <h2 class="text-center font-medium">
+      {{ formTitleTxt }}
+    </h2>
+  </section>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+
+    <!-- Campo Nome -->
+    <mat-form-field appearance="outline" class="w-full">
+      <input matInput placeholder="Digite seu nome" formControlName="name" type="text" required />
+      @if (registerForm.get('name')?.touched && registerForm.get('name')?.hasError('required')) {
+        <small class="text-red-600">Nome é obrigatório</small>
+      }
+    </mat-form-field>
+
+    <!-- Campo de E-mail -->
+    <mat-form-field appearance="outline" class="w-full"
+
+    >
+      <input matInput placeholder="Digite seu e-mail" formControlName="email" type="email" required />
+      @if (registerForm.get('email')?.touched) {
+        @if (registerForm.get('email')?.hasError('required')) {
+          <small class="text-red-600">E-mail é obrigatório</small>
+        } @else if (registerForm.get('email')?.hasError('email')) {
+          <small class="text-red-600">E-mail inválido</small>
+        }
+      }
+    </mat-form-field>
+
+    <!-- Campo de Username -->
+    <mat-form-field appearance="outline" class="w-full"
+
+    >
+      <input matInput placeholder="Digite seu apelido" formControlName="username" type="username" required />
+      @if (registerForm.get('username')?.touched) {
+        @if (registerForm.get('username')?.hasError('required')) {
+          <small class="text-red-600">Apelido é obrigatório</small>
+        } @else if (registerForm.get('username')?.hasError('username')) {
+          <small class="text-red-600">Apelido inválido</small>
+        }
+      }
+    </mat-form-field>
+
+    <!-- Campo de Senha -->
+    <mat-form-field appearance="outline" class="w-full">
+      <input matInput placeholder="Digite sua senha" formControlName="password" type="password" required />
+      @if (registerForm.get('password')?.touched) {
+        @if (registerForm.get('password')?.hasError('required')) {
+          <small class="text-red-600">Senha é obrigatória</small>
+        } @else if (registerForm.get('password')?.hasError('minlength')) {
+          <small class="text-red-600">Senha deve ter pelo menos 6 caracteres</small>
+        }
+      }
+    </mat-form-field>
+
+    <!-- Campo confirmar senha -->
+    <mat-form-field appearance="outline" class="w-full">
+      <input matInput placeholder="Confirmar senha" formControlName="confirmPassword" type="password" required />
+      @if (registerForm.get('confirmPassword')?.touched) {
+        @if (registerForm.get('confirmPassword')?.hasError('required')) {
+          <small class="text-red-600">Confirmação de senha é obrigatória</small>
+        } @else if (registerForm.get('confirmPassword')?.hasError('passwordMismatch')) {
+          <small class="text-red-600">As senhas não coincidem</small>
+        }
+      }
+    </mat-form-field>
+
+    <!-- Botão de Submit -->
+    <button mat-raised-button color="primary" type="submit" class="w-full" [disabled]="!registerForm.valid">
+      {{ primaryBtnTxt }}
+    </button>
+
+    <!-- Botão voltar -->
+    <button mat-stroked-button class="w-full" type="button" (click)="this.onNavigate('auth/login')">
+      {{ secondaryBtnTxt }}
+    </button>
+  </form>
+</app-default-auth-layout>

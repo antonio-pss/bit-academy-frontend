@@ -4,3 +4,5 @@ import { AppComponent } from './app/app.component';
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
+
+/*Para adicionar providers, redirecionar-se ao appConfig*/

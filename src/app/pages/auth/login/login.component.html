@@ -1,7 +1,7 @@
 <app-default-auth-layout>
   <section class="flex flex-col items-center p-2 gap-2.5">
     <h2 class=" text-center font-medium ">
-      Entrar
+      {{ formTitleTxt }}
     </h2>
 
   </section>
@@ -39,15 +39,15 @@
       [disabled]="!loginForm.valid"
       (click)="onSubmit()"
     >
-      Entrar
+      {{ primaryBtnTxt }}
     </button>
 
     <!-- Botão ir ao cadastro-->
     <button
       mat-raised-button
       class="w-full"
-      (click)="onNavigate(['/register'])">
-      Cadastrar
+      (click)="this.onNavigate('auth/signup')">
+      {{ secondaryBtnTxt }}
     </button>
   </form>
 </app-default-auth-layout>
