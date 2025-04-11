@@ -49,7 +49,7 @@ export class LoginComponent {
 
         next: (response) => {
           console.log(response);
-          this.router.navigate(['']).then();
+          this.router.navigate(['auth/platform-selector']).then();
         },
         error: (error) => {
           console.error(error);

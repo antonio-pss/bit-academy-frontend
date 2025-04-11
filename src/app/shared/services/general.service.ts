@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ApiEndpointsService} from './api-endpoints.service';
-import {tap} from 'rxjs';
-import {User} from '../models/user';
-import {jwtDecode} from 'jwt-decode';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ApiEndpointsService } from './api-endpoints.service';
+import { tap } from 'rxjs';
+import { User } from '../models/user';
+import { jwtDecode } from 'jwt-decode';
 
 interface LoginResponse {
   access: string;
@@ -15,15 +15,16 @@ interface LoginResponse {
 })
 export class GeneralService {
 
-  constructor(private readonly httpClient: HttpClient,
-              private readonly apiEndPoints: ApiEndpointsService,) {
-  }
+  constructor(
+    private readonly httpClient: HttpClient,
+    private readonly apiEndPoints: ApiEndpointsService
+  ) {}
 
   get headers(): HttpHeaders {
     const token = sessionStorage.getItem('auth-token');
 
     let headers = new HttpHeaders({
-      'Content-Type': 'application/json', // Adiciona o token CSRF aos cabeçalhos
+      'Content-Type': 'application/json' // Adiciona o token CSRF aos cabeçalhos
     });
     if (token) {
       headers = headers.append('Authorization', 'Bearer '.concat(token));
@@ -34,8 +35,8 @@ export class GeneralService {
   public login(username: string, password: string) {
     return this.httpClient.post<LoginResponse>(
       this.apiEndPoints.endpoints.loginUser,
-      {username, password},
-      {withCredentials: true}
+      { username, password },
+      { withCredentials: true }
     ).pipe(
       tap((value) => {
         console.log('Token recebido:', value.access);
@@ -50,8 +51,8 @@ export class GeneralService {
   public signup(name: string, username: string, email: string, password: string) {
     return this.httpClient.post(
       this.apiEndPoints.endpoints.signUpUser,
-      {name, username, email, password}
-    )
+      { name, username, email, password }
+    );
   }
 
   get user(): User | null {
@@ -77,11 +78,13 @@ export class GeneralService {
         email: payload.email,
         active: true,
         created_at: undefined,
-        modified_at: undefined,
+        modified_at: undefined
       };
     } catch (error) {
       console.error('Erro ao decodificar o token JWT:', error);
       return null;
     }
   }
+
+
 }
