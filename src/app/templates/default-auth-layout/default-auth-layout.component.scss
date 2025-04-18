@@ -1,0 +1,23 @@
+.body {
+  background: linear-gradient(120deg, #34C759, #F79824, #1E91D6);
+  background-size: 200% 200%;
+  animation: smoothShift 15s ease-in-out infinite;
+}
+
+@keyframes smoothShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

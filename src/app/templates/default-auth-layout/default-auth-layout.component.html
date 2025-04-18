@@ -1,19 +1,12 @@
-<main class="h-screen w-full bg-richBlack p-2 grid grid-cols-12 gap-4">
+<main class="flex h-screen w-full p-2 gap-4">
   <!-- Card do Formulário -->
-  <mat-card class="col-span-4 bg-white p-6 shadow-lg rounded-lg">
-    <section class="flex flex-col items-center gap-4">
-      <h2 class="text-center text-2xl font-bold text-gray-800">
-        Bem-vindo!
-      </h2>
-      <mat-divider></mat-divider>
-      <!-- Onde ficam os formulário, não precisa tocar -->
-      <ng-content></ng-content>
-
-    </section>
+  <mat-card class="flex lg:w-5 md:w-5 h-screen p-6 align-items-center shadow-lg rounded-lg bg-black-alpha-90">
+    <ng-content></ng-content>
   </mat-card>
 
   <!-- Área para animações ou outros conteúdos -->
-  <div class="col-span-8 bg-gray-100 rounded-lg p-6">
-    <!-- Futuras animações ou conteúdo aqui -->
-  </div>
+  <section class="flex body md:w-full h-full border-round-2xl justify-content-center align-items-center">
+      <img src="assets/logo-white-bit-academy.svg" alt="Logo Bit Academy">
+    <!-- Futuras animações ou conteúdo aqui class="col-span-8 bg-gray-100 rounded-lg p-6" -->
+  </section>
 </main>
