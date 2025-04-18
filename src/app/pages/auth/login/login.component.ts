@@ -4,19 +4,16 @@ import {Router} from '@angular/router';
 import {MatFormField} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
-import {DefaultAuthLayoutComponent} from '../../../templates/default-auth-layout/default-auth-layout.component';
 import {GeneralService} from '../../../shared/services/general.service';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   imports: [
-    DefaultAuthLayoutComponent,
     ReactiveFormsModule,
     MatFormField,
     MatInput,
-    MatButton,
-    DefaultAuthLayoutComponent
+    MatButton
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'

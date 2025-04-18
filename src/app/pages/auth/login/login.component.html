@@ -1,53 +1,58 @@
-<app-default-auth-layout>
-  <section class="flex flex-col items-center p-2 gap-2.5">
-    <h2 class=" text-center font-medium ">
+<main class="flex p-4 bg-black-alpha-90">
+  <section class="col w-full">
+    <h2 class="text-center text-white">
       {{ formTitleTxt }}
     </h2>
 
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Campo de E-mail -->
+      <mat-form-field appearance="outline" class="w-full">
+        <input
+          matInput
+          placeholder="Digite seu e-mail"
+          formControlName="email"
+          type="email"
+          class="text-white"
+          required
+        />
+
+      </mat-form-field>
+
+      <!-- Campo de Senha -->
+      <mat-form-field appearance="outline" class="w-full">
+        <input
+          matInput
+          placeholder="Digite sua senha"
+          formControlName="password"
+          type="password"
+          class="text-white"
+          required
+        />
+
+      </mat-form-field>
+
+      <!-- Botão de Submit -->
+      <div class="flex">
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          class="w-full bg-white text-black-alpha-90"
+          [disabled]="!loginForm.valid"
+          (click)="onSubmit()"
+        >
+          {{ primaryBtnTxt }}
+        </button>
+
+        <!-- Botão ir ao cadastro-->
+        <button
+          mat-flat-button
+          class="w-full bg-white text-black-alpha-90"
+          (click)="this.onNavigate('auth/signup')">
+          {{ secondaryBtnTxt }}
+        </button>
+      </div>
+    </form>
   </section>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
-    <!-- Campo de E-mail -->
-    <mat-form-field appearance="outline" class="w-full">
-      <input
-        matInput
-        placeholder="Digite seu e-mail"
-        formControlName="email"
-        type="email"
-        required
-      />
-
-    </mat-form-field>
-
-    <!-- Campo de Senha -->
-    <mat-form-field appearance="outline" class="w-full">
-      <input
-        matInput
-        placeholder="Digite sua senha"
-        formControlName="password"
-        type="password"
-        required
-      />
-
-    </mat-form-field>
-
-    <!-- Botão de Submit -->
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      class="w-full"
-      [disabled]="!loginForm.valid"
-      (click)="onSubmit()"
-    >
-      {{ primaryBtnTxt }}
-    </button>
-
-    <!-- Botão ir ao cadastro-->
-    <button
-      mat-raised-button
-      class="w-full"
-      (click)="this.onNavigate('auth/signup')">
-      {{ secondaryBtnTxt }}
-    </button>
-  </form>
-</app-default-auth-layout>
+  <section class="col body"></section>
+</main>
