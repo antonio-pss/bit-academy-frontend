@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MatButton} from "@angular/material/button";
+import {MatFabButton} from "@angular/material/button";
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {
@@ -13,8 +13,8 @@ import {
 } from "@angular/forms";
 import {Router} from '@angular/router';
 import {GeneralService} from '../../../shared/services/general.service';
-import {DefaultAuthLayoutComponent} from '../../../templates/default-auth-layout/default-auth-layout.component';
 import {ToastrService} from 'ngx-toastr';
+import {DefaultAuthLayoutComponent} from '../../../templates/default-auth-layout/default-auth-layout.component';
 
 export function confirmPasswordValidator(passwordField: string, confirmPasswordField: string): ValidatorFn {
   return (group: AbstractControl): ValidationErrors | null => {
@@ -47,11 +47,11 @@ export function confirmPasswordValidator(passwordField: string, confirmPasswordF
   selector: 'app-signup',
   standalone: true,
   imports: [
-    DefaultAuthLayoutComponent,
-    MatButton,
     MatFormField,
     MatInput,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFabButton,
+    DefaultAuthLayoutComponent
   ],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']

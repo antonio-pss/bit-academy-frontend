@@ -1,53 +1,55 @@
 <app-default-auth-layout>
-  <section class="flex flex-col items-center p-2 gap-2.5">
-    <h2 class=" text-center font-medium ">
-      {{ formTitleTxt }}
-    </h2>
+  <section class="flex flex-column justify-content-center h-full w-fit p-4">
+      <h2 class="text-center text-white">
+        {{ formTitleTxt }}
+      </h2>
 
-  </section>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
-    <!-- Campo de E-mail -->
-    <mat-form-field appearance="outline" class="w-full">
-      <input
-        matInput
-        placeholder="Digite seu e-mail"
-        formControlName="email"
-        type="email"
-        required
-      />
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Campo de E-mail -->
+        <mat-form-field appearance="outline" class="w-full">
+          <input
+            matInput
+            placeholder="Digite seu e-mail"
+            formControlName="email"
+            type="email"
+            class="text-white"
+            required
+          />
 
-    </mat-form-field>
+        </mat-form-field>
 
-    <!-- Campo de Senha -->
-    <mat-form-field appearance="outline" class="w-full">
-      <input
-        matInput
-        placeholder="Digite sua senha"
-        formControlName="password"
-        type="password"
-        required
-      />
+        <!-- Campo de Senha -->
+        <mat-form-field appearance="outline" class="w-full">
+          <input
+            matInput
+            placeholder="Digite sua senha"
+            formControlName="password"
+            type="password"
+            class="text-white"
+            required
+          />
 
-    </mat-form-field>
+        </mat-form-field>
 
-    <!-- Botão de Submit -->
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      class="w-full"
-      [disabled]="!loginForm.valid"
-      (click)="onSubmit()"
-    >
-      {{ primaryBtnTxt }}
-    </button>
+        <!-- Botão de Submit -->
+        <button
+          mat-fab extended
+          color="primary"
+          type="submit"
+          class="w-full h-3rem mb-2 bg-white text-black-alpha-90"
+          [disabled]="!loginForm.valid"
+          (click)="onSubmit()"
+        >
+          {{ primaryBtnTxt }}
+        </button>
 
-    <!-- Botão ir ao cadastro-->
-    <button
-      mat-raised-button
-      class="w-full"
-      (click)="this.onNavigate('auth/signup')">
-      {{ secondaryBtnTxt }}
-    </button>
-  </form>
+        <!-- Botão ir ao cadastro-->
+        <button
+          mat-fab extended
+          class="w-full h-3rem bg-white text-black-alpha-90"
+          (click)="this.onNavigate('auth/signup')">
+          {{ secondaryBtnTxt }}
+        </button>
+      </form>
+    </section>
 </app-default-auth-layout>
