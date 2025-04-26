@@ -1,7 +1,8 @@
 import {Routes} from '@angular/router';
-import {LoginComponent} from './pages/auth/login/login.component';
-import {SignupComponent} from './pages/auth/signup/signup.component';
-import {PlatformSelectorComponent} from './pages/platform-selector/platform-selector.component';
+import {LoginComponent} from './modules/auth/components/login/login.component';
+import {SignupComponent} from './modules/auth/components/signup/signup.component';
+import {ClassComponent} from './modules/bit-class/components/class/class.component';
+import {SelectPlataformComponent} from './modules/auth/components/select-plataform/select-plataform.component';
 
 export const routes: Routes = [
   {
@@ -17,13 +18,17 @@ export const routes: Routes = [
       },
       {
         path: 'platform-selector',
-        component: PlatformSelectorComponent,
+        component: SelectPlataformComponent,
+      },
+      {
+        path: 'class',
+        component: ClassComponent,
       },
       {
         path: '',
         redirectTo: 'login',
         pathMatch: 'full',
-      }
+      },
     ]
   },
   {
