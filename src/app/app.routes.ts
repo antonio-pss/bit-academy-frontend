@@ -1,8 +1,8 @@
 import {Routes} from '@angular/router';
 import {LoginComponent} from './modules/auth/components/login/login.component';
 import {SignupComponent} from './modules/auth/components/signup/signup.component';
-import {ClassComponent} from './modules/bit-class/components/class/class.component';
 import {SelectPlataformComponent} from './modules/auth/components/select-plataform/select-plataform.component';
+import {ClassroomComponent} from './modules/bit-class/components/classroom/classroom.component';
 
 export const routes: Routes = [
   {
@@ -21,8 +21,8 @@ export const routes: Routes = [
         component: SelectPlataformComponent,
       },
       {
-        path: 'class',
-        component: ClassComponent,
+        path: 'classroom',
+        component: ClassroomComponent,
       },
       {
         path: '',
