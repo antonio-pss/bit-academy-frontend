@@ -8,36 +8,14 @@ export const routes: Routes = [
   {
     path: 'auth',
     children: [
-      {
-        path: 'login',
-        component: LoginComponent,
-      },
-      {
-        path: 'signup',
-        component: SignupComponent,
-      },
-      {
-        path: 'platform-selector',
-        component: SelectPlataformComponent,
-      },
-      {
-        path: 'classroom',
-        component: ClassroomComponent,
-      },
-      {
-        path: '',
-        redirectTo: 'login',
-        pathMatch: 'full',
-      },
-    ]
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignupComponent },
+      { path: 'platform-selector', component: SelectPlataformComponent },
+      // depois remover, ta aq p teste
+      { path: 'classroom', component: ClassroomComponent },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+    ],
   },
-  {
-    path: '',
-    redirectTo: 'auth/login',
-    pathMatch: 'full',
-  },
-  {
-    path: '**',
-    redirectTo: 'auth/login',
-  }
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'auth/login' },
 ];
