@@ -72,19 +72,19 @@ export class GeneralService {
       }
 
       return {
-        user_id: payload.user_id,
         name: payload.name,
         username: payload.username,
         email: payload.email,
+        xp: payload.xp,
+        streak: payload.streak,
         active: true,
         created_at: undefined,
-        modified_at: undefined
+        modified_at: undefined,
+        id: undefined,
       };
     } catch (error) {
       console.error('Erro ao decodificar o token JWT:', error);
       return null;
     }
   }
-
-
 }
