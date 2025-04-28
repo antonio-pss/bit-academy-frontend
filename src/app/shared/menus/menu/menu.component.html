@@ -1,1 +1,26 @@
-<p>menu works!</p>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
+               (closed)="events.push('close!')">
+    <mat-nav-list>
+      @for (item of listaDeMenus; track trackByIndex) {
+        <mat-list-item (click)="this.onNavigate( item.routee )">
+          <mat-icon matListIcon>{{ item.icon }}</mat-icon>
+          {{ item.menu }}
+        </mat-list-item>
+      }
+      <mat-list-item (click)="this.logout()">
+        <mat-icon matListIcon>logout</mat-icon>
+        sair
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <p>
+      <button mat-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </p>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
