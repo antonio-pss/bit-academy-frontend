@@ -4,6 +4,9 @@ import {SignupComponent} from './modules/auth/components/signup/signup.component
 import {SelectPlataformComponent} from './modules/auth/components/select-plataform/select-plataform.component';
 import {MainComponent} from './modules/pages/main/main.component';
 import {HomeComponent} from './modules/auth/components/home/home.component';
+import {TeacherMaterialComponent} from './modules/bit-class/components/teacher-material/teacher-material.component';
+import {AvaliationComponent} from './modules/bit-class/components/avaliation/avaliation.component';
+import {CalendarComponent} from './modules/bit-class/components/calendar/calendar.component';
 import {FrequencyComponent} from './modules/bit-class/components/classroom/frequency/frequency.component';
 import {ClassroomComponent} from './modules/bit-class/components/classroom/classroom.component';
 
@@ -31,11 +34,23 @@ export const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'classroom',
+        path: 'calendario',
+        component: CalendarComponent,
+      },
+      {
+        path: 'material',
+        component: TeacherMaterialComponent
+      },
+      {
+        path: 'avaliacao',
+        component: AvaliationComponent
+      },
+      {
+        path: 'sala',
         component: ClassroomComponent,
         children: [
           {
-            path: 'frequency',
+            path: 'frequencia',
             component: FrequencyComponent
           },
         ]
