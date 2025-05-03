@@ -24,6 +24,7 @@ import {MatToolbar} from '@angular/material/toolbar';
 export class MainComponent {
   menuItems = [
     {label: 'Início', icon: 'home', route: '/home'},
+    {label: 'Minhas salas', icon: 'co_present', route: '/sala'},
     {label: 'Calendário', icon: 'calendar_month', route: '/calendario'},
     {label: 'Material', icon: 'book_2', route: '/material'},
     {label: 'Avaliação', icon: 'library_books', route: '/avaliacao'},
