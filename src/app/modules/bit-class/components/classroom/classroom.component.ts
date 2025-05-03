@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import {MenuComponent} from "../../../../shared/menus/menu/menu.component";
+import {RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-classroom',
-    imports: [
-        MenuComponent
-    ],
+  imports: [
+    RouterOutlet
+  ],
   templateUrl: './classroom.component.html',
   styleUrl: './classroom.component.scss'
 })
