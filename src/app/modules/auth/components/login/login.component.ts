@@ -1,20 +1,20 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatFabButton} from "@angular/material/button";
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from '@angular/router';
-import {GeneralService} from '../../../../shared/services/general.service';
+import {AuthBaseService} from '../../../../shared/services/auth-base.service';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
-    imports: [
-        MatFabButton,
-        MatFormField,
-        MatInput,
-        ReactiveFormsModule
-    ],
+  imports: [
+    MatFabButton,
+    MatFormField,
+    MatInput,
+    ReactiveFormsModule
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -26,7 +26,7 @@ export class LoginComponent {
 
   constructor(private readonly fb: FormBuilder,
               private readonly router: Router,
-              private readonly generalService: GeneralService,
+              private readonly generalService: AuthBaseService,
               private readonly toastr: ToastrService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -35,15 +35,15 @@ export class LoginComponent {
   }
 
   public onSubmit() {
-    console.log(
-      this.loginForm.controls['email'].value,
-      this.loginForm.controls['password'].value);
+    const userData = {
+      email: this.loginForm.controls['email'].value,
+      password: this.loginForm.controls['password'].value
+    }
 
     if (this.loginForm.valid) {
       this.generalService.login(
-        this.loginForm.controls['email'].value,
-        this.loginForm.controls['password'].value).subscribe({
-
+        userData.email, userData.password
+      ).subscribe({
         next: (response) => {
           console.log(response);
           this.router.navigate(['auth/platform-selector']).then();

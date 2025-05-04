@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ApiEndpointsService } from './api-endpoints.service';
-import { tap } from 'rxjs';
-import { User } from '../models/user';
-import { jwtDecode } from 'jwt-decode';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {EndpointsService} from './endpoints.service';
+import {tap} from 'rxjs';
+import {User} from '../models/user';
+import {jwtDecode} from 'jwt-decode';
 
 interface LoginResponse {
   access: string;
@@ -13,12 +13,13 @@ interface LoginResponse {
 @Injectable({
   providedIn: 'root'
 })
-export class GeneralService {
+export class AuthBaseService {
 
   constructor(
     private readonly httpClient: HttpClient,
-    private readonly apiEndPoints: ApiEndpointsService
-  ) {}
+    private readonly httpEndpoints: EndpointsService
+  ) {
+  }
 
   get headers(): HttpHeaders {
     const token = sessionStorage.getItem('auth-token');
@@ -32,11 +33,11 @@ export class GeneralService {
     return headers;
   }
 
-  public login(username: string, password: string) {
+  public login(email: string, password: string) {
     return this.httpClient.post<LoginResponse>(
-      this.apiEndPoints.endpoints.loginUser,
-      { username, password },
-      { withCredentials: true }
+      this.httpEndpoints.path.loginUser,
+      {email, password},
+      {withCredentials: true}
     ).pipe(
       tap((value) => {
         console.log('Token recebido:', value.access);
@@ -48,10 +49,11 @@ export class GeneralService {
     );
   }
 
-  public signup(name: string, username: string, email: string, password: string) {
+  public signup(name: string, email: string, username: string, password: string) {
+    console.log(name, email, username, password);
     return this.httpClient.post(
-      this.apiEndPoints.endpoints.signUpUser,
-      { name, username, email, password }
+      this.httpEndpoints.path.signUpUser,
+      {name, username, email, password}
     );
   }
 

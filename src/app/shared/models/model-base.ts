@@ -3,5 +3,4 @@ export interface ModelBase {
   modified_at?: Date;
   active: boolean;
   id?: number;
-
 }

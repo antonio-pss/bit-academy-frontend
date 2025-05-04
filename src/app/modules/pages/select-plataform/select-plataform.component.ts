@@ -22,6 +22,6 @@ export class SelectPlataformComponent {
               private readonly toastr: ToastrService) { }
 
   public onNavigate(action: string) {
-    return this.router.navigate([action]).then();
+    return this.router.navigate(['plataform', action]).then();
   }
 }

@@ -1,6 +1,5 @@
-
 <section class="flex flex-column w-fit h-full p-4">
-  <h2 class="text-center text-white">
+  <h2 class="text-center text-black">
     {{ formTitleTxt }}
   </h2>
 
@@ -8,67 +7,38 @@
 
     <!-- Campo Nome -->
     <mat-form-field appearance="outline" class="w-full">
-      <input matInput placeholder="Digite seu nome" formControlName="name" type="text" class="text-white" required/>
-      @if (registerForm.get('name')?.touched && registerForm.get('name')?.hasError('required')) {
+      <input matInput placeholder="Digite seu nome" formControlName="name" type="text" class="text-black" required/>
+      @if (registerForm.get('name')?.invalid && (registerForm.get('name')?.touched || registerForm.get('name')?.dirty)) {
         <small class="text-red-600">Nome é obrigatório</small>
       }
     </mat-form-field>
 
     <!-- Campo de E-mail -->
-    <mat-form-field appearance="outline" class="w-full"
-
-    >
-      <input matInput placeholder="Digite seu e-mail" formControlName="email" type="email" class="text-white"
+    <mat-form-field appearance="outline" class="w-full">
+      <input matInput placeholder="Digite seu e-mail" formControlName="email" type="email" class="text-black"
              required/>
-      @if (registerForm.get('email')?.touched) {
-        @if (registerForm.get('email')?.hasError('required')) {
-          <small class="text-red-600">E-mail é obrigatório</small>
-        } @else if (registerForm.get('email')?.hasError('email')) {
-          <small class="text-red-600">E-mail inválido</small>
-        }
-      }
     </mat-form-field>
 
     <!-- Campo de Username -->
-    <mat-form-field appearance="outline" class="w-full"
-
-    >
-      <input matInput placeholder="Digite seu apelido" formControlName="username" type="username" class="text-white"
+    <mat-form-field appearance="outline" class="w-full">
+      <input matInput placeholder="Digite seu apelido" formControlName="username" type="username" class="text-black"
              required/>
-      @if (registerForm.get('username')?.touched) {
-        @if (registerForm.get('username')?.hasError('required')) {
-          <small class="text-red-600">Apelido é obrigatório</small>
-        } @else if (registerForm.get('username')?.hasError('username')) {
-          <small class="text-red-600">Apelido inválido</small>
-        }
-      }
     </mat-form-field>
 
     <!-- Campo de Senha -->
     <mat-form-field appearance="outline" class="w-full">
-      <input matInput placeholder="Digite sua senha" formControlName="password" type="password" class="text-white"
+      <input matInput placeholder="Digite sua senha" formControlName="password" type="password" class="text-black"
              required/>
-      @if (registerForm.get('password')?.touched) {
-        @if (registerForm.get('password')?.hasError('required')) {
-          <small class="text-red-600">Senha é obrigatória</small>
-        } @else if (registerForm.get('password')?.hasError('minlength')) {
-          <small class="text-red-600">Senha deve ter pelo menos 6 caracteres</small>
-        }
-      }
     </mat-form-field>
+
 
     <!-- Campo confirmar senha -->
     <mat-form-field appearance="outline" class="w-full">
       <input matInput placeholder="Confirmar senha" formControlName="confirmPassword" type="password"
-             class="text-white" required/>
-      @if (registerForm.get('confirmPassword')?.touched) {
-        @if (registerForm.get('confirmPassword')?.hasError('required')) {
-          <small class="text-red-600">Confirmação de senha é obrigatória</small>
-        } @else if (registerForm.get('confirmPassword')?.hasError('passwordMismatch')) {
-          <small class="text-red-600">As senhas não coincidem</small>
-        }
-      }
+             class="text-black" required/>
+
     </mat-form-field>
+
 
     <!-- Botão de Submit -->
     <button mat-fab extended color="primary" type="submit" class="w-full h-3rem mb-2 bg-white text-black-alpha-90"

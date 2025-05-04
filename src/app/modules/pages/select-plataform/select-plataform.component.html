@@ -1,0 +1,26 @@
+<section class="flex flex-col items-center justify-center h-screen gap-4 bg-gray-100">
+  <h2 class="text-2xl font-semibold text-gray-800">{{ titleTxt }}</h2>
+
+  <div class="flex gap-2 align-content-center justify-content-center ">
+    <button
+      (click)="onNavigate('')"
+      mat-raised-button
+      class="w-48 py-2 text-black bg-blue-500 hover:bg-blue-600 rounded-lg shadow-md">
+      {{ bitNotesName }}
+    </button>
+
+    <button
+      (click)="onNavigate('class')"
+      mat-raised-button
+      class="w-48 py-2 text-black bg-green-500 hover:bg-green-600 rounded-lg shadow-md">
+      {{ bitClassName }}
+    </button>
+
+    <button
+      (click)="onNavigate('')"
+      mat-raised-button
+      class="w-48 py-2 text-black bg-red-500 hover:bg-red-600 rounded-lg shadow-md">
+      {{ bitSchoolName }}
+    </button>
+  </div>
+</section>
