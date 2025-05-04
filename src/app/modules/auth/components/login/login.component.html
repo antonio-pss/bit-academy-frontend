@@ -1,10 +1,9 @@
-
-<section class="flex flex-column justify-content-center h-full w-fit p-4">
-  <h2 class="text-center text-white">
+<section class="flex flex-column justify-content-center h-screen w-fit p-4">
+  <h2 class="text-center text-black">
     {{ formTitleTxt }}
   </h2>
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full">
     <!-- Campo de E-mail -->
     <mat-form-field appearance="outline" class="w-full">
       <input
@@ -12,7 +11,7 @@
         placeholder="Digite seu e-mail"
         formControlName="email"
         type="email"
-        class="text-white"
+        class="text-black"
         required
       />
 
@@ -25,7 +24,7 @@
         placeholder="Digite sua senha"
         formControlName="password"
         type="password"
-        class="text-white"
+        class="text-black"
         required
       />
 
@@ -38,7 +37,6 @@
       type="submit"
       class="w-full h-3rem mb-2 bg-white text-black-alpha-90"
       [disabled]="!loginForm.valid"
-      (click)="onSubmit()"
     >
       {{ primaryBtnTxt }}
     </button>

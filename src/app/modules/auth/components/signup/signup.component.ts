@@ -13,7 +13,7 @@ import {
 } from "@angular/forms";
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {GeneralService} from '../../../../shared/services/general.service';
+import {AuthBaseService} from '../../../../shared/services/auth-base.service';
 
 export function confirmPasswordValidator(passwordField: string, confirmPasswordField: string): ValidatorFn {
   return (group: AbstractControl): ValidationErrors | null => {
@@ -44,63 +44,64 @@ export function confirmPasswordValidator(passwordField: string, confirmPasswordF
 
 @Component({
   selector: 'app-signup',
-    imports: [
-        MatFabButton,
-        MatFormField,
-        MatInput,
-        ReactiveFormsModule
-    ],
+  imports: [
+    MatFabButton,
+    MatFormField,
+    MatInput,
+    ReactiveFormsModule
+  ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
-  public registerForm: FormGroup;
-
   public formTitleTxt: string = "Registrar";
   public primaryBtnTxt: string = "Salvar";
   public secondaryBtnTxt: string = "Voltar";
 
+  public registerForm: FormGroup;
+
   constructor(private readonly fb: FormBuilder,
               private readonly router: Router,
-              private readonly generalServices: GeneralService,
+              private readonly generalServices: AuthBaseService,
               private readonly toastr: ToastrService) {
 
-    this.registerForm = this.fb.group({
-        name: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        username: ['', [Validators.required, Validators.min(3), Validators.maxLength(20)]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', Validators.required]
-      },
-      {validators: confirmPasswordValidator('password', 'confirmPassword')}
-    );
+    this.registerForm = this.fb.nonNullable.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]]
+    }, {
+      validators: confirmPasswordValidator('password', 'confirmPassword')
+    })
   }
 
+
   public onSubmit() {
-    console.log(
-      this.registerForm.controls['name'].value,
-      this.registerForm.controls['email'].value,
-      this.registerForm.controls['username'].value,
-      this.registerForm.controls['password'].value,
-      this.registerForm.controls['confirmPassword'].value
-    );
+    const userData = {
+      name: this.registerForm.get('name')?.value,
+      email: this.registerForm.get('email')?.value,
+      username: this.registerForm.get('username')?.value,
+      password: this.registerForm.get('password')?.value
+    };
+
     if (this.registerForm.valid) {
       this.generalServices.signup(
-        this.registerForm.controls['name'].value,
-        this.registerForm.controls['email'].value,
-        this.registerForm.controls['username'].value,
-        this.registerForm.controls['password'].value
-      ).subscribe({
-
-        next: (response) => {
-          console.log(response);
-          this.router.navigate(['auth/login']).then();
-        },
-        error: (error) => {
-          console.error(error);
-          this.toastr.error('Erro ao registrar usuário')
-        }
-      })
+        userData.name,
+        userData.email,
+        userData.username,
+        userData.password)
+        .subscribe({
+          next: (response) => {
+            console.log(response);
+            this.router.navigate(['auth/login']).then();
+            this.toastr.success("Usuário registrado com sucesso");
+          },
+          error: (error) => {
+            console.error(error);
+            this.toastr.error('Erro ao registrar usuário')
+          }
+        })
     }
   }
 
