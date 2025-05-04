@@ -1,0 +1,35 @@
+<main class="h-screen flex flex-row">
+  <mat-sidenav-container class="h-screen">
+    <mat-sidenav mode="side" opened class="w-15rem bg-primary text-white p-3">
+      <mat-nav-list>
+        @for(item of menuItems; track item.label) {
+          <mat-list-item
+            (click)="onNavigate(item.route)"
+            class="hover:bg-primary-700 cursor-pointer rounded-md mb-2">
+            <mat-icon class="mr-2">{{ item.icon }}</mat-icon>
+            {{ item.label }}
+          </mat-list-item>
+        }
+        <mat-divider class="my-2 bg-white/30"></mat-divider>
+
+        <mat-list-item
+          (click)="onLogout()"
+          class="hover:bg-primary-700 cursor-pointer rounded-md">
+          <mat-icon class="mr-2">logout</mat-icon>
+          Sair
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+
+  </mat-sidenav-container>
+
+
+  <!-- Main Content -->
+    <div class="flex-1 p-2">
+      <mat-toolbar>
+        <span> {{ currentTitle }}</span>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </div>
+
+</main>

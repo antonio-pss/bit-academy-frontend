@@ -5,9 +5,11 @@ import {MatListItem, MatNavList} from '@angular/material/list';
 import {MatIcon} from '@angular/material/icon';
 import {MatDivider} from '@angular/material/divider';
 import {MatToolbar} from '@angular/material/toolbar';
+import {AuthBaseService} from '../../../shared/services/auth-base.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
-  selector: 'app-main',
+  selector: 'app-main-class',
   imports: [
     RouterOutlet,
     MatSidenavContainer,
@@ -23,23 +25,26 @@ import {MatToolbar} from '@angular/material/toolbar';
 })
 export class MainComponent {
   menuItems = [
-    {label: 'Início', icon: 'home', route: '/home'},
-    {label: 'Minhas salas', icon: 'co_present', route: '/sala'},
-    {label: 'Calendário', icon: 'calendar_month', route: '/calendario'},
-    {label: 'Material', icon: 'book_2', route: '/material'},
-    {label: 'Avaliação', icon: 'library_books', route: '/avaliacao'},
-    {label: 'Perfil', icon: 'person', route: '/perfil'},
-    {label: 'Configurações', icon: 'settings', route: '/configuracoes'}
+    {label: 'Início', icon: 'home', route: '#'},
+    {label: 'Minhas salas', icon: 'co_present', route: '#'},
+    {label: 'Calendário', icon: 'calendar_month', route: '#'},
+    {label: 'Material', icon: 'book_2', route: '#'},
+    {label: 'Avaliação', icon: 'library_books', route: '#'},
+    {label: 'Perfil', icon: 'person', route: '#'},
+    {label: 'Configurações', icon: 'settings', route: '#'}
   ];
 
   public currentTitle: string = '';
 
-  constructor(private router: Router) {
+  constructor(private readonly router: Router,
+              private readonly authService: AuthBaseService,
+              private readonly toastr: ToastrService) {
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const currentRoute = this.router.url;
         const menuItem = this.menuItems.find(item => item.route === currentRoute);
-        this.currentTitle = menuItem ? menuItem.label : 'Página não encontrada';
+        this.currentTitle = menuItem ? menuItem?.label : 'Página não encontrada';
       }
     });
   }
@@ -49,8 +54,9 @@ export class MainComponent {
   }
 
   public onLogout() {
-    console.log('Deslogando...');
-    this.router.navigate(['/login']).then();
+    this.authService.logout()
+    this.toastr.info('Você saiu com sucesso!', 'Logout')
+    this.router.navigate(['auth/login']).then();
   }
 
 }

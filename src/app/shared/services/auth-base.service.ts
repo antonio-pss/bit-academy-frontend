@@ -57,6 +57,12 @@ export class AuthBaseService {
     );
   }
 
+  public logout() {
+    console.log('Deslogando...');
+    sessionStorage.removeItem('auth-token');
+    sessionStorage.removeItem('refresh');
+  }
+
   get user(): User | null {
     const token = sessionStorage.getItem('auth-token');
 
