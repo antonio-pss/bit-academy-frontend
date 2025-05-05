@@ -21,6 +21,6 @@ export class SelectPlataformComponent {
     constructor(private readonly router: Router) {}
 
     public onNavigate(action: string) {
-        return this.router.navigate([action]).then();
+        return this.router.navigate([action]).then()
     }
 }

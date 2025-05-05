@@ -80,15 +80,20 @@ export class MainClassComponent {
         // Navegação bem sucedida
       })
       .catch(error => {
-        this.toastr.error('Erro ao navegar para a página');
         console.error('Erro de navegação:', error);
+        this.toastr.error('Erro ao navegar para a página','',{
+          timeOut: 3000,
+          progressBar: true,
+          progressAnimation: 'increasing',
+          closeButton: true
+        });
       });
   }
 
   public onLogout(): void {
     this.authService.logout();
     this.toastr.info('Você saiu com sucesso!', 'Logout');
-    this.router.navigate(['auth/login'])
+    this.router.navigate(['auth','login'])
       .then(() => {
         // Navegação bem sucedida
       })
