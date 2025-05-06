@@ -1,13 +1,20 @@
-<section class="p-d-flex p-jc-center p-ai-center p-flex-column not-found-container">
-  <mat-card class="not-found-card">
-    <mat-card-title>Página não encontrada</mat-card-title>
-    <mat-card-content>
-      <p>Desculpe, a página que você está tentando acessar não existe.</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="onNavigate('home')">
-        Voltar para a página inicial
-      </button>
+<section class="flex justify-content-center align-items-center flex-column min-h-screen" role="main">
+<mat-card class="not-found-card p-4">
+        <mat-card-title class="text-center mb-4">
+            <mat-icon class="text-6xl text-primary mb-3">error_outline</mat-icon>
+            <div class="text-4xl">404</div>
+            <div>Página não encontrada</div>
+        </mat-card-title>
+        <mat-card-content class="text-center mb-4">
+            <p>Desculpe, a página que você está tentando acessar não existe ou foi movida.</p>
+            <p>Por favor, verifique o endereço digitado ou utilize uma das opções abaixo.</p>
+        </mat-card-content>
+        <mat-card-actions class="flex justify-content-center gap-2">
+            <button mat-raised-button color="basic" (click)="location.back()">
+                <mat-icon>arrow_back</mat-icon>
+                Voltar
+            </button>
+
     </mat-card-actions>
   </mat-card>
 </section>

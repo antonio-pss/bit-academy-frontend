@@ -46,7 +46,7 @@ export class LoginComponent {
       ).subscribe({
         next: (response) => {
           console.log(response);
-          this.router.navigate(['auth/platform-selector']).then();
+          this.router.navigate(['auth', 'platform-selector'])
         },
         error: (error) => {
           console.error(error);
