@@ -1,55 +1,73 @@
-<section class="flex flex-column w-fit h-full p-4">
-  <h2 class="text-center text-black">
-    {{ formTitleTxt }}
-  </h2>
 
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+<div class="login-page relative">
+  <!-- Imagem no canto superior esquerdo (mantendo sua posição original) -->
+  <img src="assets/logo-white-bit-academy.svg" alt="logo" class="absolute top-0 md:right-0 m-4">
 
-    <!-- Campo Nome -->
-    <mat-form-field appearance="outline" class="w-full">
-      <input matInput placeholder="Digite seu nome" formControlName="name" type="text" class="text-black" required/>
-      @if (registerForm.get('name')?.invalid && (registerForm.get('name')?.touched || registerForm.get('name')?.dirty)) {
-        <small class="text-red-600">Nome é obrigatório</small>
-      }
-    </mat-form-field>
+  <!-- Container centralizado com PrimeFlex -->
+  <div class="flex justify-content-center align-items-center min-h-screen">
+    <div class="login-card w-full max-w-md">
+      <!-- Header -->
+      <div class="justify-content-center mb-4">
+        <h2 class="text-center text-white">
+          {{ formTitleTxt }}
+        </h2>
+      </div>
 
-    <!-- Campo de E-mail -->
-    <mat-form-field appearance="outline" class="w-full">
-      <input matInput placeholder="Digite seu e-mail" formControlName="email" type="email" class="text-black"
-             required/>
-    </mat-form-field>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
-    <!-- Campo de Username -->
-    <mat-form-field appearance="outline" class="w-full">
-      <input matInput placeholder="Digite seu apelido" formControlName="username" type="username" class="text-black"
-             required/>
-    </mat-form-field>
+      <!-- Campo Nome -->
+      <mat-form-field appearance="outline" class="w-full">
+        <input matInput placeholder="Digite seu nome" formControlName="name" type="text" class="text-white" required/>
+        @if (registerForm.get('name')?.invalid && (registerForm.get('name')?.touched || registerForm.get('name')?.dirty)) {
+          <small class="text-white">Nome é obrigatório</small>
+        }
+      </mat-form-field>
 
-    <!-- Campo de Senha -->
-    <mat-form-field appearance="outline" class="w-full">
-      <input matInput placeholder="Digite sua senha" formControlName="password" type="password" class="text-black"
-             required/>
-    </mat-form-field>
+      <!-- Campo de E-mail -->
+      <mat-form-field appearance="outline" class="w-full">
+        <input matInput placeholder="Digite seu e-mail" formControlName="email" type="email" class="text-white"
+               required/>
+      </mat-form-field>
+
+      <!-- Campo de Username -->
+      <mat-form-field appearance="outline" class="w-full">
+        <input matInput placeholder="Digite seu apelido" formControlName="username" type="username" class="text-white"
+               required/>
+        @if (registerForm.get('username')?.invalid && (registerForm.get('username')?.touched || registerForm.get('username')?.dirty)) {
+          <small class="text-white">Minímo de 3 caracteres</small>
+        }
+      </mat-form-field>
+
+      <!-- Campo de Senha -->
+      <mat-form-field appearance="outline" class="w-full">
+        <input matInput placeholder="Digite sua senha" formControlName="password" type="password" class="text-white"
+               required/>
+        @if (registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)) {
+          <small class="text-white">Minímo de 6 caracteres</small>
+        }
+      </mat-form-field>
 
 
-    <!-- Campo confirmar senha -->
-    <mat-form-field appearance="outline" class="w-full">
-      <input matInput placeholder="Confirmar senha" formControlName="confirmPassword" type="password"
-             class="text-black" required/>
+      <!-- Campo confirmar senha -->
+      <mat-form-field appearance="outline" class="w-full">
+        <input matInput placeholder="Confirmar senha" formControlName="confirmPassword" type="password"
+               class="text-white" required/>
+      </mat-form-field>
 
-    </mat-form-field>
+      <div class="flex justify-content-center gap-2">
+        <!-- Botão de Submit -->
+        <button mat-fab extended type="submit" class="flex btn-primary w-10rem"
+                [disabled]="!registerForm.valid">
+          {{ primaryBtnTxt }}
+        </button>
 
-
-    <!-- Botão de Submit -->
-    <button mat-fab extended color="primary" type="submit" class="w-full h-3rem mb-2 bg-white text-black-alpha-90"
-            [disabled]="!registerForm.valid">
-      {{ primaryBtnTxt }}
-    </button>
-
-    <!-- Botão voltar -->
-    <button mat-fab extended class="w-full h-3rem bg-white text-black-alpha-90" type="button"
-            (click)="this.onNavigate('auth/login')">
-      {{ secondaryBtnTxt }}
-    </button>
-  </form>
-</section>
+        <!-- Botão voltar -->
+        <button mat-fab extended class="flex btn-secondary p-3 w-10rem" type="button"
+                (click)="this.onNavigate('auth/login')">
+          {{ secondaryBtnTxt }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
