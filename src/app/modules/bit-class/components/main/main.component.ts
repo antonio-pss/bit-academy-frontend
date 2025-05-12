@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {MatSidenav, MatSidenavContainer} from '@angular/material/sidenav';
 import {MatListItem, MatNavList} from '@angular/material/list';
@@ -16,7 +16,7 @@ interface MenuItem {
 }
 
 @Component({
-  selector: 'app-main-class',
+  selector: 'app-main',
   imports: [
     RouterOutlet,
     MatSidenavContainer,
@@ -30,19 +30,11 @@ interface MenuItem {
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
-export class MainClassComponent {
+export class MainComponent {
+  public menuItems: MenuItem[] = [];
 
-  public menuItems: MenuItem[] = [
-    {label: 'Início', icon: 'home', route: 'home'},
-    {label: 'Minhas salas', icon: 'co_present', route: 'salas'},
-    {label: 'Calendário', icon: 'calendar_month', route: 'calendario'},
-    {label: 'Material', icon: 'book_2', route: 'material'},
-    {label: 'Avaliação', icon: 'library_books', route: 'avaliacao'},
-    {label: 'Perfil', icon: 'person', route: 'perfil'},
-    {label: 'Configurações', icon: 'settings', route: 'configuracoes'}
-  ];
-
-  private _currentTitle: string = 'Início';
+  private _currentTitle: string = 'Início'
+  public activeRoute = ''
 
   constructor(
     private readonly router: Router,
@@ -56,14 +48,45 @@ export class MainClassComponent {
       .subscribe(() => {
         this.updateCurrentTitle();
       });
+
+    this.setActiveRoute(this.router.url);
+
+    this.menuItems = [
+      {label: 'Início', icon: 'home', route: 'home'},
+      {label: 'Minhas salas', icon: 'co_present', route: '#'},
+      {label: 'Calendário', icon: 'calendar_month', route: '#'},
+      {label: 'Material', icon: 'book_2', route: '#'},
+      {label: 'Avaliação', icon: 'library_books', route: '#'},
+      {label: 'Perfil', icon: 'person', route: '#'},
+      {label: 'Configurações', icon: 'settings', route: '#'}
+    ]
   }
 
-  private updateCurrentTitle(): void {
-    const urlSegments = this.router.url.split('/');
-    const currentRoute = urlSegments[urlSegments.length - 1];
-    this._currentTitle = this.menuItems.find(item => item.route === currentRoute)?.label
-      || 'Página não encontrada';
+  public setActiveRoute(url: string) {
+    // Remover barras iniciais para comparação consistente
+    const cleanUrl = url.startsWith('/') ? url.substring(1) : url;
+
+    // Encontrar item que corresponde à rota atual
+    for (const item of this.menuItems) {
+      const cleanRoute = item.route.startsWith('/') ? item.route.substring(1) : item.route;
+      if (cleanUrl === cleanRoute || cleanUrl.startsWith(cleanRoute + '/')) {
+        this.activeRoute = item.route;
+        return;
+      }
+    }
   }
+
+
+  private updateCurrentTitle(): void {
+    const currentUrl = this.router.url;
+    const matchingItem = this.menuItems.find(item => {
+      return currentUrl.includes(item.route) ||
+        (item.route.startsWith('/') && currentUrl.includes(item.route.substring(1)));
+    });
+
+    this._currentTitle = matchingItem?.label || 'Página não encontrada';
+  }
+
 
   public get currentTitle(): string {
     return this._currentTitle;
@@ -77,11 +100,13 @@ export class MainClassComponent {
 
     this.router.navigate(['class', action])
       .then(() => {
-        // Navegação bem sucedida
+        this.activeRoute = '/class/' + action;
+        this.updateCurrentTitle();
+
       })
       .catch(error => {
         console.error('Erro de navegação:', error);
-        this.toastr.error('Erro ao navegar para a página','',{
+        this.toastr.error('Erro ao navegar para a página', '', {
           timeOut: 3000,
           progressBar: true,
           progressAnimation: 'increasing',
@@ -93,7 +118,7 @@ export class MainClassComponent {
   public onLogout(): void {
     this.authService.logout();
     this.toastr.info('Você saiu com sucesso!', 'Logout');
-    this.router.navigate(['auth','login'])
+    this.router.navigate(['auth', 'login'])
       .then(() => {
         // Navegação bem sucedida
       })

@@ -1,0 +1,35 @@
+.card {
+  background: var(--mat-sys-background);
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+    box-shadow: none;
+  }
+}
+
+.card:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  transform: translateY(-2px);
+}
+
+.card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 0.0625rem solid #e0e0e0;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+}
+
+.pagination {
+  margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
