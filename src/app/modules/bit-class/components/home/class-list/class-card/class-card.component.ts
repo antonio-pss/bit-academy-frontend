@@ -5,7 +5,6 @@ import {DecimalPipe, NgClass} from '@angular/common';
 @Component({
   selector: 'app-class-card',
   imports: [
-    MatButton,
     NgClass,
     DecimalPipe,
   ],

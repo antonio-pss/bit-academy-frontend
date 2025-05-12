@@ -1,52 +1,74 @@
-<section class="flex flex-column justify-content-center h-screen w-fit p-4">
-  <h2 class="text-center text-black">
-    {{ formTitleTxt }}
-  </h2>
+<!-- select-plataform.component.html -->
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full">
-    <!-- Campo de E-mail -->
-    <mat-form-field appearance="outline" class="w-full">
-      <input
-        matInput
-        placeholder="Digite seu e-mail"
-        formControlName="email"
-        type="email"
-        class="text-black"
-        required
-      />
+<div class="login-page relative">
+  <!-- Imagem no canto superior esquerdo (mantendo sua posição original) -->
+    <img src="assets/logo-white-bit-academy.svg" alt="logo" class="absolute top-0 md:right-0 m-4">
 
-    </mat-form-field>
+  <!-- Container centralizado com PrimeFlex -->
+  <div class="flex justify-content-center align-items-center min-h-screen">
+    <div class="login-card w-full max-w-md">
+      <!-- Header -->
+      <div class="justify-content-center mb-4">
+        <h2 class="text-center text-white">
+          {{ formTitleTxt }}
+        </h2>
+      </div>
 
-    <!-- Campo de Senha -->
-    <mat-form-field appearance="outline" class="w-full">
-      <input
-        matInput
-        placeholder="Digite sua senha"
-        formControlName="password"
-        type="password"
-        class="text-black"
-        required
-      />
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <!-- E-mail -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-icon matPrefix>mail</mat-icon>
+          <input
+            matInput
+            placeholder="Digite seu e-mail"
+            formControlName="email"
+            type="email"
+            required
+            class="text-white"
+          />
+        </mat-form-field>
 
-    </mat-form-field>
+        <!-- Senha -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-icon matPrefix>lock</mat-icon>
+          <input
+            matInput
+            placeholder="Digite sua senha"
+            formControlName="password"
+            type="password"
+            required
+            class="text-white"
+          />
+          <button matSuffix mat-icon-button type="button">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </mat-form-field>
 
-    <!-- Botão de Submit -->
-    <button
-      mat-fab extended
-      color="primary"
-      type="submit"
-      class="w-full h-3rem mb-2 bg-white text-black-alpha-90"
-      [disabled]="!loginForm.valid"
-    >
-      {{ primaryBtnTxt }}
-    </button>
+        <div class="flex justify-content-center gap-2">
+          <!-- Botão de Submit -->
+          <button
+            mat-fab extended
+            type="submit"
+            [disabled]="!loginForm.valid"
+            class="flex btn-primary w-10rem"
+          >
+            {{ primaryBtnTxt }}
+          </button>
 
-    <!-- Botão ir ao cadastro-->
-    <button
-      mat-fab extended
-      class="w-full h-3rem bg-white text-black-alpha-90"
-      (click)="this.onNavigate('auth/signup')">
-      {{ secondaryBtnTxt }}
-    </button>
-  </form>
-</section>
+          <!-- Botão ir ao cadastro -->
+          <button
+            mat-fab extended
+            type="button"
+            (click)="onNavigate('auth/signup')"
+            class="flex btn-secondary p-3 w-10rem"
+          >
+            {{ secondaryBtnTxt }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+

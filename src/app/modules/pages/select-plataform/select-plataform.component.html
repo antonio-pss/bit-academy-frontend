@@ -1,26 +1,64 @@
-<section class="flex flex-col items-center justify-center h-screen gap-4 bg-gray-100">
-  <h2 class="text-2xl font-semibold text-gray-800">{{ titleTxt }}</h2>
+<body class="p-3">
+<div class="flex flex-column align-items-center justify-content-center min-h-screen">
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <!-- Academic hat icon -->
+    <div class="flex justify-content-center mb-4">
+      <span class="material-icons" style="font-size: 48px; color: white;">school</span>
+    </div>
 
-  <div class="flex gap-2 align-content-center justify-content-center ">
-    <button
-      (click)="onNavigate('/notes')"
-      mat-raised-button
-      class="w-48 py-2 text-black bg-blue-500 hover:bg-blue-600 rounded-lg shadow-md">
-      {{ bitNotesName }}
-    </button>
+    <!-- BITAcademy title -->
+    <h1 class="text-4xl font-medium mb-2">BITAcademy</h1>
 
-    <button
-      (click)="onNavigate('/class')"
-      mat-raised-button
-      class="w-48 py-2 text-black bg-green-500 hover:bg-green-600 rounded-lg shadow-md">
-      {{ bitClassName }}
-    </button>
-
-    <button
-      (click)="onNavigate('/school')"
-      mat-raised-button
-      class="w-48 py-2 text-black bg-red-500 hover:bg-red-600 rounded-lg shadow-md">
-      {{ bitSchoolName }}
-    </button>
+    <!-- Subtitle -->
+    <p class="text-xl text-gray-300">Escolha uma plataforma para acessar</p>
   </div>
-</section>
+
+  <!-- Cards Container -->
+  <div class="flex flex-wrap justify-content-center gap-5 w-full max-w-4xl">
+    <!-- Bit Class Card -->
+    <mat-card
+      (click)="onNavigate('/class')"
+      class="platform-card p-5 w-full md:w-20rem cursor-pointer"
+      style="border-radius: 12px;"
+    >
+      <div class="flex flex-column align-items-center">
+        <div class="icon-container" style="background-color: #e6f7e6;">
+          <span class="material-icons" style="font-size: 30px; color: #4CAF50;">school</span>
+        </div>
+        <h3 class="text-xl font-medium mb-2" style="color: #4CAF50;">Bit Class</h3>
+        <p class="text-center text-gray-600">Aulas e materiais de estudo</p>
+      </div>
+    </mat-card>
+
+    <!-- Bit School Card -->
+    <mat-card
+      (click)="onNavigate('/school')"
+      class="platform-card p-5 w-full md:w-20rem cursor-pointer"
+      style="border-radius: 12px;"
+    >
+      <div class="flex flex-column align-items-center">
+        <div class="icon-container" style="background-color: #fff3e0;">
+          <span class="material-icons" style="font-size: 30px; color: #FF9800;">account_balance</span>
+        </div>
+        <h3 class="text-xl font-medium mb-2" style="color: #FF9800;">Bit School</h3>
+        <p class="text-center text-gray-600">Gestão escolar completa</p>
+      </div>
+    </mat-card>
+
+    <!-- Bit Notes Card -->
+    <mat-card
+      (click)="onNavigate('/notes')"
+      class="platform-card p-5 w-full md:w-20rem cursor-pointer"
+      style="border-radius: 12px;"
+    >
+      <div class="flex flex-column align-items-center">
+        <div class="icon-container" style="background-color: #e3f2fd;">
+          <span class="material-icons" style="font-size: 30px; color: #2196F3;">edit</span>
+        </div>
+        <h3 class="text-xl font-medium mb-2" style="color: #2196F3;">Bit Notes</h3>
+        <p class="text-center text-gray-600">Anotações e organização</p>
+      </div>
+    </mat-card>
+  </div>
+</div>

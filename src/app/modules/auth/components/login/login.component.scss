@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:host {
+  display: block;
+  font-family: 'Roboto', sans-serif;
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 1rem;
+  background: linear-gradient(180deg, #2a353e, #101419);
+  background-size: 100% 100%;
+  min-height: 100vh; /* Garante que o gradiente cubra toda a altura da tela */
+}
+
+
+
+.login-card {
+  background-color: #141414;
+  border: 1px solid #141414;
+  border-radius: 12px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease;
+  text-align: center;
+  justify-content: center;
+
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.header-icon {
+  color: white;
+  height: 60px;
+  width: 60px;
+}
+
+.input-field {
+  background-color: #ed3232;
+  border: 1px solid #e13737;
+  color: #d12323;
+  transition: all 0.3s ease;
+  padding: 0.75rem;
+}
+
+.input-field:focus-within {
+  border-color: #4caf50 !important;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.btn-primary {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.75rem;
+  font-weight: 500;
+  width: 100%;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #3e8e41;
+    transform: translateY(-1px);
+  }
+}
+
+.btn-secondary {
+  background-color: #3a3a3a;
+  color: white;
+  border: 1px solid #555;
+  padding: 0.75rem;
+  font-weight: 500;
+  width: 100%;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #444;
+    transform: translateY(-1px);
+  }
+}
+
+
