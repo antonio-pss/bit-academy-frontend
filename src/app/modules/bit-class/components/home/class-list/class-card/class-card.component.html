@@ -1,0 +1,53 @@
+<section class="col-12 lg:col-12 md:col-4 p-3">
+  <section class="card p-2 h-full cursor-pointer class-card">
+    <section class="card-body">
+      <div class="flex justify-content-between align-items-start mb-4">
+        <div>
+          <h3 class="m-0 font-medium">{{ title || 'Default Title' }}</h3>
+          <p class="m-0 text-secondary text-sm mt-1">{{ schedule || 'Not Scheduled' }}</p>
+        </div>
+        <div class="flex align-items-center gap-1">
+          <i class="pi pi-users text-secondary" aria-hidden="true"></i>
+          <span class="text-sm">{{ studentCount || 0 }}</span>
+        </div>
+      </div>
+
+      <div class="flex justify-content-between align-items-center mb-4">
+        <div>
+          <span class="text-secondary text-xs">Average Grade</span>
+          <div class="flex align-items-center gap-1 mt-1">
+            <i class="pi pi-star-fill text-yellow-500"></i>
+            <span class="text-sm font-medium">{{ gradeAverage | number:'1.1-2' }}</span>
+          </div>
+        </div>
+
+        <div class="progress-ring">
+          <svg viewBox="0 0 36 36">
+            <circle class="progress-ring-bg" cx="18" cy="18" r="16"></circle>
+            <circle
+              class="progress-ring-fill"
+              cx="18"
+              cy="18"
+              r="16"
+              [attr.stroke-dasharray]="progressPercentage + ' 100'"
+              stroke-dashoffset="22"
+            ></circle>
+          </svg>
+          <div class="progress-text">{{ progressPercentage }}%</div>
+        </div>
+      </div>
+
+      <div class="flex justify-content-between align-items-center">
+        <div class="flex align-items-center gap-1">
+          <i class="pi pi-file-edit text-secondary" aria-hidden="true"></i>
+          <span class="text-sm">{{ assignmentsCount || 0 }} Assignments</span>
+        </div>
+        <span class="badge" [ngClass]="{
+          'badge-success': status === 'Active',
+          'badge-warning': status === 'Pending',
+          'badge-danger': status === 'Overdue'
+        }">{{ status || 'N/A' }}</span>
+      </div>
+    </section>
+  </section>
+</section>

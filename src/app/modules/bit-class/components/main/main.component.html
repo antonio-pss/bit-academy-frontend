@@ -1,10 +1,11 @@
-<main class="h-screen flex flex-row">
-  <mat-sidenav-container class="h-screen">
+<main class=" flex flex-row overflow-auto h-full">
+  <mat-sidenav-container class="flex flex-row">
     <mat-sidenav mode="side" opened class="w-15rem bg-primary text-white p-3">
       <mat-nav-list>
         @for(item of menuItems; track item.label) {
           <mat-list-item
             (click)="onNavigate(item.route)"
+            [class.active-menu-item]="activeRoute === item.route"
             class="hover:bg-primary-700 cursor-pointer rounded-md mb-2">
             <mat-icon class="mr-2">{{ item.icon }}</mat-icon>
             {{ item.label }}
@@ -29,6 +30,7 @@
       <mat-toolbar>
         <span> {{ currentTitle }}</span>
       </mat-toolbar>
+
       <router-outlet></router-outlet>
     </div>
 
