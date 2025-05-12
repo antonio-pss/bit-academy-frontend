@@ -9,7 +9,7 @@ import {AuthBaseService} from '../../../shared/services/auth-base.service';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
-  selector: 'app-main-class',
+  selector: 'app-main',
   imports: [
     RouterOutlet,
     MatSidenavContainer,

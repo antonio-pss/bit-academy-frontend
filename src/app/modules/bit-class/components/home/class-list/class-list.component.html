@@ -1,0 +1,62 @@
+<section class="card">
+  <section class="card-header flex flex-row justify-content-between align-items-center">
+    <h2 class="m-0 text-xl font-bold">Suas salas</h2>
+
+    <section class="flex flex-row align-items-center gap-3">
+      <mat-form-field class="w-full sm:w-auto" appearance="outline">
+        <mat-label>Buscar salas...</mat-label>
+        <input matInput
+               [(ngModel)]="searchTerm"
+               (input)="onSearch()">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="w-full sm:w-auto" appearance="outline">
+        <mat-label>Filter by Status</mat-label>
+        <mat-select (selectionChange)="onChangeStatus($event)">
+          <mat-option value="all">All Classes</mat-option>
+          <mat-option value="active">Active</mat-option>
+          <mat-option value="pending">Pending</mat-option>
+          <mat-option value="overdue">Overdue</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" (click)="onCreate()">Novo</button>
+    </section>
+  </section>
+
+  <section class="flex flex-column">
+    <div class="grid gap-2">
+      @for (item of paginatedClasses; track item.id) {
+        <app-class-card
+          [title]="item.title"
+          [schedule]="item.schedule"
+          [studentCount]="item.studentCount"
+          [gradeAverage]="item.gradeAverage"
+          [assignmentsCount]="item.assignmentsCount"
+          [progressPercentage]="item.progressPercentage"
+          [status]="item.status"
+          [id]="item.id">
+
+        </app-class-card>
+      }
+    </div>
+
+    <section class="pagination flex justify-content-end align-items-center mt-4">
+<!--      <span class="text-secondary text-sm">-->
+<!--        Showing {{ (currentPageIndex) * itemsPerPage + 1 }}- -->
+<!--        {{ Math.min((currentPageIndex + 1) * itemsPerPage, filteredClasses.length) }}-->
+<!--        of {{ filteredClasses.length }} classes-->
+<!--      </span>-->
+
+      <!-- Angular Material Paginator -->
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        [length]="filteredClasses.length"
+        (page)="onPageChange($event)">
+      </mat-paginator>
+
+    </section>
+  </section>
+</section>
