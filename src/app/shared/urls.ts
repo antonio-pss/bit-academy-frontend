@@ -1,4 +1,6 @@
-const localhost = 'http://127.0.0.1:8000/api';
+import { enviroment } from './services/enviroments/enviroments';
+
+const localhost = enviroment.urlBase
 
 export const URLS = {
   BASE: localhost, // Mude para `production` quando necessário
