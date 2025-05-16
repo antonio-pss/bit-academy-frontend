@@ -1,0 +1,29 @@
+services:
+  backend:
+    image: antoniopss/bit-academy:latest
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.backend
+    depends_on:
+      - database
+    networks:
+      - backend
+
+  database:
+    image: "postgres:16-alpine"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+    env_file:
+      - .env.backend
+    ports:
+      - "5433:5432"
+    networks:
+      - backend
+
+volumes:
+  postgres-data:
+
+networks:
+  backend:
+    driver: bridge
