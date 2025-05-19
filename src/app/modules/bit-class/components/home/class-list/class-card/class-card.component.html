@@ -1,6 +1,6 @@
 <section class="col-12 lg:col-12 md:col-4 p-3">
-  <section class="card p-2 h-full cursor-pointer class-card">
-    <section class="card-body">
+  <mat-card class="card p-2 h-full cursor-pointer class-card">
+    <mat-card-content class="card-body">
       <div class="flex justify-content-between align-items-start mb-4">
         <div>
           <h3 class="m-0 font-medium">{{ title || 'Default Title' }}</h3>
@@ -48,6 +48,6 @@
           'badge-danger': status === 'Overdue'
         }">{{ status || 'N/A' }}</span>
       </div>
-    </section>
-  </section>
+    </mat-card-content>
+  </mat-card>
 </section>
