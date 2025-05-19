@@ -1,5 +1,5 @@
-<section class="card">
-  <section class="card-header flex flex-row justify-content-between align-items-center">
+<mat-card>
+  <mat-card-header class="flex flex-row justify-content-between align-items-center">
     <h2 class="m-0 text-xl font-bold">Suas salas</h2>
 
     <section class="flex flex-row align-items-center gap-3">
@@ -21,9 +21,9 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-flat-button color="primary" (click)="onCreate()">Novo</button>
+      <button mat-flat-button color="primary" (click)="openDialog()">Novo</button>
     </section>
-  </section>
+  </mat-card-header>
 
   <section class="flex flex-column">
     <div class="grid gap-2">
@@ -42,11 +42,6 @@
     </div>
 
     <section class="pagination flex justify-content-end align-items-center mt-4">
-<!--      <span class="text-secondary text-sm">-->
-<!--        Showing {{ (currentPageIndex) * itemsPerPage + 1 }}- -->
-<!--        {{ Math.min((currentPageIndex + 1) * itemsPerPage, filteredClasses.length) }}-->
-<!--        of {{ filteredClasses.length }} classes-->
-<!--      </span>-->
 
       <!-- Angular Material Paginator -->
       <mat-paginator
@@ -58,4 +53,15 @@
 
     </section>
   </section>
-</section>
+</mat-card>
+
+
+@if (open) {
+  <mat-dialog-container>
+    <app-class-form
+      (onClose)="onClose()"
+    >
+    </app-class-form>
+  </mat-dialog-container>
+}
+

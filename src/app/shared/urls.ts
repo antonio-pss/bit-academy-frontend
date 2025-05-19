@@ -1,11 +1,12 @@
-const localhost = 'http://127.0.0.1:8000/api';
+const API_BASE_URL = 'http://127.0.0.1:8000/api';
 
 export const URLS = {
-  BASE: localhost, // Mude para `production` quando necessário
-
+  BASE: API_BASE_URL, // Pode ser alterado para a URL de produção quando necessário
   AUTH: {
-    LOGIN: `${localhost}/auth/login/`,
-    SIGNUP: `${localhost}/auth/signup/`,
+    LOGIN: `${API_BASE_URL}/login/`,
+    SIGNUP: `${API_BASE_URL}/signup/`,
   },
-  USER: `${localhost}/user/`, //URL para os métodos GET, POST, PUT e DELETE
+  USER: `${API_BASE_URL}/auser/`, // CRUD para usuários
+  CLASS: `${API_BASE_URL}/class/`, // CRUD para turmas
+  SCHOOL: `${API_BASE_URL}/school/`, // CRUD para escolas
 };
