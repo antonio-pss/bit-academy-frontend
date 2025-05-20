@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {MatButton} from "@angular/material/button";
 import {Router} from '@angular/router';
+import {MatCard} from '@angular/material/card';
 
 @Component({
     selector: 'app-select-plataform',
-    imports: [
-        MatButton
-    ],
+  imports: [
+    MatCard
+  ],
     templateUrl: './select-plataform.component.html',
     styleUrl: './select-plataform.component.scss'
 })
