@@ -10,6 +10,8 @@ export class EndpointsService {
     // Authentication
     loginUser:  URLS.AUTH.LOGIN,
     signUpUser:  URLS.AUTH.SIGNUP,
+    refreshToken: URLS.AUTH.REFRESH, // Adicione esta linha
+
 
     // User Actions
     user:  URLS.USER,
@@ -22,6 +24,7 @@ export class EndpointsService {
     // School actions
     school:  URLS.SCHOOL,
     schoolById:  URLS.SCHOOL + ':id/',
+
 
   }
 

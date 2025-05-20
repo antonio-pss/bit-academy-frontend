@@ -1,0 +1,79 @@
+import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Observable, of, switchMap, tap} from 'rxjs';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GeneralService {
+
+  constructor(private httpClient: HttpClient,) {}
+
+
+  private getHeaders(): Observable<HttpHeaders> {
+    const token = sessionStorage.getItem('auth-token');
+    return of(new HttpHeaders({ "Authorization": "Bearer ".concat(<string>token) }));
+  }
+
+
+
+  post(path: string, body: any): Observable<any> {
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.post(path, body, { headers })
+      )
+    );
+  }
+
+  get(path: string): Observable<any> {
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.get(path, {headers})
+      )
+    );
+  }
+
+  getById(path: string, id:number): Observable<any> {
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.get(path + id + '/', {headers})
+      )
+    );
+  }
+
+  patch(body: any, path: string): Observable<HttpResponse<any>> {
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.patch(path + body.id + '/', body, { headers }).pipe(
+          tap((response: any) => response),
+        )
+      )
+    );
+  }
+
+  getPaginated(path: string, limit: number, offset: number): Observable<any> {
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.get(path, {
+          headers,
+          params: {
+            limit: limit.toString(),
+            offset: offset.toString(),
+          }
+        })
+      )
+    );
+  }
+
+
+  delete(path: string, id: number): Observable<HttpResponse<any>> {
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.delete(path + id + '/', { headers }).pipe(
+          tap((response: any) => response),
+        )
+      )
+    );
+  }
+}
