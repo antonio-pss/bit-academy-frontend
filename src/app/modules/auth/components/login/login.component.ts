@@ -1,19 +1,22 @@
 import {Component} from '@angular/core';
-import {MatFabButton} from "@angular/material/button";
+import {MatButton, MatFabButton, MatIconButton} from "@angular/material/button";
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from '@angular/router';
 import {AuthBaseService} from '../../../../shared/services/auth-base.service';
 import {ToastrService} from 'ngx-toastr';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
   imports: [
-    MatFabButton,
     MatFormField,
     MatInput,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIcon,
+    MatIconButton,
+    MatFabButton
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
