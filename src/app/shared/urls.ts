@@ -5,6 +5,7 @@ export const URLS = {
   AUTH: {
     LOGIN: `${API_BASE_URL}/login/`,
     SIGNUP: `${API_BASE_URL}/signup/`,
+    REFRESH: `${API_BASE_URL}token/refresh/`,
   },
   USER: `${API_BASE_URL}/auser/`, // CRUD para usuários
   CLASS: `${API_BASE_URL}/class/`, // CRUD para turmas

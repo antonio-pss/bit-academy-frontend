@@ -189,4 +189,6 @@ export class ClassListComponent {
       // Adicione lógica adicional aqui, se necessário
     });
   }
+
+  protected readonly ClassFormComponent = ClassFormComponent;
 }
