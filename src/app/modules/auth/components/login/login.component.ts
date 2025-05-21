@@ -21,7 +21,7 @@ import {MatIcon} from '@angular/material/icon';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent{
+export class LoginComponent {
   public loginForm: FormGroup;
   public formTitleTxt: string = "Entrar";
   public primaryBtnTxt: string = "Entrar";
@@ -33,7 +33,7 @@ export class LoginComponent{
               private readonly toastr: ToastrService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     })
   }
 
@@ -45,16 +45,17 @@ export class LoginComponent{
 
     if (this.loginForm.valid) {
       this.generalService.login(
-        userData.email,
-        userData.password
+        userData.email, userData.password
       ).subscribe({
         next: (response) => {
-          this.router.navigate(['auth', 'platform-selector']).then();
+          console.log(response);
+          this.router.navigate(['auth', 'platform-selector'])
         },
-        error: (error: any) => {
-          this.toastr.error(error.message, 'Erro de Autenticação');
+        error: (error) => {
+          console.error(error);
+          this.toastr.error('Erro ao fazer login')
         }
-      });
+      })
     }
   }
 
