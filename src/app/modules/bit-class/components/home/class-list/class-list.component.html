@@ -21,7 +21,7 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-flat-button color="primary" (click)="onCreate()">Novo</button>
+      <button mat-flat-button color="primary">Novo</button>
     </section>
   </section>
 
@@ -37,17 +37,16 @@
           [progressPercentage]="item.progressPercentage"
           [status]="item.status"
           [id]="item.id">
-
         </app-class-card>
       }
     </div>
 
     <section class="pagination flex justify-content-end align-items-center mt-4">
-<!--      <span class="text-secondary text-sm">-->
-<!--        Showing {{ (currentPageIndex) * itemsPerPage + 1 }}- -->
-<!--        {{ Math.min((currentPageIndex + 1) * itemsPerPage, filteredClasses.length) }}-->
-<!--        of {{ filteredClasses.length }} classes-->
-<!--      </span>-->
+      <!--      <span class="text-secondary text-sm">-->
+      <!--        Showing {{ (currentPageIndex) * itemsPerPage + 1 }}- -->
+      <!--        {{ Math.min((currentPageIndex + 1) * itemsPerPage, filteredClasses.length) }}-->
+      <!--        of {{ filteredClasses.length }} classes-->
+      <!--      </span>-->
 
       <!-- Angular Material Paginator -->
       <mat-paginator

@@ -1,12 +1,14 @@
 import {Component, Input} from '@angular/core';
-import {MatButton} from '@angular/material/button';
 import {DecimalPipe, NgClass} from '@angular/common';
+import {MatCard, MatCardContent} from '@angular/material/card';
 
 @Component({
   selector: 'app-class-card',
   imports: [
     NgClass,
     DecimalPipe,
+    MatCardContent,
+    MatCard,
   ],
   templateUrl: './class-card.component.html',
   styleUrl: './class-card.component.scss'

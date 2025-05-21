@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {FormsModule} from '@angular/forms';
 import {MatButton, MatButtonModule} from '@angular/material/button';
@@ -8,6 +8,8 @@ import {MatIcon} from '@angular/material/icon';
 import {MatOption, MatSelect, MatSelectChange} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
+import {MatDialog, MatDialogContainer} from '@angular/material/dialog';
+import {ClassFormComponent} from './class-form/class-form.component';
 
 @Component({
   selector: 'app-class-list',
@@ -29,6 +31,8 @@ import {MatCardModule} from '@angular/material/card';
   styleUrls: ['./class-list.component.scss']
 })
 export class ClassListComponent {
+  @Output() open = new EventEmitter<boolean>();
+
   public displayedClasses: any[] = []; // Lista inicial de classes
   public filteredClasses: any[] = []; // Lista de classes após busca ou filtro
   public paginatedClasses: any[] = []; // Classes exibidas na página atual
@@ -40,7 +44,9 @@ export class ClassListComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor() {
+  constructor(
+    private dialog: MatDialog
+  ) {
     // Exemplo de dados iniciais
     this.displayedClasses = [
       {
@@ -164,8 +170,25 @@ export class ClassListComponent {
   }
 
   // Exemplos de ações futuras
-  public onCreate(): void {
-    console.log('Create new class clicked');
+  public isOpen(): void {
+    this.open.emit(true);
   }
 
+  public onClose() {
+    this.open.emit(false);
+  }
+
+  public openDialog(): void {
+    const dialogRef = this.dialog.open(ClassFormComponent, {
+      width: '500px',
+      disableClose: true,
+    });
+
+    dialogRef.componentInstance.onClose.subscribe(() => {
+      dialogRef.close();
+      // Adicione lógica adicional aqui, se necessário
+    });
+  }
+
+  protected readonly ClassFormComponent = ClassFormComponent;
 }
