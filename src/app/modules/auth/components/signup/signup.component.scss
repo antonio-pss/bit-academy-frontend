@@ -18,7 +18,6 @@
 }
 
 
-
 .login-card {
 
   background-color: #141414;
@@ -82,5 +81,11 @@
   &:hover {
     background-color: #444;
     transform: translateY(-1px);
+  }
+
+  &:disabled {
+    background-color: #969696;
+    color: #666;
+    cursor: not-allowed;
   }
 }
