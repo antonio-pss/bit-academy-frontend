@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://0.0.0.0:8000';
+const API_BASE_URL = 'http://18.117.154.106:8000';
 
 export const URLS = {
   BASE: API_BASE_URL, // Pode ser alterado para a URL de produção quando necessário
