@@ -1,0 +1,25 @@
+<mat-card class="hover:shadow-md transition cursor-pointer">
+  <mat-card-header>
+    <mat-card-title class="font-medium">{{ activity.title }}</mat-card-title>
+    <span [ngClass]="{
+      'bg-yellow-100 text-yellow-800': activity.status === 'pending',
+      'bg-red-100 text-red-800': activity.status === 'overdue'
+    }" class="text-xs px-2 py-1 rounded-full ml-auto">
+      {{ activity.status === 'pending' ? 'Pendente' : 'Atrasada' }}
+    </span>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p class="text-sm text-gray-600 mb-3">{{ activity.description }}</p>
+    <div class="flex justify-between items-center">
+      <span class="text-xs text-gray-500">
+        <mat-icon class="text-xs mr-1">event</mat-icon>
+        {{ activity.date }}
+      </span>
+      <span class="text-xs text-gray-500">
+        <mat-icon class="text-xs mr-1">school</mat-icon>
+        {{ activity.completed }}/32
+      </span>
+    </div>
+  </mat-card-content>
+</mat-card>

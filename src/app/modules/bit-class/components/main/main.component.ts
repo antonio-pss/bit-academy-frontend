@@ -8,6 +8,8 @@ import {MatToolbar} from '@angular/material/toolbar';
 import {AuthBaseService} from '../../../../shared/services/auth-base.service';
 import {ToastrService} from 'ngx-toastr';
 import {filter} from 'rxjs';
+import {NgClass} from '@angular/common';
+import {MATERIAL_IMPORTS} from '../../../../shared/imports/material.imports';
 
 interface MenuItem {
   label: string;
@@ -18,14 +20,9 @@ interface MenuItem {
 @Component({
   selector: 'app-main',
   imports: [
+    ...MATERIAL_IMPORTS,
     RouterOutlet,
-    MatSidenavContainer,
-    MatNavList,
-    MatListItem,
-    MatIcon,
-    MatDivider,
-    MatSidenav,
-    MatToolbar
+    NgClass
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
@@ -35,6 +32,8 @@ export class MainComponent {
 
   private _currentTitle: string = 'Início'
   public activeRoute = ''
+  public isCollapsed = false;
+
 
   constructor(
     private readonly router: Router,
@@ -76,7 +75,6 @@ export class MainComponent {
     }
   }
 
-
   private updateCurrentTitle(): void {
     const currentUrl = this.router.url;
     const matchingItem = this.menuItems.find(item => {
@@ -87,10 +85,14 @@ export class MainComponent {
     this._currentTitle = matchingItem?.label || 'Página não encontrada';
   }
 
-
   public get currentTitle(): string {
     return this._currentTitle;
   }
+
+  public toggleMenu(): void {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
 
   public onNavigate(action: string): void {
     if (action === '#') {

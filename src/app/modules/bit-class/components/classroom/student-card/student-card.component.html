@@ -1,0 +1,32 @@
+<mat-card class="hover:shadow-md transition cursor-pointer">
+  <mat-card-header>
+    <div class="flex items-center">
+      <mat-icon class="bg-indigo-100 text-indigo-600 rounded-full w-10 h-10 flex items-center justify-center mr-3">
+        {{ student.initials }}
+      </mat-icon>
+      <div>
+        <mat-card-title class="font-medium">{{ student.name }}</mat-card-title>
+        <mat-card-subtitle class="text-xs">Média: {{ student.average }}</mat-card-subtitle>
+      </div>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="flex justify-between items-center">
+      <div>
+        <span class="text-xs text-gray-500">Atividades</span>
+        <p class="text-sm font-medium">{{ student.activitiesCompleted }}</p>
+      </div>
+      <div>
+        <span class="text-xs text-gray-500">Frequência</span>
+        <p class="text-sm font-medium">{{ student.attendance }}</p>
+      </div>
+      <span [ngClass]="{
+        'bg-green-100 text-green-800': student.performance === 'excellent',
+        'bg-blue-100 text-blue-800': student.performance === 'good'
+      }" class="text-xs px-2 py-1 rounded-full">
+        {{ student.performance === 'excellent' ? 'Excelente' : 'Bom' }}
+      </span>
+    </div>
+  </mat-card-content>
+</mat-card>

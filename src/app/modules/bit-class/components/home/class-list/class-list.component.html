@@ -21,12 +21,16 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-flat-button color="primary">Novo</button>
+      <button mat-flat-button
+              color="primary"
+              (click)="openDialog()">
+        Novo
+      </button>
     </section>
   </section>
 
   <section class="flex flex-column">
-    <div class="grid gap-2">
+    <div class="grid gap-5">
       @for (item of paginatedClasses; track item.id) {
         <app-class-card
           [title]="item.title"
@@ -36,26 +40,21 @@
           [assignmentsCount]="item.assignmentsCount"
           [progressPercentage]="item.progressPercentage"
           [status]="item.status"
-          [id]="item.id">
+          [id]="item.id"
+          (click)="onNavigate('class/classroom')">
+        >
         </app-class-card>
       }
     </div>
 
     <section class="pagination flex justify-content-end align-items-center mt-4">
-      <!--      <span class="text-secondary text-sm">-->
-      <!--        Showing {{ (currentPageIndex) * itemsPerPage + 1 }}- -->
-      <!--        {{ Math.min((currentPageIndex + 1) * itemsPerPage, filteredClasses.length) }}-->
-      <!--        of {{ filteredClasses.length }} classes-->
-      <!--      </span>-->
-
-      <!-- Angular Material Paginator -->
       <mat-paginator
         [pageSizeOptions]="[5, 10, 20]"
         showFirstLastButtons
         [length]="filteredClasses.length"
         (page)="onPageChange($event)">
       </mat-paginator>
-
     </section>
   </section>
 </section>
+
