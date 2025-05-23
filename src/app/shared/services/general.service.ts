@@ -21,7 +21,7 @@ export class GeneralService {
   post(path: string, body: any): Observable<any> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
-        this.httpClient.post(path, body, { headers })
+        this.httpClient.post(path, body, { headers, withCredentials: true })
       )
     );
   }

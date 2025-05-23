@@ -21,7 +21,11 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-flat-button color="primary">Novo</button>
+      <button mat-flat-button
+              color="primary"
+              (click)="openDialog()">
+        Novo
+      </button>
     </section>
   </section>
 
@@ -42,20 +46,13 @@
     </div>
 
     <section class="pagination flex justify-content-end align-items-center mt-4">
-      <!--      <span class="text-secondary text-sm">-->
-      <!--        Showing {{ (currentPageIndex) * itemsPerPage + 1 }}- -->
-      <!--        {{ Math.min((currentPageIndex + 1) * itemsPerPage, filteredClasses.length) }}-->
-      <!--        of {{ filteredClasses.length }} classes-->
-      <!--      </span>-->
-
-      <!-- Angular Material Paginator -->
       <mat-paginator
         [pageSizeOptions]="[5, 10, 20]"
         showFirstLastButtons
         [length]="filteredClasses.length"
         (page)="onPageChange($event)">
       </mat-paginator>
-
     </section>
   </section>
 </section>
+

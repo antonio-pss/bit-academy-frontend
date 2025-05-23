@@ -10,6 +10,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialog, MatDialogContainer} from '@angular/material/dialog';
 import {ClassFormComponent} from './class-form/class-form.component';
+import {GeneralService} from '../../../../../shared/services/general.service';
+import {EndpointsService} from '../../../../../shared/services/endpoints.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-class-list',
@@ -45,7 +48,10 @@ export class ClassListComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private readonly classService: GeneralService,
+    private readonly toastr: ToastrService,
+    private readonly endpoint: EndpointsService
   ) {
     // Exemplo de dados iniciais
     this.displayedClasses = [
@@ -115,28 +121,19 @@ export class ClassListComponent {
     this.updatePaginatedClasses();
   }
 
-  /**
-   * Atualiza os dados paginados com base na página atual e no número de itens por página
-   */
+
   public updatePaginatedClasses(): void {
     const startIndex = this.currentPageIndex * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     this.paginatedClasses = this.filteredClasses.slice(startIndex, endIndex);
   }
 
-  /**
-   * Gerencia a troca de página quando o paginator dispara o evento (página ou tamanho).
-   * @param event Evento de mudança gerado pelo paginator.
-   */
   public onPageChange(event: PageEvent): void {
     this.itemsPerPage = event.pageSize;
     this.currentPageIndex = event.pageIndex;
     this.updatePaginatedClasses();
   }
 
-  /**
-   * Filtra as classes com base no termo de busca fornecido pelo usuário.
-   */
   public onSearch(): void {
     if (!this.searchTerm.trim()) {
       this.filteredClasses = [...this.displayedClasses];
@@ -151,10 +148,6 @@ export class ClassListComponent {
     this.updatePaginatedClasses();
   }
 
-  /**
-   * Aplica um filtro às classes com base no status selecionado.
-   * @param event Evento de alteração do select
-   */
   public onChangeStatus(event: MatSelectChange): void {
     const selectedStatus = event.value;
 
@@ -169,26 +162,30 @@ export class ClassListComponent {
     this.updatePaginatedClasses();
   }
 
-  // Exemplos de ações futuras
-  public isOpen(): void {
-    this.open.emit(true);
-  }
-
-  public onClose() {
-    this.open.emit(false);
-  }
-
   public openDialog(): void {
     const dialogRef = this.dialog.open(ClassFormComponent, {
       width: '500px',
       disableClose: true,
     });
 
-    dialogRef.componentInstance.onClose.subscribe(() => {
-      dialogRef.close();
-      // Adicione lógica adicional aqui, se necessário
+    dialogRef.afterClosed().subscribe(success => {
+      if (success) {
+        this.loadClasses();
+      }
     });
   }
 
-  protected readonly ClassFormComponent = ClassFormComponent;
+  public loadClasses() {
+    this.classService.get(this.endpoint.path.class).subscribe({
+      next: (classes) => {
+        this.displayedClasses = classes;
+        this.filteredClasses = [...this.displayedClasses];
+        this.updatePaginatedClasses();
+      },
+      error: (error) => {
+        console.error('Erro ao carregar classes:', error);
+        this.toastr.error('Erro ao carregar as salas');
+      }
+    });
+  }
 }

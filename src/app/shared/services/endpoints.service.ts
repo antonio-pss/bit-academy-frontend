@@ -18,7 +18,7 @@ export class EndpointsService {
     userById:  URLS.USER + ':id/',
 
     // Class actions
-    class:  URLS.CLASS,
+    class:  URLS.CLASS + 'new/',
     classById:  URLS.CLASS + ':id/',
 
     // School actions
