@@ -19,7 +19,6 @@ import {NgIf} from '@angular/common';
     ReactiveFormsModule,
     MatCardTitle,
     MatLabel,
-    NgIf,
     MatDialogContent,
 
   ],

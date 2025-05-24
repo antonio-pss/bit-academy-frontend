@@ -57,7 +57,7 @@ export class MainComponent {
       {label: 'Calendário', icon: 'calendar_month', route: '#'},
       {label: 'Material', icon: 'book_2', route: '#'},
       {label: 'Avaliação', icon: 'library_books', route: '#'},
-      {label: 'Perfil', icon: 'person', route: '#'},
+      {label: 'Perfil', icon: 'person', route: 'profile'},
       {label: 'Configurações', icon: 'settings', route: '#'}
     ]
   }
