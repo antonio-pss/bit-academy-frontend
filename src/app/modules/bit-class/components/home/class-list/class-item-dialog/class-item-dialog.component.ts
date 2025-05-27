@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Output} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GeneralService} from '../../../../../../shared/services/general.service';
@@ -19,7 +19,7 @@ import {COMMON_IMPORTS} from '../../../../../../shared/imports/common';
   templateUrl: './class-item-dialog.component.html',
   styleUrl: './class-item-dialog.component.scss'
 })
-export class ClassItemDialogComponent {
+export class ClassItemDialogComponent implements AfterViewInit{
 
   @Output() onClose = new EventEmitter<boolean>();
 
@@ -43,7 +43,6 @@ export class ClassItemDialogComponent {
     private readonly endpoint: EndpointsService,
     private readonly router: Router,
   ) {
-
     this.classForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -60,6 +59,16 @@ export class ClassItemDialogComponent {
 
   public onNavigate(action: string) {
     return this.router.navigate([action]).then();
+  }
+
+  ngAfterViewInit() {
+    this.classForm.statusChanges.subscribe(status => {
+      console.log('Status do formulário:', status);
+      Object.keys(this.classForm.controls).forEach(key => {
+        const control = this.classForm.get(key);
+        console.log(`Campo ${key}: ${control?.status}`, control?.errors);
+      });
+    });
   }
 
   public onSubmit(): void {

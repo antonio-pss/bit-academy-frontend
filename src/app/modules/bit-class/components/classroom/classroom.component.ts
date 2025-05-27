@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ClassroomStatCardComponent} from './classroom-stat-card/classroom-stat-card.component';
 import {AttendanceItemComponent} from './attendance-item/attendance-item.component';
@@ -21,22 +21,21 @@ import {EndpointsService} from '../../../../shared/services/endpoints.service';
     ActivityCardComponent,
     StudentCardComponent,
     MaterialCardComponent,
-    NgForOf,
   ],
   templateUrl: './classroom.component.html',
   styleUrl: './classroom.component.scss'
 })
-export class ClassroomComponent {
+export class ClassroomComponent implements OnInit{
   public attendanceList = [
-    { name: 'Ana Maria', initials: 'AM', status: 'present' },
-    { name: 'Bruno Silva', initials: 'BS', status: 'present' },
-    { name: 'Carlos Rocha', initials: 'CR', status: 'late' },
-    { name: 'Daniela Fernandes', initials: 'DF', status: 'absent' },
-    { name: 'Eduardo Pereira', initials: 'EP', status: 'present' },
-    { name: 'Fernanda Souza', initials: 'FS', status: 'present' }
+    {name: 'Ana Maria', initials: 'AM', status: 'present'},
+    {name: 'Bruno Silva', initials: 'BS', status: 'present'},
+    {name: 'Carlos Rocha', initials: 'CR', status: 'late'},
+    {name: 'Daniela Fernandes', initials: 'DF', status: 'absent'},
+    {name: 'Eduardo Pereira', initials: 'EP', status: 'present'},
+    {name: 'Fernanda Souza', initials: 'FS', status: 'present'}
   ];
 
-  public  activities = [
+  public activities = [
     {
       title: 'Prova Bimestral - Álgebra',
       description: 'Avaliação sobre equações do 2º grau e funções quadráticas',
@@ -60,7 +59,7 @@ export class ClassroomComponent {
     }
   ];
 
-  public  topStudents = [
+  public topStudents = [
     {
       name: 'Ana Maria',
       initials: 'AM',
@@ -87,7 +86,7 @@ export class ClassroomComponent {
     }
   ];
 
-  public  recentMaterials = [
+  public recentMaterials = [
     {
       title: 'Slides - Equações 2º Grau',
       description: 'Material de apoio para a próxima aula',
@@ -111,7 +110,7 @@ export class ClassroomComponent {
     }
   ];
 
-  public  studentList = [
+  public studentList = [
     {
       id: 1,
       name: 'Ana Maria',
@@ -121,9 +120,9 @@ export class ClassroomComponent {
       activitiesCompleted: '12/12',
       attendance: '100%',
     }
-    ]
+  ]
 
-  public classroom: Classroom | null = null;
+  public classroom?: Classroom;
 
   constructor(
     private readonly routeActivatedRoute: ActivatedRoute,
@@ -138,6 +137,10 @@ export class ClassroomComponent {
   }
 
   public ngOnInit(): void {
+    this.getClassroom()
+  }
+
+  public getClassroom(): void {
     this.classroomService.getById(this.endpointService.path.classById, Number(this.classId)).subscribe({
       next: (classroom: Classroom) => {
         this.classroom = classroom;

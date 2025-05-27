@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Output} from '@angular/core';
 import {MatDialogContainer, MatDialogContent, MatDialogRef} from '@angular/material/dialog';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatCardHeader, MatCardTitle} from '@angular/material/card';
@@ -19,7 +19,6 @@ import {NgIf} from '@angular/common';
     ReactiveFormsModule,
     MatCardTitle,
     MatLabel,
-    NgIf,
     MatDialogContent,
 
   ],
@@ -27,7 +26,7 @@ import {NgIf} from '@angular/common';
   templateUrl: './class-form.component.html',
   styleUrl: './class-form.component.scss'
 })
-export class ClassFormComponent {
+export class ClassFormComponent implements AfterViewInit{
 
   @Output() onClose = new EventEmitter<boolean>();
 
@@ -39,11 +38,20 @@ export class ClassFormComponent {
     private readonly classService: GeneralService,
     private readonly endpoint: EndpointsService,
   ) {
-
     this.classForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       id_course_module_discipline: []
+    });
+  }
+
+  ngAfterViewInit() {
+    this.classForm.statusChanges.subscribe(status => {
+      console.log('Status do formulário:', status);
+      Object.keys(this.classForm.controls).forEach(key => {
+        const control = this.classForm.get(key);
+        console.log(`Campo ${key}: ${control?.status}`, control?.errors);
+      });
     });
   }
 
