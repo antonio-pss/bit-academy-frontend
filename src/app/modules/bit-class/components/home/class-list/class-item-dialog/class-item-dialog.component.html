@@ -1,11 +1,11 @@
 <mat-dialog-content class="p-4">
+  <mat-label>Nome da sala</mat-label>
   <form [formGroup]="classForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-3">
     <mat-card-header>
       <mat-card-title>Nova Sala</mat-card-title>
     </mat-card-header>
 
     <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Nome da sala</mat-label>
       <input matInput
              formControlName="name"
              placeholder="Digite o nome da sala">
@@ -20,17 +20,53 @@
       </textarea>
     </mat-form-field>
 
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Dias de aula</mat-label>
+      <mat-select formControlName="schedule" multiple>
+        @for (day of daysOfWeek; track day) {
+          <mat-option [value]="day">
+            {{ day }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+<!--Boa ideia deixa pra depois-->
+<!--    <mat-form-field appearance="outline" class="w-full">-->
+<!--      <mat-label>Horários por semana</mat-label>-->
+<!--      <mat-select formControlName="hours_per_week">-->
+<!--        @for (hour of hoursPerWeek; track hour) {-->
+<!--          <mat-option [value]="hour">-->
+<!--            {{ hour }}-->
+<!--          </mat-option>-->
+<!--        }-->
+<!--      </mat-select>-->
+<!--    </mat-form-field>-->
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Horários por semana</mat-label>
+      <mat-select formControlName="hours_per_week">
+        <mat-option value="1">1</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="4">4</mat-option>
+        <mat-option value="5">5</mat-option>
+        <mat-option value="6">6</mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <div class="flex justify-content-end gap-2">
       <button mat-button
               type="button"
               (click)="closeDialog()"
-               >
+      >
         Cancelar
       </button>
       <button mat-raised-button
               color="primary"
               type="submit"
               [disabled]="!classForm.valid"
+
       >
         Salvar
       </button>

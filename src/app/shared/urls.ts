@@ -8,7 +8,7 @@ export const URLS = {
     SIGNUP: `${API_BASE_URL}/signup/`,
     REFRESH: `${API_BASE_URL}token/refresh/`,
   },
-  USER: `${API_BASE_URL}/auser/`, // CRUD para usuários
+  USER: `${API_BASE_URL}/user/`, // CRUD para usuários
   CLASS: `${API_BASE_DEAFAULT_URL}/class/`, // CRUD para turmas
   SCHOOL: `${API_BASE_DEAFAULT_URL}/school/`, // CRUD para escolas
 };

@@ -15,16 +15,14 @@ export class EndpointsService {
 
     // User Actions
     user:  URLS.USER,
-    userById:  URLS.USER + ':id/',
+
 
     // Class actions
     class:  URLS.CLASS + 'new/',
-    classById:  URLS.CLASS + ':id/',
+    classById:  URLS.CLASS,
 
     // School actions
     school:  URLS.SCHOOL,
-    schoolById:  URLS.SCHOOL + ':id/',
-
 
   }
 

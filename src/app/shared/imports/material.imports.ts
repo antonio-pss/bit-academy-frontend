@@ -1,20 +1,20 @@
 import {MatListItem, MatListModule, MatNavList} from '@angular/material/list';
-import {MatInputModule} from '@angular/material/input';
+import {MatInput, MatInputModule} from '@angular/material/input';
 import {
   MatCard,
   MatCardContent,
   MatCardHeader, MatCardSubtitle,
   MatCardTitle
 } from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton, MatButtonModule} from '@angular/material/button';
 import {MatIcon, MatIconModule} from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
+import {MatOption, MatSelect, MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogContent, MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule, } from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -32,6 +32,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
 import {MatBadge} from '@angular/material/badge';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {MatFormField, MatLabel} from '@angular/material/form-field';
 
 
 
@@ -77,4 +78,18 @@ export const MATERIAL_IMPORTS = [
   MatDivider,
   MatSidenav,
   MatToolbar,
+  MatFormField,
+  MatCardHeader,
+  MatInput,
+  MatButton,
+  MatCardTitle,
+  MatLabel,
+  MatDialogContent,
+  MatOption,
+  MatSelectModule,
+  MatSortModule,
+  MatPaginatorModule,
+  MatTooltipModule,
+  MatSlideToggleModule,
+  MatSelect,
 ]

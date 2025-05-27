@@ -1,27 +1,19 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {MatDialogContent, MatDialogRef} from '@angular/material/dialog';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatCardHeader, MatCardTitle} from '@angular/material/card';
-import {MatInput} from '@angular/material/input';
-import {MatButton} from '@angular/material/button';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatDialogRef} from '@angular/material/dialog';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GeneralService} from '../../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../../shared/services/endpoints.service';
 import {Router} from '@angular/router';
-import {Class} from '../../../../../../shared/models/class';
+import {Classroom} from '../../../../../../shared/models/class';
 import {takeUntil} from 'rxjs';
+import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
+import {COMMON_IMPORTS} from '../../../../../../shared/imports/common';
 
 @Component({
   selector: 'app-class-item-dialog',
   imports: [
-    MatFormField,
-    MatCardHeader,
-    MatInput,
-    MatButton,
-    ReactiveFormsModule,
-    MatCardTitle,
-    MatLabel,
-    MatDialogContent
+    ...MATERIAL_IMPORTS,
+    ...COMMON_IMPORTS
   ],
   standalone: true,
   templateUrl: './class-item-dialog.component.html',
@@ -31,7 +23,18 @@ export class ClassItemDialogComponent {
 
   @Output() onClose = new EventEmitter<boolean>();
 
-  public classForm: FormGroup
+  public classForm: FormGroup;
+  public daysOfWeek: string[] = [
+    'Domingo',
+    'Segunda-feira',
+    'Terça-feira',
+    'Quarta-feira',
+    'Quinta-feira',
+    'Sexta-feira',
+    'Sábado'
+  ];
+
+  // public hoursPerWeek: string[] = Array.from({length: 24}, (_, i) => `${i.toString().padStart(2, '0')}:00`);
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -44,7 +47,9 @@ export class ClassItemDialogComponent {
     this.classForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      id_course_module_discipline: []
+      id_course_module_discipline: [null],
+      schedule: ['', Validators.required],
+      hours_per_week: [0, [Validators.required, Validators.min(1), Validators.max(168)]],
     });
   }
 
@@ -57,17 +62,16 @@ export class ClassItemDialogComponent {
     return this.router.navigate([action]).then();
   }
 
-
   public onSubmit(): void {
     if (this.classForm.valid) {
       this.classService.post(this.endpoint.path.class, this.classForm.value)
         .pipe(takeUntil(this.classService.unsubscribe))
         .subscribe(
           {
-            next: (response: Class) => {
+            next: (response: Classroom) => {
               const classId = response.id;
               this.closeDialog(true)
-              this.onNavigate('clasroom').then()
+              this.onNavigate('class/classroom/' + classId).then()
               console.log('Classe criada com sucesso:', this.classForm.value);
             },
             error: (error: Error) => {

@@ -7,6 +7,10 @@ import {StudentCardComponent} from './student-card/student-card.component';
 import {ActivityCardComponent} from './activity-card/activity-card.component';
 import {MATERIAL_IMPORTS} from '../../../../shared/imports/material.imports';
 import {MaterialCardComponent} from './material-card/material-card.component';
+import {GeneralService} from '../../../../shared/services/general.service';
+import {Classroom} from '../../../../shared/models/class';
+import {ToastrService} from 'ngx-toastr';
+import {EndpointsService} from '../../../../shared/services/endpoints.service';
 
 @Component({
   selector: 'app-classroom',
@@ -106,29 +110,6 @@ export class ClassroomComponent {
       type: 'doc'
     }
   ];
-  public  recentActivities = [
-    {
-      title: 'Prova Bimestral - Álgebra',
-      description: 'Avaliação sobre equações do 2º grau e funções quadráticas',
-      date: '15/06',
-      completed: '0/32',
-      status: 'pending'
-    },
-    {
-      title: 'Trabalho em Grupo',
-      description: 'Projeto sobre aplicações de funções no cotidiano',
-      date: '22/06',
-      completed: '5/32',
-      status: 'pending'
-    },
-    {
-      title: 'Lista de Exercícios',
-      description: 'Exercícios sobre sistemas de equações',
-      date: '10/06',
-      completed: '25/32',
-      status: 'overdue'
-    }
-  ];
 
   public  studentList = [
     {
@@ -142,11 +123,33 @@ export class ClassroomComponent {
     }
     ]
 
-  constructor( private readonly routeActivatedRoute: ActivatedRoute) {
+  public classroom: Classroom | null = null;
+
+  constructor(
+    private readonly routeActivatedRoute: ActivatedRoute,
+    private readonly classroomService: GeneralService,
+    private readonly toastr: ToastrService,
+    private readonly endpointService: EndpointsService
+  ) {
   }
 
   public get classId(): string {
     return this.routeActivatedRoute.snapshot.params['id'];
   }
+
+  public ngOnInit(): void {
+    this.classroomService.getById(this.endpointService.path.classById, Number(this.classId)).subscribe({
+      next: (classroom: Classroom) => {
+        this.classroom = classroom;
+        this.toastr.success('Turma carregada com sucesso!');
+        console.log('Turma carregada com sucesso:', this.classroom);
+      },
+      error: (error) => {
+        console.error('Erro ao carregar a turma:', error);
+        this.toastr.error('Erro ao carregar a turma', '', {})
+      }
+    });
+  }
+
 
 }
