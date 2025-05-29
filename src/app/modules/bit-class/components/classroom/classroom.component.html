@@ -1,1 +1,268 @@
-<router-outlet></router-outlet>
+<section class="flex flex-column h-screen">
+  <!-- Top Navigation -->
+  <mat-toolbar color="primary" class="shadow-sm ">
+    <div class="flex justify-content-between align-items-center w-full p-3">
+      <div class="flex items-center">
+        <button mat-icon-button class="md:hidden mr-4">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <h2 class="text-xl font-semibold">
+          {{ this.classroom?.name || 'Turma de Exemplo' }}
+        </h2>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <button mat-raised-button color="accent" class="flex items-center">
+          <mat-icon>add</mat-icon>
+          <span>Nova Atividade</span>
+        </button>
+      </div>
+    </div>
+
+  </mat-toolbar>
+
+  <!-- Toolbar with Class Information -->
+  <section class="bg-indigo-50 p-3 w-full ">
+    <mat-toolbar class="flex flex-wrap  justify-content-between align-items-center gap-6">
+      <section class="flex gap-3">
+        <div class="flex align-items-center">
+          <mat-icon class="text-indigo-600 mr-2">event</mat-icon>
+          <span class="text-sm">{{ this.classroom?.schedule }}</span>
+        </div>
+        <div class="flex align-items-center">
+          <mat-icon class="text-indigo-600 mr-2">calendar_today</mat-icon>
+
+          <span class="text-sm">{{ this.classroom?.hours_per_week }}</span>
+        </div>
+        <div class="flex align-items-center">
+          <mat-icon class="text-indigo-600 mr-2">people</mat-icon>
+          <span class="text-sm">32 alunos</span>
+        </div>
+      </section>
+      <!--Desempenho médio da turma-->
+      <div class="flex align-items-center">
+        <span class="text-sm font-medium">Desempenho médio: <span class="text-indigo-600">7.8</span></span>
+      </div>
+    </mat-toolbar>
+  </section>
+
+  <!-- Main Content Area -->
+  <section class="flex flex-column w-full h-full">
+    <!-- Content -->
+    <section class="h-full">
+      <mat-tab-group class="h-full">
+        <mat-tab label="Visão Geral">
+          <section class="p-3">
+            <!-- Classroom Dashboard -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+              <!-- Performance Summary -->
+              <mat-card class="lg:col-span-2">
+                <mat-card-header>
+                  <mat-card-title>Desempenho da Turma</mat-card-title>
+                  <mat-form-field appearance="outline" class="ml-auto w-48">
+                    <mat-select>
+                      <mat-option>Últimos 30 dias</mat-option>
+                      <mat-option>Últimos 3 meses</mat-option>
+                      <mat-option>Este semestre</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-card-header>
+
+                <mat-card-content>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <app-classroom-stat-card
+                      [title]="'Média Geral'"
+                      [value]="7.8"
+                      [trend]="'up'"
+                      [change]="' +0.5 em relação ao último bimestre'">
+                    </app-classroom-stat-card>
+
+                    <app-classroom-stat-card
+                      [title]="'Taxa de Aprovação'"
+                      [value]="84.5"
+                      [trend]="'up'"
+                      [change]="'+6% em relação ao último bimestre'">
+                    </app-classroom-stat-card>
+
+                    <app-classroom-stat-card
+                      [title]="'Taxa de Entrega'"
+                      [value]="92"
+                      [trend]="'neutral'"
+                      [change]="'-3% em relação ao último bimestre'">
+                    </app-classroom-stat-card>
+                  </div>
+
+                  <div class="chart-container">
+                    <div class="bg-gray-100 h-64 flex items-center justify-center rounded-lg">
+                      <span class="text-gray-500">Gráfico de Desempenho</span>
+                      <!--Colocar um gráfico aqui.-->
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+
+              <!-- Today's Attendance -->
+              <mat-card class="shadow-sm hover:shadow-md transition-shadow duration-200">
+                <mat-card-header class="pb-3 border-b border-gray-100">
+                  <mat-card-title class="text-lg font-semibold">Frequência de Hoje</mat-card-title>
+                  <div class="ml-auto flex items-center gap-2">
+                    <mat-icon class="text-gray-400 scale-75">calendar_today</mat-icon>
+                    <span class="text-sm text-gray-500">Quarta, 14 Jun</span>
+                  </div>
+                </mat-card-header>
+
+                <mat-card-content class="pt-4">
+                  <!-- Attendance Summary -->
+                  <div class="flex items-center justify-between mb-6">
+                    <div>
+                      <span class="text-sm font-medium text-gray-500">Presentes</span>
+                      <p class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                        28<small class="text-base font-normal text-gray-500">/32 alunos</small>
+                      </p>
+                    </div>
+
+                    <div class="w-32 flex flex-col items-end">
+                      <span class="text-sm font-medium text-primary-600">87.5%</span>
+                      <mat-progress-bar
+                        mode="determinate"
+                        value="87.5"
+                        color="primary"
+                        class="mt-1 h-2 rounded-full">
+                      </mat-progress-bar>
+                    </div>
+                  </div>
+
+                  <!-- Attendance List -->
+                  <div class="mb-4">
+                    <div class="flex items-center justify-between mb-3 px-2">
+                      <h3 class="text-sm font-medium text-gray-500">Lista de Alunos</h3>
+                      <span class="text-xs text-gray-400">{{ studentList.length }} registros</span>
+                    </div>
+
+                    <div class="border border-gray-100 rounded-lg overflow-hidden">
+                      <div class="space-y-1 max-h-64 overflow-y-auto">
+                        @for (student of studentList; track student.id) {
+                          <app-attendance-item
+                            [student]="student"
+                            class="hover:bg-gray-50 transition-colors">
+                          </app-attendance-item>
+                        }
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Actions -->
+                  <div class="flex justify-between items-center pt-2 border-t border-gray-100">
+                    <button mat-button color="primary" class="flex items-center gap-1">
+                      <mat-icon>refresh</mat-icon>
+                      <span>Atualizar</span>
+                    </button>
+                    <button mat-raised-button color="primary" class="flex items-center gap-1">
+                      <mat-icon>how_to_reg</mat-icon>
+                      <span>Registrar Frequência</span>
+                    </button>
+                  </div>
+                </mat-card-content>
+
+              </mat-card>
+
+              <!-- Upcoming Activities -->
+              <mat-card class="mb-6">
+                <mat-card-header>
+                  <mat-card-title>Próximas Atividades</mat-card-title>
+                  <button mat-button color="primary" class="ml-auto">
+                    Ver todas
+                  </button>
+                </mat-card-header>
+
+                <mat-card-content>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @for (activity of activities; track activity) {
+                      <app-activity-card
+                        [activity]="activity">
+                      </app-activity-card>
+                    }
+                  </div>
+                </mat-card-content>
+              </mat-card>
+
+              <!-- Top Students -->
+              <mat-card class="mb-6">
+                <mat-card-header>
+                  <mat-card-title>Melhores Alunos</mat-card-title>
+                  <mat-form-field appearance="outline" class="ml-auto w-48">
+                    <mat-select>
+                      <mat-option>Este bimestre</mat-option>
+                      <mat-option>Últimos 30 dias</mat-option>
+                      <mat-option>Ano letivo</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-card-header>
+
+                <mat-card-content>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    @for (student of topStudents; track student) {
+                      <app-student-card
+                        [student]="student">
+                      </app-student-card>
+                    }
+                  </div>
+
+                  <div class="mt-6 text-center">
+                    <button mat-button color="primary">
+                      Ver todos os alunos
+                    </button>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+
+              <!-- Recent Materials -->
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Materiais Recentes</mat-card-title>
+                  <button mat-button color="primary" class="ml-auto">
+                    Ver todos
+                  </button>
+                </mat-card-header>
+
+                <mat-card-content>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @for (material of recentMaterials; track material) {
+                      <app-material-card
+                        [material]="material">
+                      </app-material-card>
+                    }
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </section>
+        </mat-tab>
+
+        <mat-tab label="Alunos">
+          <div class="p-6">
+            <!-- Conteúdo da aba Alunos -->
+          </div>
+        </mat-tab>
+        <mat-tab label="Atividades">
+          <div class="p-6">
+            <!-- Conteúdo da aba Atividades -->
+          </div>
+        </mat-tab>
+        <mat-tab label="Materiais">
+          <div class="p-6">
+            <!-- Conteúdo da aba Materiais -->
+          </div>
+        </mat-tab>
+
+        <!--Settings section-->
+        <mat-tab label="Configurações">
+          <div class="p-3">
+            <app-classroom-settings>
+            </app-classroom-settings>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </section>
+  </section>
+</section>

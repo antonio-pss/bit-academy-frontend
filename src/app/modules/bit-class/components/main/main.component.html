@@ -1,37 +1,67 @@
-<main class=" flex flex-row overflow-auto h-full">
-  <mat-sidenav-container class="flex flex-row">
-    <mat-sidenav mode="side" opened class="w-15rem bg-primary text-white p-3">
-      <mat-nav-list>
-        @for(item of menuItems; track item.label) {
-          <mat-list-item
-            (click)="onNavigate(item.route)"
-            [class.active-menu-item]="activeRoute === item.route"
-            class="hover:bg-primary-700 cursor-pointer rounded-md mb-2">
-            <mat-icon class="mr-2">{{ item.icon }}</mat-icon>
-            {{ item.label }}
-          </mat-list-item>
-        }
-        <mat-divider class="my-2 bg-white/30"></mat-divider>
-
-        <mat-list-item
-          (click)="onLogout()"
-          class="hover:bg-primary-700 cursor-pointer rounded-md">
-          <mat-icon class="mr-2">logout</mat-icon>
-          Sair
-        </mat-list-item>
-      </mat-nav-list>
-    </mat-sidenav>
-
-  </mat-sidenav-container>
-
-
-  <!-- Main Content -->
-    <div class="flex-1 p-2">
-      <mat-toolbar>
-        <span> {{ currentTitle }}</span>
-      </mat-toolbar>
-
-      <router-outlet></router-outlet>
+<div class="flex flex-row h-screen overflow-hidden">
+  <!-- Sidebar (parte fixa do layout) -->
+  <aside class="bg-primary text-white flex flex-column transition-all duration-300 ease-in-out"
+         [ngClass]="{ 'w-3rem': isCollapsed, 'w-15rem': !isCollapsed }">
+    <!-- Logo Section -->
+    <div class="flex align-items-center justify-content-center py-4 border-bottom-1 border-white border-opacity-10"
+         [ngClass]="{ 'px-2': isCollapsed, 'px-4': !isCollapsed }">
+      @if (isCollapsed) {
+        <div class="text-xl font-bold">A</div>
+      } @else {
+        <div class="text-xl font-bold whitespace-nowrap">App Name</div>
+      }
     </div>
 
-</main>
+    <!-- Menu Items -->
+    <nav class="flex flex-column gap-1 w-full flex-grow-1 p-2">
+      @for (item of menuItems; track item.label) {
+        <a (click)="onNavigate(item.route)"
+           [class.active-menu-item]="activeRoute === item.route"
+           class="cursor-pointer border-round-md hover:bg-primary-700 flex align-items-center transition-all no-underline text-white"
+           [ngClass]="{ 'justify-content-center p-2': isCollapsed, 'justify-content-start p-3': !isCollapsed }">
+          <mat-icon class="flex-shrink-0">{{ item.icon }}</mat-icon>
+          @if (!isCollapsed) {
+            <span class="text-sm font-medium whitespace-nowrap ml-3">
+              {{ item.label }}
+            </span>
+          }
+        </a>
+      }
+    </nav>
+
+    <!-- Footer/Logout -->
+    <div class="mt-auto border-top-1 border-white border-opacity-10 p-2">
+      <a (click)="onLogout()"
+         class="cursor-pointer border-round-md hover:bg-primary-700 flex align-items-center transition-all no-underline text-white"
+         [ngClass]="{ 'justify-content-center p-2': isCollapsed, 'justify-content-start p-3': !isCollapsed }">
+        <mat-icon class="flex-shrink-0">logout</mat-icon>
+        @if (!isCollapsed) {
+          <span class="text-sm font-medium whitespace-nowrap ml-3">
+            Sair
+          </span>
+        }
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="flex-grow-1 flex flex-column overflow-hidden">
+    <!-- Toolbar -->
+    <header class="bg-white shadow-1 flex align-items-center justify-content-between p-3">
+      <div class="flex align-items-center gap-3">
+        <button mat-icon-button (click)="toggleMenu()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="text-lg font-medium">{{ currentTitle }}</span>
+      </div>
+      <div class="flex align-items-center gap-3">
+        <!-- Toolbar actions here -->
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="flex-grow-1 h-fit p-4 bg-gray-50">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

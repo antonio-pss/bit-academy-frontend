@@ -7,7 +7,6 @@ import { authChildrenGuard } from './shared/guards/auth-children.guard';
 import { NotFoundComponent } from './modules/auth/components/not-found/not-found.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   {
     path: 'auth',
     children: [
@@ -27,6 +26,7 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./modules/bit-class/bit-class.module').then(m => m.BitClassModule),
   },
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: 'not-found', component: NotFoundComponent },
-  { path: '**', redirectTo: 'not-found' }
+  { path: '**', redirectTo: 'not-found' },
 ];

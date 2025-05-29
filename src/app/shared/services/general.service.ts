@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {Observable, of, switchMap, tap} from 'rxjs';
+import {Observable, of, Subject, switchMap, tap, throwError} from 'rxjs';
 
 
 @Injectable({
@@ -10,23 +10,29 @@ export class GeneralService {
 
   constructor(private httpClient: HttpClient,) {}
 
+  public unsubscribe = new Subject();
+
+
 
   private getHeaders(): Observable<HttpHeaders> {
     const token = sessionStorage.getItem('auth-token');
-    return of(new HttpHeaders({ "Authorization": "Bearer ".concat(<string>token) }));
+    if (!token) {
+      return throwError(() => new Error('Token não encontrado no armazenamento.'));
+    }
+    return of(new HttpHeaders({ "Authorization": "Bearer ".concat(token) }));
   }
 
 
-
-  post(path: string, body: any): Observable<any> {
+  public post(path: string, body: any): Observable<any> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
-        this.httpClient.post(path, body, { headers })
+        this.httpClient.post(path, body, { headers, withCredentials: true })
       )
     );
   }
 
-  get(path: string): Observable<any> {
+
+  public get(path: string): Observable<any> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
         this.httpClient.get(path, {headers})
@@ -34,7 +40,8 @@ export class GeneralService {
     );
   }
 
-  getById(path: string, id:number): Observable<any> {
+
+  public getById(path: string, id:number): Observable<any> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
         this.httpClient.get(path + id + '/', {headers})
@@ -42,7 +49,8 @@ export class GeneralService {
     );
   }
 
-  patch(body: any, path: string): Observable<HttpResponse<any>> {
+
+  public patch(body: any, path: string): Observable<HttpResponse<any>> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
         this.httpClient.patch(path + body.id + '/', body, { headers }).pipe(
@@ -52,7 +60,8 @@ export class GeneralService {
     );
   }
 
-  getPaginated(path: string, limit: number, offset: number): Observable<any> {
+
+  public getPaginated(path: string, limit: number, offset: number): Observable<any> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
         this.httpClient.get(path, {
@@ -66,8 +75,18 @@ export class GeneralService {
     );
   }
 
+  public update(path: string, id: number, body: any): Observable<HttpResponse<any>> {
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.put(`${path}${id}/`, body, { headers, observe: 'response', withCredentials: true }).pipe(
+          tap((response: any) => response)
+        )
+      )
+    );
+  }
 
-  delete(path: string, id: number): Observable<HttpResponse<any>> {
+
+  public delete(path: string, id: number): Observable<HttpResponse<any>> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
         this.httpClient.delete(path + id + '/', { headers }).pipe(

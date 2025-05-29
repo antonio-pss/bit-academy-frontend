@@ -34,7 +34,7 @@
         <input matInput placeholder="Digite seu apelido" formControlName="username" type="username" class="text-white"
                required/>
         @if (registerForm.get('username')?.invalid && (registerForm.get('username')?.touched || registerForm.get('username')?.dirty)) {
-          <small class="text-white">Minímo de 6 caracteres</small>
+          <small class="text-white">Minímo de 3 caracteres</small>
         }
       </mat-form-field>
 
@@ -43,7 +43,7 @@
         <input matInput placeholder="Digite sua senha" formControlName="password" type="password" class="text-white"
                required/>
         @if (registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)) {
-          <small class="text-white">Minímo de 8 caracteres</small>
+          <small class="text-white">Minímo de 6 caracteres</small>
         }
       </mat-form-field>
 
@@ -56,7 +56,7 @@
 
       <div class="flex justify-content-center gap-2">
         <!-- Botão de Submit -->
-        <button mat-fab extended type="submit" class="flex btn-secondary w-10rem"
+        <button mat-fab extended type="submit" class="flex btn-primary w-10rem"
                 [disabled]="!registerForm.valid">
           {{ primaryBtnTxt }}
         </button>

@@ -67,12 +67,6 @@
     background-color: #3e8e41;
     transform: translateY(-1px);
   }
-
-  &:disabled {
-    background-color: #969696;
-    color: #666;
-    cursor: not-allowed;
-  }
 }
 
 .btn-secondary {

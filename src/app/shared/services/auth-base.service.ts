@@ -112,7 +112,11 @@ export class AuthBaseService {
   }
 
   private getAuthToken(): string | null {
-    return sessionStorage.getItem(AuthBaseService.STORAGE_KEYS.TOKEN);
+    const token = sessionStorage.getItem(AuthBaseService.STORAGE_KEYS.TOKEN);
+    if (token && this.isValidPayload(this.decodeToken(token))) {
+      return token;
+    }
+    return null;
   }
 
   private getRefreshToken(): string | null {

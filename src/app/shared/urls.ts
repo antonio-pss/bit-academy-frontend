@@ -1,13 +1,14 @@
-const API_BASE_URL = 'http://18.117.154.106:8000';
+const API_BASE_URL = 'http://127.0.0.1:8000/core';
+const API_BASE_DEAFAULT_URL = 'http://127.0.0.1:8000';
 
 export const URLS = {
   BASE: API_BASE_URL, // Pode ser alterado para a URL de produção quando necessário
   AUTH: {
-    LOGIN: `${API_BASE_URL}/core/login/`,
-    SIGNUP: `${API_BASE_URL}/core/signup/`,
-    REFRESH: `${API_BASE_URL}/core/token/refresh/`,
+    LOGIN: `${API_BASE_URL}/login/`,
+    SIGNUP: `${API_BASE_URL}/signup/`,
+    REFRESH: `${API_BASE_URL}token/refresh/`,
   },
-  USER: `${API_BASE_URL}/core/user/`, // CRUD para usuários
-  CLASS: `${API_BASE_URL}/class/`, // CRUD para turmas
-  SCHOOL: `${API_BASE_URL}/school/`, // CRUD para escolas
+  USER: `${API_BASE_URL}/user/`, // CRUD para usuários
+  CLASS: `${API_BASE_DEAFAULT_URL}/class/`, // CRUD para turmas
+  SCHOOL: `${API_BASE_DEAFAULT_URL}/school/`, // CRUD para escolas
 };

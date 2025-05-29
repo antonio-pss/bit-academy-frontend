@@ -1,0 +1,15 @@
+<div class="flex items-center justify-between p-2 hover:bg-gray-50 rounded-lg">
+  <div class="flex items-center">
+    <mat-icon class="bg-indigo-100 text-indigo-600 rounded-full w-8 h-8 flex items-center justify-center mr-3">
+      {{ student.initials }}
+    </mat-icon>
+    <span class="text-sm font-medium">{{ student.name }}</span>
+  </div>
+  <span [ngClass]="{
+    'bg-green-100 text-green-800': student.status === 'present',
+    'bg-yellow-100 text-yellow-800': student.status === 'late',
+    'bg-red-100 text-red-800': student.status === 'absent'
+  }" class="text-xs px-2 py-1 rounded-full">
+    {{ student.status === 'present' ? 'Presente' : student.status === 'late' ? 'Atrasado' : 'Faltou' }}
+  </span>
+</div>

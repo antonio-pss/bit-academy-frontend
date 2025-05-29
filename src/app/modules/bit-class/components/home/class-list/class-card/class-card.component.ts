@@ -14,7 +14,6 @@ import {MatCard, MatCardContent} from '@angular/material/card';
   styleUrl: './class-card.component.scss'
 })
 export class ClassCardComponent {
-
   @Input() title: string = '';
   @Input() schedule: string = '';
   @Input() studentCount: number = 0;

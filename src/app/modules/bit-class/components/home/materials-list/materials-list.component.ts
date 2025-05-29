@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {NgForOf, NgIf} from '@angular/common';
 import {MatCard, MatCardHeader} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
 
