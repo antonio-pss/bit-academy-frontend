@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {GeneralService} from '../../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../../shared/services/endpoints.service';
 import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
+import {Classroom} from '../../../../../../shared/models/class';
 
 @Component({
   selector: 'app-class-form',
@@ -15,7 +16,7 @@ import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.import
   templateUrl: './class-form.component.html',
   styleUrl: './class-form.component.scss'
 })
-export class ClassFormComponent  {
+export class ClassFormComponent {
 
   @Output() onClose = new EventEmitter<boolean>();
 
@@ -62,5 +63,16 @@ export class ClassFormComponent  {
         }
       });
     }
+  }
+
+  public getClassroomList(): void {
+    this.classService.getPaginated(this.endpoint.path.class, 1, 10).subscribe({
+      next: (classrooms: Classroom[]) => {
+        console.log('Lista de turmas:', classrooms);
+      },
+      error: (error: Error) => {
+        console.error('Erro ao obter lista de turmas:', error);
+      }
+    });
   }
 }
