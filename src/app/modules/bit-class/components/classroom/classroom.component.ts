@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ClassroomStatCardComponent} from './classroom-stat-card/classroom-stat-card.component';
-import {AttendanceItemComponent} from './attendance-item/attendance-item.component';
-import {NgForOf} from '@angular/common';
-import {StudentCardComponent} from './student-card/student-card.component';
-import {ActivityCardComponent} from './activity-card/activity-card.component';
+import {ClassroomStatCardComponent} from './components/classroom-stat-card/classroom-stat-card.component';
+import {AttendanceItemComponent} from './components/attendance-item/attendance-item.component';
+import {StudentCardComponent} from './components/student-card/student-card.component';
+import {ActivityCardComponent} from './components/activity-card/activity-card.component';
 import {MATERIAL_IMPORTS} from '../../../../shared/imports/material.imports';
-import {MaterialCardComponent} from './material-card/material-card.component';
+import {MaterialCardComponent} from './components/material-card/material-card.component';
 import {GeneralService} from '../../../../shared/services/general.service';
 import {Classroom} from '../../../../shared/models/class';
 import {ToastrService} from 'ngx-toastr';
 import {EndpointsService} from '../../../../shared/services/endpoints.service';
+import {ClassroomSettingsComponent} from './classroom-settings/classroom-settings.component';
 
 @Component({
   selector: 'app-classroom',
@@ -21,6 +21,7 @@ import {EndpointsService} from '../../../../shared/services/endpoints.service';
     ActivityCardComponent,
     StudentCardComponent,
     MaterialCardComponent,
+    ClassroomSettingsComponent,
   ],
   templateUrl: './classroom.component.html',
   styleUrl: './classroom.component.scss'
@@ -122,7 +123,7 @@ export class ClassroomComponent implements OnInit{
     }
   ]
 
-  public classroom?: Classroom;
+  public classroom?: Classroom
 
   constructor(
     private readonly routeActivatedRoute: ActivatedRoute,

@@ -27,11 +27,12 @@
       <section class="flex gap-3">
         <div class="flex align-items-center">
           <mat-icon class="text-indigo-600 mr-2">event</mat-icon>
-          <span class="text-sm">Segunda e Quarta, 10:30</span>
+          <span class="text-sm">{{ this.classroom?.schedule }}</span>
         </div>
         <div class="flex align-items-center">
-          <mat-icon class="text-indigo-600 mr-2">place</mat-icon>
-          <span class="text-sm">Sala 12</span>
+          <mat-icon class="text-indigo-600 mr-2">calendar_today</mat-icon>
+
+          <span class="text-sm">{{ this.classroom?.hours_per_week }}</span>
         </div>
         <div class="flex align-items-center">
           <mat-icon class="text-indigo-600 mr-2">people</mat-icon>
@@ -135,16 +136,17 @@
                   <div class="mb-4">
                     <div class="flex items-center justify-between mb-3 px-2">
                       <h3 class="text-sm font-medium text-gray-500">Lista de Alunos</h3>
-                      <span class="text-xs text-gray-400">{{studentList.length}} registros</span>
+                      <span class="text-xs text-gray-400">{{ studentList.length }} registros</span>
                     </div>
 
                     <div class="border border-gray-100 rounded-lg overflow-hidden">
                       <div class="space-y-1 max-h-64 overflow-y-auto">
-                        <app-attendance-item
-                          *ngFor="let student of studentList"
-                          [student]="student"
-                          class="hover:bg-gray-50 transition-colors">
-                        </app-attendance-item>
+                        @for (student of studentList; track student.id) {
+                          <app-attendance-item
+                            [student]="student"
+                            class="hover:bg-gray-50 transition-colors">
+                          </app-attendance-item>
+                        }
                       </div>
                     </div>
                   </div>
@@ -164,72 +166,75 @@
 
               </mat-card>
 
-            <!-- Upcoming Activities -->
-            <mat-card class="mb-6">
-              <mat-card-header>
-                <mat-card-title>Próximas Atividades</mat-card-title>
-                <button mat-button color="primary" class="ml-auto">
-                  Ver todas
-                </button>
-              </mat-card-header>
-
-              <mat-card-content>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  <app-activity-card
-                    *ngFor="let activity of activities"
-                    [activity]="activity">
-                  </app-activity-card>
-                </div>
-              </mat-card-content>
-            </mat-card>
-
-            <!-- Top Students -->
-            <mat-card class="mb-6">
-              <mat-card-header>
-                <mat-card-title>Melhores Alunos</mat-card-title>
-                <mat-form-field appearance="outline" class="ml-auto w-48">
-                  <mat-select>
-                    <mat-option>Este bimestre</mat-option>
-                    <mat-option>Últimos 30 dias</mat-option>
-                    <mat-option>Ano letivo</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </mat-card-header>
-
-              <mat-card-content>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <app-student-card
-                    *ngFor="let student of topStudents"
-                    [student]="student">
-                  </app-student-card>
-                </div>
-
-                <div class="mt-6 text-center">
-                  <button mat-button color="primary">
-                    Ver todos os alunos
+              <!-- Upcoming Activities -->
+              <mat-card class="mb-6">
+                <mat-card-header>
+                  <mat-card-title>Próximas Atividades</mat-card-title>
+                  <button mat-button color="primary" class="ml-auto">
+                    Ver todas
                   </button>
-                </div>
-              </mat-card-content>
-            </mat-card>
+                </mat-card-header>
 
-            <!-- Recent Materials -->
-            <mat-card>
-              <mat-card-header>
-                <mat-card-title>Materiais Recentes</mat-card-title>
-                <button mat-button color="primary" class="ml-auto">
-                  Ver todos
-                </button>
-              </mat-card-header>
+                <mat-card-content>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @for (activity of activities; track activity) {
+                      <app-activity-card
+                        [activity]="activity">
+                      </app-activity-card>
+                    }
+                  </div>
+                </mat-card-content>
+              </mat-card>
 
-              <mat-card-content>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  <app-material-card
-                    *ngFor="let material of recentMaterials"
-                    [material]="material">
-                  </app-material-card>
-                </div>
-              </mat-card-content>
-            </mat-card>
+              <!-- Top Students -->
+              <mat-card class="mb-6">
+                <mat-card-header>
+                  <mat-card-title>Melhores Alunos</mat-card-title>
+                  <mat-form-field appearance="outline" class="ml-auto w-48">
+                    <mat-select>
+                      <mat-option>Este bimestre</mat-option>
+                      <mat-option>Últimos 30 dias</mat-option>
+                      <mat-option>Ano letivo</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-card-header>
+
+                <mat-card-content>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    @for (student of topStudents; track student) {
+                      <app-student-card
+                        [student]="student">
+                      </app-student-card>
+                    }
+                  </div>
+
+                  <div class="mt-6 text-center">
+                    <button mat-button color="primary">
+                      Ver todos os alunos
+                    </button>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+
+              <!-- Recent Materials -->
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Materiais Recentes</mat-card-title>
+                  <button mat-button color="primary" class="ml-auto">
+                    Ver todos
+                  </button>
+                </mat-card-header>
+
+                <mat-card-content>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @for (material of recentMaterials; track material) {
+                      <app-material-card
+                        [material]="material">
+                      </app-material-card>
+                    }
+                  </div>
+                </mat-card-content>
+              </mat-card>
             </div>
           </section>
         </mat-tab>
@@ -249,9 +254,12 @@
             <!-- Conteúdo da aba Materiais -->
           </div>
         </mat-tab>
+
+        <!--Settings section-->
         <mat-tab label="Configurações">
-          <div class="p-6">
-            <!-- Conteúdo da aba Configurações -->
+          <div class="p-3">
+            <app-classroom-settings>
+            </app-classroom-settings>
           </div>
         </mat-tab>
       </mat-tab-group>

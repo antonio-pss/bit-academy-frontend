@@ -1,32 +1,21 @@
-import {AfterViewInit, Component, EventEmitter, Output} from '@angular/core';
-import {MatDialogContainer, MatDialogContent, MatDialogRef} from '@angular/material/dialog';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatCardHeader, MatCardTitle} from '@angular/material/card';
-import {MatInput} from '@angular/material/input';
-import {MatButton} from '@angular/material/button';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {GeneralService} from '../../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../../shared/services/endpoints.service';
-import {NgIf} from '@angular/common';
+import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
 
 @Component({
   selector: 'app-class-form',
   imports: [
-    MatFormField,
-    MatCardHeader,
-    MatInput,
-    MatButton,
+    ...MATERIAL_IMPORTS,
     ReactiveFormsModule,
-    MatCardTitle,
-    MatLabel,
-    MatDialogContent,
-
   ],
   standalone: true,
   templateUrl: './class-form.component.html',
   styleUrl: './class-form.component.scss'
 })
-export class ClassFormComponent implements AfterViewInit{
+export class ClassFormComponent  {
 
   @Output() onClose = new EventEmitter<boolean>();
 
@@ -45,15 +34,15 @@ export class ClassFormComponent implements AfterViewInit{
     });
   }
 
-  ngAfterViewInit() {
-    this.classForm.statusChanges.subscribe(status => {
-      console.log('Status do formulário:', status);
-      Object.keys(this.classForm.controls).forEach(key => {
-        const control = this.classForm.get(key);
-        console.log(`Campo ${key}: ${control?.status}`, control?.errors);
-      });
-    });
-  }
+  // ngAfterViewInit() {
+  //   this.classForm.statusChanges.subscribe(status => {
+  //     console.log('Status do formulário:', status);
+  //     Object.keys(this.classForm.controls).forEach(key => {
+  //       const control = this.classForm.get(key);
+  //       console.log(`Campo ${key}: ${control?.status}`, control?.errors);
+  //     });
+  //   });
+  // }
 
   public closeDialog(success: boolean = false): void {
     this.onClose.emit(success);
@@ -66,7 +55,7 @@ export class ClassFormComponent implements AfterViewInit{
       this.classService.post(this.endpoint.path.class, this.classForm.value).subscribe({
         next: () => {
           this.closeDialog(true),
-          console.log(this.classForm.value);
+            console.log(this.classForm.value);
         },
         error: (error: Error) => {
           console.error('Erro ao criar classe:', error);

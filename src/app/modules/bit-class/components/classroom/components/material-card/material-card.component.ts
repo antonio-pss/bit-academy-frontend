@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
+import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
 import {NgClass} from '@angular/common';
 
 @Component({

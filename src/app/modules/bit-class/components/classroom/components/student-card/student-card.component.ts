@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
+import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
 
 @Component({
   selector: 'app-student-card',

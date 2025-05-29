@@ -1,7 +1,6 @@
-import {ReactiveFormsModule} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
 
 
 export const COMMON_IMPORTS = [
-  ReactiveFormsModule,
-
+  ToastrService,
 ]

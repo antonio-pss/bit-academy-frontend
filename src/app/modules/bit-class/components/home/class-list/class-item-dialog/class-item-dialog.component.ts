@@ -1,19 +1,18 @@
 import {AfterViewInit, Component, EventEmitter, Output} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {GeneralService} from '../../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../../shared/services/endpoints.service';
 import {Router} from '@angular/router';
 import {Classroom} from '../../../../../../shared/models/class';
 import {takeUntil} from 'rxjs';
 import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
-import {COMMON_IMPORTS} from '../../../../../../shared/imports/common';
 
 @Component({
   selector: 'app-class-item-dialog',
   imports: [
     ...MATERIAL_IMPORTS,
-    ...COMMON_IMPORTS
+    ReactiveFormsModule
   ],
   standalone: true,
   templateUrl: './class-item-dialog.component.html',

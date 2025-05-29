@@ -75,6 +75,17 @@ export class GeneralService {
     );
   }
 
+  public update(path: string, id: number, body: any): Observable<HttpResponse<any>> {
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.put(`${path}${id}/`, body, { headers, observe: 'response', withCredentials: true }).pipe(
+          tap((response: any) => response)
+        )
+      )
+    );
+  }
+
+
   public delete(path: string, id: number): Observable<HttpResponse<any>> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
