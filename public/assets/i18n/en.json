@@ -1,0 +1,13 @@
+{
+  "login": "Login",
+  "new": "New",
+  "create_account": "Create account",
+  "name_placeholder_class": "Enter the classroom name",
+  "description": "Description",
+  "school_days": "School days",
+  "weekly_hours": "Hours per week",
+  "cancel": "Cancel",
+  "save": "Save",
+  "write_your_email": "Write your E-mail"
+
+}

@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
+    "@ngx-translate/core": "^16.0.4",
+    "@ngx-translate/http-loader": "^16.0.1",
     "jwt-decode": "^4.0.0",
     "ngx-toastr": "^19.0.0",
     "primeflex": "^4.0.0",

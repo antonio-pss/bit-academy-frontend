@@ -1,19 +1,21 @@
 <!-- select-plataform.component.html -->
 
 <div class="login-page relative">
+  <button mat-button="elevated" (click)="trocarIdioma()">
+    {{ idiomaAtual === 'pt' ? 'English' : 'Português' }}
+  </button>
   <!-- Imagem no canto superior esquerdo (mantendo sua posição original) -->
-    <img src="assets/logo-white-bit-academy.svg" alt="logo" class="absolute top-0 md:right-0 m-4">
+    <img src="../../../../../../public/assets/logo-white-bit-academy.svg" alt="logo" class="absolute top-0 md:right-0 m-4">
 
   <!-- Container centralizado com PrimeFlex -->
   <div class="flex justify-content-center align-items-center min-h-screen">
     <div class="login-card w-full max-w-md">
       <!-- Header -->
       <div class="justify-content-center mb-4">
-        <h2 class="text-center text-white">
-          {{ formTitleTxt }}
+        <h2  class="text-center text-white">
+          {{ "login" | translate }}
         </h2>
       </div>
-
       <!-- Login Form -->
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
         <!-- E-mail -->
@@ -53,7 +55,7 @@
             [disabled]="!loginForm.valid"
             class="flex btn-primary w-10rem"
           >
-            {{ primaryBtnTxt }}
+            {{ "login" | translate }}
           </button>
 
           <!-- Botão ir ao cadastro -->
@@ -63,7 +65,7 @@
             (click)="onNavigate('auth/signup')"
             class="flex btn-secondary p-3 w-10rem"
           >
-            {{ secondaryBtnTxt }}
+            {{ "create_account" | translate }}
           </button>
         </div>
       </form>

@@ -1,0 +1,12 @@
+{
+  "login": "Entrar",
+  "new": "Novo",
+  "create_account": "Criar conta",
+  "name_placeholder_class": "Digite o nome da sala",
+  "description": "Descrição",
+  "school_days": "Dias de aula",
+  "weekly_hours": "Horários por semana",
+  "cancel": "Cancelar",
+  "save": "Salvar",
+  "write_your_email": "Digite o seu e-mail"
+}
