@@ -35,16 +35,6 @@ export class ClassFormComponent {
     });
   }
 
-  // ngAfterViewInit() {
-  //   this.classForm.statusChanges.subscribe(status => {
-  //     console.log('Status do formulário:', status);
-  //     Object.keys(this.classForm.controls).forEach(key => {
-  //       const control = this.classForm.get(key);
-  //       console.log(`Campo ${key}: ${control?.status}`, control?.errors);
-  //     });
-  //   });
-  // }
-
   public closeDialog(success: boolean = false): void {
     this.onClose.emit(success);
     this.dialogRef.close(success);
@@ -63,16 +53,5 @@ export class ClassFormComponent {
         }
       });
     }
-  }
-
-  public getClassroomList(): void {
-    this.classService.getPaginated(this.endpoint.path.class, 1, 10).subscribe({
-      next: (classrooms: Classroom[]) => {
-        console.log('Lista de turmas:', classrooms);
-      },
-      error: (error: Error) => {
-        console.error('Erro ao obter lista de turmas:', error);
-      }
-    });
   }
 }

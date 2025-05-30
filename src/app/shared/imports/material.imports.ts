@@ -3,7 +3,7 @@ import {MatInput, MatInputModule} from '@angular/material/input';
 import {
   MatCard,
   MatCardContent,
-  MatCardHeader, MatCardSubtitle,
+  MatCardHeader, MatCardModule, MatCardSubtitle,
   MatCardTitle
 } from '@angular/material/card';
 import {MatButton, MatButtonModule} from '@angular/material/button';
@@ -11,7 +11,7 @@ import {MatIcon, MatIconModule} from '@angular/material/icon';
 import {MatOption, MatSelect, MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogContent, MatDialogModule} from '@angular/material/dialog';
@@ -92,4 +92,14 @@ export const MATERIAL_IMPORTS = [
   MatTooltipModule,
   MatSlideToggleModule,
   MatSelect,
+  MatButton,
+  MatPaginator,
+  MatFormField,
+  MatIcon,
+  MatSelect,
+  MatOption,
+  MatInputModule,
+  MatPaginatorModule,
+  MatButtonModule,
+  MatCardModule
 ]
