@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatDialogContainer, MatDialogRef} from '@angular/material/dialog';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatIcon} from '@angular/material/icon';
@@ -27,7 +27,7 @@ import {EndpointsService} from '../../../../../../shared/services/endpoints.serv
   templateUrl: './class-form.component.html',
   styleUrl: './class-form.component.scss'
 })
-export class ClassFormComponent {
+export class ClassFormComponent extends GeneralService<Class> implements OnInit {
 
   @Output() onClose = new EventEmitter<boolean>();
   public classForm: FormGroup
