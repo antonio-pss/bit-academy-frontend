@@ -1,6 +1,6 @@
 import {Component, OnInit, signal} from '@angular/core';
 import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
-import {Classroom} from '../../../../../shared/models/class';
+import {Classroom} from '../../../../../shared/models/bit-class/class';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {GeneralService} from '../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../shared/services/endpoints.service';

@@ -15,7 +15,7 @@ import {EndpointsService} from '../../../../../shared/services/endpoints.service
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
-import {Classroom} from '../../../../../shared/models/class';
+import {Classroom} from '../../../../../shared/models/bit-class/class';
 
 @Component({
   selector: 'app-class-list',

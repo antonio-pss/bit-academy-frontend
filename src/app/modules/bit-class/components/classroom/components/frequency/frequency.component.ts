@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ClassMember} from '../../../../../../shared/models/class-member';
+import {ClassMember} from '../../../../../../shared/models/bit-class/class-member';
 import {TesteService} from '../../../../../../shared/services/teste.service';
 import {MatListOption, MatSelectionList} from '@angular/material/list';
 import {MatButton} from '@angular/material/button';

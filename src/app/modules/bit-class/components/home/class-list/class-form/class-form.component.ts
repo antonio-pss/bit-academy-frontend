@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {GeneralService} from '../../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../../shared/services/endpoints.service';
 import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
-import {Classroom} from '../../../../../../shared/models/class';
+import {Classroom} from '../../../../../../shared/models/bit-class/class';
 
 @Component({
   selector: 'app-class-form',

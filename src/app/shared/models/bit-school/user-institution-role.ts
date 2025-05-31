@@ -1,4 +1,4 @@
-import {ModelBase} from './model-base';
+import {ModelBase} from '../model-base';
 
 export interface UserInstitutionRole extends ModelBase {
   id_user?: number;

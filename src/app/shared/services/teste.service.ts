@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ClassMember} from '../models/class-member';
+import {ClassMember} from '../models/bit-class/class-member';
 
 @Injectable({
   providedIn: 'root'
