@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {FormsModule} from '@angular/forms';
 import {MatButton, MatButtonModule} from '@angular/material/button';
@@ -14,27 +14,22 @@ import {GeneralService} from '../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../shared/services/endpoints.service';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
+import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
+import {Classroom} from '../../../../../shared/models/class';
+
 
 @Component({
   selector: 'app-class-list',
+  standalone: true,
   templateUrl: './class-list.component.html',
+  styleUrls: ['./class-list.component.scss'],
   imports: [
     FormsModule,
-    MatButton,
     ClassCardComponent,
-    MatPaginator,
-    MatFormField,
-    MatIcon,
-    MatSelect,
-    MatOption,
-    MatInputModule,
-    MatPaginatorModule,
-    MatButtonModule,
-    MatCardModule
-  ],
-  styleUrls: ['./class-list.component.scss']
+    ...MATERIAL_IMPORTS
+  ]
 })
-export class ClassListComponent {
+export class ClassListComponent implements OnInit {
   @Output() open = new EventEmitter<boolean>();
 
   public displayedClasses: any[] = []; // Lista inicial de classes
@@ -59,12 +54,12 @@ export class ClassListComponent {
     this.displayedClasses = [
       {
         id: 1,
-        title: 'Math',
-        schedule: 'Mon 9AM',
-        studentCount: 30,
-        gradeAverage: 85,
-        assignmentsCount: 5,
-        progressPercentage: 80,
+        title: 'Math', // título da aula
+        schedule: 'Mon 9AM', // dias de aula
+        studentCount: 30, // número de alunos
+        gradeAverage: 85, //a média notas pode ser feito aqui
+        assignmentsCount: 5, // número de tarefas
+        progressPercentage: 80, // porcentagem de progresso da sala
         status: 'Active'
       },
       {
@@ -123,6 +118,21 @@ export class ClassListComponent {
     this.updatePaginatedClasses();
   }
 
+  ngOnInit(): void {
+    this.loadClasses();
+    this.getClassroomList();
+  }
+
+  public getClassroomList(): void {
+    this.classService.getPaginated(this.endpoint.path.class, 1, 10).subscribe({
+      next: (classrooms: Classroom[]) => {
+        console.log('Lista de turmas:', classrooms);
+      },
+      error: (error: Error) => {
+        console.error('Erro ao obter lista de turmas:', error);
+      }
+    });
+  }
 
   public updatePaginatedClasses(): void {
     const startIndex = this.currentPageIndex * this.itemsPerPage;

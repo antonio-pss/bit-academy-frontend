@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {GeneralService} from '../../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../../shared/services/endpoints.service';
 import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
+import {Classroom} from '../../../../../../shared/models/class';
+
 
 @Component({
   selector: 'app-class-form',
@@ -33,16 +35,6 @@ export class ClassFormComponent  {
       id_course_module_discipline: []
     });
   }
-
-  // ngAfterViewInit() {
-  //   this.classForm.statusChanges.subscribe(status => {
-  //     console.log('Status do formulário:', status);
-  //     Object.keys(this.classForm.controls).forEach(key => {
-  //       const control = this.classForm.get(key);
-  //       console.log(`Campo ${key}: ${control?.status}`, control?.errors);
-  //     });
-  //   });
-  // }
 
   public closeDialog(success: boolean = false): void {
     this.onClose.emit(success);

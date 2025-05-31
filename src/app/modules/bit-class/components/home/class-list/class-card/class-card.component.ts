@@ -11,6 +11,7 @@ import {MatCard, MatCardContent} from '@angular/material/card';
     MatCard,
   ],
   templateUrl: './class-card.component.html',
+  standalone: true,
   styleUrl: './class-card.component.scss'
 })
 export class ClassCardComponent {
