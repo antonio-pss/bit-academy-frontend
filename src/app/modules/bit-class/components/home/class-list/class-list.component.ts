@@ -1,21 +1,16 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {MatPaginator, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
-import {FormsModule} from '@angular/forms';
-import {MatButton, MatButtonModule} from '@angular/material/button';
-import {ClassCardComponent} from './class-card/class-card.component';
-import {MatFormField} from '@angular/material/form-field';
-import {MatIcon} from '@angular/material/icon';
-import {MatOption, MatSelect, MatSelectChange} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-import {MatDialog, MatDialogContainer} from '@angular/material/dialog';
-import {ClassItemDialogComponent} from './class-item-dialog/class-item-dialog.component';
-import {GeneralService} from '../../../../../shared/services/general.service';
-import {EndpointsService} from '../../../../../shared/services/endpoints.service';
-import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
-import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
-import {Classroom} from '../../../../../shared/models/bit-class/class';
+import { Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import { MatPaginator, PageEvent} from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
+import { ClassCardComponent } from './class-card/class-card.component';
+import { MatSelectChange } from '@angular/material/select';
+import { MatDialog } from '@angular/material/dialog';
+import { ClassItemDialogComponent } from './class-item-dialog/class-item-dialog.component';
+import { GeneralService } from '../../../../../shared/services/general.service';
+import { EndpointsService } from '../../../../../shared/services/endpoints.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { MATERIAL_IMPORTS } from '../../../../../shared/imports/material.imports';
+import { Classroom } from '../../../../../shared/models/bit-class/class';
 
 @Component({
   selector: 'app-class-list',

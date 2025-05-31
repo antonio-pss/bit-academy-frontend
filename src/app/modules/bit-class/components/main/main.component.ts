@@ -1,10 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
-import {MatSidenav, MatSidenavContainer} from '@angular/material/sidenav';
-import {MatListItem, MatNavList} from '@angular/material/list';
-import {MatIcon} from '@angular/material/icon';
-import {MatDivider} from '@angular/material/divider';
-import {MatToolbar} from '@angular/material/toolbar';
+import { Component } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import {AuthBaseService} from '../../../../shared/services/auth-base.service';
 import {ToastrService} from 'ngx-toastr';
 import {filter} from 'rxjs';
