@@ -17,6 +17,7 @@ import {Router} from '@angular/router';
 import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
 import {Classroom} from '../../../../../shared/models/class';
 
+
 @Component({
   selector: 'app-class-list',
   standalone: true,

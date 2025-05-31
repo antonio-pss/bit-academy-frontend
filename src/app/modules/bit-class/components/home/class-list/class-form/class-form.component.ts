@@ -6,6 +6,7 @@ import {EndpointsService} from '../../../../../../shared/services/endpoints.serv
 import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
 import {Classroom} from '../../../../../../shared/models/class';
 
+
 @Component({
   selector: 'app-class-form',
   imports: [
@@ -16,7 +17,7 @@ import {Classroom} from '../../../../../../shared/models/class';
   templateUrl: './class-form.component.html',
   styleUrl: './class-form.component.scss'
 })
-export class ClassFormComponent {
+export class ClassFormComponent  {
 
   @Output() onClose = new EventEmitter<boolean>();
 
