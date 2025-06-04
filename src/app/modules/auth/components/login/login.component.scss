@@ -1,87 +1,171 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+/* ===== Fonte Padrão e Reset Mínimo ===== */
 :host {
   display: block;
   font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
+/* ==========================================
+   1. CONTAINER PRINCIPAL: GRADIENTE SUAVE EM AZUL
+      (COM MAIS PARADAS DE COR E TAMANHO MAIOR PARA EVITAR “PIXELAÇÃO”)
+   ========================================== */
 .login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
   padding: 1rem;
-  background: linear-gradient(180deg, #2a353e, #101419);
-  background-size: 100% 100%;
-  min-height: 100vh; /* Garante que o gradiente cubra toda a altura da tela */
+  z-index: 0;
+
+  /* Gradiente em tons de azul com várias paradas de cor */
+  background: linear-gradient(
+      120deg,
+      #0b1c3f 0%,
+      #112d5e 25%,
+      #0e264e 50%,
+      #112d5e 75%,
+      #0b1c3f 100%
+  );
+  background-size: 400% 400%;
+  background-repeat: no-repeat;
+  animation: gradientShift 25s ease infinite;
 }
 
-
-
-.login-card {
-  background-color: #141414;
-  border: 1px solid #141414;
-  border-radius: 12px;
-  padding: 2.5rem;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-  transition: transform 0.2s ease;
-  text-align: center;
-  justify-content: center;
-
-
-  &:hover {
-    transform: translateY(-2px);
+/* Keyframes para deslocar o gradiente suavemente */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
-.header-icon {
-  color: white;
-  height: 60px;
-  width: 60px;
+/* ==========================================
+   2. PSEUDO‐ELEMENTO: “MANCHAS” SUAVES EM AZUL PULSANDO
+   ========================================== */
+.login-page::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+      circle at 30% 30%,
+      rgba(100, 149, 237, 0.05),  /* azul suave (Cornflower Blue) mais transparente */
+      transparent 60%
+  );
+  filter: blur(100px);
+  opacity: 0.5;
+  animation: softPulse 14s ease-in-out infinite alternate;
+  z-index: 1;
 }
 
-.input-field {
-  background-color: #ed3232;
-  border: 1px solid #e13737;
-  color: #d12323;
-  transition: all 0.3s ease;
-  padding: 0.75rem;
+/* Keyframes para movimentar e pulsar a “mancha” radial */
+@keyframes softPulse {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(30%, 20%) scale(1.3);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(60%, 40%) scale(1);
+    opacity: 0.5;
+  }
 }
 
-.input-field:focus-within {
-  border-color: #4caf50 !important;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+/* ==========================================
+   3. CONTEÚDO ACIMA DAS ANIMAÇÕES
+   ========================================== */
+.login-card {
+  position: relative;
+  z-index: 2;
+  background-color: rgba(20, 20, 20, 0.9);
+  border-radius: 0.75rem; /* 12px */
+  padding: 2rem;          /* 32px */
+  width: 100%;
+  max-width: 24rem;       /* 384px */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+.login-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+.login-page img {
+  position: relative;
+  z-index: 2;
+  height: 3rem; /* 48px */
+  width: auto;
+}
+
+/* ==========================================
+   4. ESTILIZAÇÕES EXISTENTES DE FORM FIELDS E BOTÕES
+   (MANTÉM O QUE JÁ HÁ NO PROJETO)
+   ========================================== */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #4caf50 !important;
+}
+
+.mat-input-element {
+  color: white !important;
 }
 
 .btn-primary {
   background-color: #4caf50;
-  color: white;
-  padding: 0.75rem;
+  color: #ffffff;
   font-weight: 500;
-  width: 100%;
-  transition: all 0.3s ease;
+  border-radius: 0.5rem; /* 8px */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-  &:hover {
-    background-color: #3e8e41;
-    transform: translateY(-1px);
-  }
+.btn-primary:hover {
+  background-color: #3e8e41;
+  transform: translateY(-2px);
 }
 
 .btn-secondary {
   background-color: #3a3a3a;
-  color: white;
-  border: 1px solid #555;
-  padding: 0.75rem;
+  color: #ffffff;
+  border: 1px solid #555555;
   font-weight: 500;
-  width: 100%;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #444;
-    transform: translateY(-1px);
-  }
+  border-radius: 0.5rem; /* 8px */
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.btn-secondary:hover {
+  background-color: #444444;
+  transform: translateY(-2px);
+}
 
+/* ==========================================
+   5. RESPONSIVIDADE
+   ========================================== */
+@media (min-width: 768px) {
+  .login-page {
+    padding: 2rem;
+  }
+  .login-card {
+    padding: 2.5rem;      /* 40px */
+    max-width: 28rem;     /* 448px */
+  }
+  .login-card h2 {
+    font-size: 1.75rem;   /* 28px */
+  }
+}

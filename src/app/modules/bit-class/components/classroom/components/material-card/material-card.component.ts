@@ -8,6 +8,7 @@ import {NgClass} from '@angular/common';
     ...MATERIAL_IMPORTS,
     NgClass
   ],
+  standalone: true,
   templateUrl: './material-card.component.html',
   styleUrl: './material-card.component.scss'
 })

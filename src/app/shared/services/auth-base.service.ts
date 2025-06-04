@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { EndpointsService } from './endpoints.service';
-import { Observable, tap, catchError, throwError } from 'rxjs';
-import { User } from '../models/user';
-import { jwtDecode } from 'jwt-decode';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {EndpointsService} from './endpoints.service';
+import {catchError, Observable, tap, throwError} from 'rxjs';
+import {User} from '../models/user';
+import {jwtDecode} from 'jwt-decode';
 
 interface LoginResponse {
   access: string;
@@ -11,7 +11,7 @@ interface LoginResponse {
 }
 
 interface JwtPayload {
-  user_id: string;
+  id: number;
   name: string;
   username: string;
   email: string;
@@ -142,12 +142,12 @@ export class AuthBaseService {
   }
 
   private isValidPayload(payload: JwtPayload): boolean {
-    return Boolean(payload.user_id && payload.name && payload.username && payload.email);
+    return Boolean(payload.id && payload.name && payload.username && payload.email);
   }
 
   private createUserFromPayload(payload: JwtPayload): User {
     return {
-      id: undefined,
+      id: payload.id,
       name: payload.name,
       username: payload.username,
       email: payload.email,

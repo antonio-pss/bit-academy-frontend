@@ -8,6 +8,7 @@ import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.import
     ...MATERIAL_IMPORTS,
     NgClass,
   ],
+  standalone: true,
   templateUrl: './activity-card.component.html',
   styleUrl: './activity-card.component.scss'
 })

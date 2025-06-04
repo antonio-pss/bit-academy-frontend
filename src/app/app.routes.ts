@@ -1,17 +1,17 @@
-import { Routes } from '@angular/router';
-import { LoginComponent } from './modules/auth/components/login/login.component';
-import { SignupComponent } from './modules/auth/components/signup/signup.component';
-import { SelectPlataformComponent } from './modules/pages/select-plataform/select-plataform.component';
-import { authGuard } from './shared/guards/auth.guard';
-import { authChildrenGuard } from './shared/guards/auth-children.guard';
-import { NotFoundComponent } from './modules/auth/components/not-found/not-found.component';
+import {Routes} from '@angular/router';
+import {LoginComponent} from './modules/auth/components/login/login.component';
+import {SignupComponent} from './modules/auth/components/signup/signup.component';
+import {SelectPlataformComponent} from './modules/pages/select-plataform/select-plataform.component';
+import {authGuard} from './shared/guards/auth.guard';
+import {authChildrenGuard} from './shared/guards/auth-children.guard';
+import {NotFoundComponent} from './modules/auth/components/not-found/not-found.component';
 
 export const routes: Routes = [
   {
     path: 'auth',
     children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'signup', component: SignupComponent },
+      {path: 'login', component: LoginComponent},
+      {path: 'signup', component: SignupComponent},
       {
         path: 'platform-selector',
         component: SelectPlataformComponent,
@@ -26,7 +26,7 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./modules/bit-class/bit-class.module').then(m => m.BitClassModule),
   },
-  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
-  { path: 'not-found', component: NotFoundComponent },
-  { path: '**', redirectTo: 'not-found' },
+  {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
+  {path: 'not-found', component: NotFoundComponent},
+  {path: '**', redirectTo: 'not-found'},
 ];

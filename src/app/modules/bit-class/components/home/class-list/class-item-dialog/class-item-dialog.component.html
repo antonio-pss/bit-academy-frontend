@@ -1,75 +1,62 @@
 <mat-dialog-content class="p-4">
-  <mat-label>Nome da sala</mat-label>
   <form [formGroup]="classForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-3">
     <mat-card-header>
-      <mat-card-title>Nova Sala</mat-card-title>
+      <mat-card-title>
+        @if (classForm.value.id) { Editar Sala } @else { Nova Sala }
+      </mat-card-title>
     </mat-card-header>
 
+    <!-- Nome da Sala -->
     <mat-form-field appearance="outline" class="w-full">
-      <input matInput
-             formControlName="name"
-             placeholder="Digite o nome da sala">
+      <mat-label>Nome da Sala</mat-label>
+      <input matInput formControlName="name" placeholder="Digite o nome da sala" />
+      @if (classForm.get('name')?.hasError('required') && classForm.get('name')?.touched) {
+        <mat-error>Nome é obrigatório.</mat-error>
+      }
     </mat-form-field>
 
+    <!-- Descrição -->
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>Descrição</mat-label>
-      <textarea matInput
-                formControlName="description"
-                placeholder="Digite a descrição da sala"
-                rows="3">
-      </textarea>
+      <textarea matInput formControlName="description" placeholder="Digite a descrição da sala" rows="3"></textarea>
+      @if (classForm.get('description')?.hasError('required') && classForm.get('description')?.touched) {
+        <mat-error>Descrição é obrigatória.</mat-error>
+      }
     </mat-form-field>
 
+    <!-- Dias de Aula -->
     <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Dias de aula</mat-label>
-      <mat-select formControlName="schedule" multiple>
+      <mat-label>Dias de Aula</mat-label>
+      <mat-select formControlName="days_per_week" multiple placeholder="Selecione os dias">
         @for (day of daysOfWeek; track day) {
-          <mat-option [value]="day">
-            {{ day }}
-          </mat-option>
+          <mat-option [value]="day">{{ weekDayLabels[day] }}</mat-option>
         }
       </mat-select>
+      @if (classForm.get('days_per_week')?.hasError('required') && classForm.get('days_per_week')?.touched) {
+        <mat-error>Selecione ao menos um dia.</mat-error>
+      }
     </mat-form-field>
 
-<!--Boa ideia deixa pra depois-->
-<!--    <mat-form-field appearance="outline" class="w-full">-->
-<!--      <mat-label>Horários por semana</mat-label>-->
-<!--      <mat-select formControlName="hours_per_week">-->
-<!--        @for (hour of hoursPerWeek; track hour) {-->
-<!--          <mat-option [value]="hour">-->
-<!--            {{ hour }}-->
-<!--          </mat-option>-->
-<!--        }-->
-<!--      </mat-select>-->
-<!--    </mat-form-field>-->
-
+    <!-- Horas por Aula -->
     <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Horários por semana</mat-label>
-      <mat-select formControlName="hours_per_week">
-        <mat-option value="1">1</mat-option>
-        <mat-option value="2">2</mat-option>
-        <mat-option value="3">3</mat-option>
-        <mat-option value="4">4</mat-option>
-        <mat-option value="5">5</mat-option>
-        <mat-option value="6">6</mat-option>
+      <mat-label>Horas por Aula</mat-label>
+      <mat-select formControlName="hours_per_class" placeholder="Selecione horas">
+        @for (hour of [1,2,3,4,5,6]; track hour) {
+          <mat-option [value]="hour">{{ hour }}</mat-option>
+        }
       </mat-select>
+      @if (classForm.get('hours_per_class')?.hasError('required') && classForm.get('hours_per_class')?.touched) {
+        <mat-error>Informe a quantidade de horas por aula.</mat-error>
+      }
+      @if (classForm.get('hours_per_class')?.hasError('min') && classForm.get('hours_per_class')?.touched) {
+        <mat-error>O valor mínimo é 1 hora.</mat-error>
+      }
     </mat-form-field>
 
+    <!-- Botões -->
     <div class="flex justify-content-end gap-2">
-      <button mat-button
-              type="button"
-              (click)="closeDialog()"
-      >
-        Cancelar
-      </button>
-      <button mat-raised-button
-              color="primary"
-              type="submit"
-              [disabled]="!classForm.valid"
-
-      >
-        Salvar
-      </button>
+      <button mat-button type="button" (click)="closeDialog(false)">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="classForm.invalid">Salvar</button>
     </div>
   </form>
 </mat-dialog-content>

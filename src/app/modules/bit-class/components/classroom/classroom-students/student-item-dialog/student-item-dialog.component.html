@@ -1,0 +1,17 @@
+<form [formGroup]="classMemberForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-4 p-4">
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Selecione o aluno</mat-label>
+    <mat-select formControlName="student" required>
+      @for (student of availableStudents; track student.id) {
+        <mat-option [value]="student.id">
+          {{ student.name }} ({{ student.email }})
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <div class="flex justify-content-end gap-2">
+    <button mat-button type="button" (click)="closeDialog(false)">Cancelar</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="classMemberForm.invalid">Matricular</button>
+  </div>
+</form>

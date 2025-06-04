@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable, of, Subject, switchMap, tap, throwError} from 'rxjs';
+import {jwtDecode} from 'jwt-decode';
 
 
 @Injectable({
@@ -12,6 +13,18 @@ export class GeneralService {
 
   public unsubscribe = new Subject();
 
+  public get userId(): number {
+    const token = sessionStorage.getItem('auth-token');
+    if (!token) {
+      throw new Error('Token não encontrado no armazenamento.');
+    }
+    try {
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.user_id;
+    } catch (error) {
+      throw new Error('Erro ao decodificar o token: ');
+    }
+  }
 
 
   private getHeaders(): Observable<HttpHeaders> {

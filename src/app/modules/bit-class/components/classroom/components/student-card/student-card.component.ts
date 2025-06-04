@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {NgClass} from '@angular/common';
 import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-student-card',
@@ -8,6 +8,7 @@ import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.import
     ...MATERIAL_IMPORTS,
     NgClass,
   ],
+  standalone: true,
   templateUrl: './student-card.component.html',
   styleUrl: './student-card.component.scss'
 })
