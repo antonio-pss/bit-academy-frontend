@@ -3,7 +3,9 @@ import {MatInput, MatInputModule} from '@angular/material/input';
 import {
   MatCard,
   MatCardContent,
-  MatCardHeader, MatCardModule, MatCardSubtitle,
+  MatCardHeader,
+  MatCardModule,
+  MatCardSubtitle,
   MatCardTitle
 } from '@angular/material/card';
 import {MatButton, MatButtonModule} from '@angular/material/button';
@@ -15,12 +17,12 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogContent, MatDialogModule} from '@angular/material/dialog';
-import {MatExpansionModule, } from '@angular/material/expansion';
+import {MatExpansionModule,} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDivider, MatDividerModule} from '@angular/material/divider';
 import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
-import { MatChipsModule} from '@angular/material/chips';
+import {MatChipsModule} from '@angular/material/chips';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
@@ -33,7 +35,6 @@ import {MatTab, MatTabGroup} from '@angular/material/tabs';
 import {MatBadge} from '@angular/material/badge';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
-
 
 
 export const MATERIAL_IMPORTS = [
@@ -101,6 +102,6 @@ export const MATERIAL_IMPORTS = [
   MatInputModule,
   MatPaginatorModule,
   MatButtonModule,
-  MatCardModule
-
+  MatCardModule,
+  MatProgressBarModule
 ]

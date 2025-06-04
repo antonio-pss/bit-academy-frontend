@@ -1,62 +1,40 @@
 <section class="card">
   <section class="card-header flex flex-row justify-content-between align-items-center">
     <h2 class="m-0 text-xl font-bold">Suas salas</h2>
-
-    <!--""""Filtro"""" dizque-->
     <section class="flex flex-row align-items-center gap-3">
       <mat-form-field class="w-full sm:w-auto" appearance="outline">
         <mat-label>Buscar salas...</mat-label>
-        <input matInput
-               [(ngModel)]="searchTerm"
-               (input)="onSearch()">
+        <input matInput [(ngModel)]="searchTerm" (input)="onSearch()">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
-
       <mat-form-field class="w-full sm:w-auto" appearance="outline">
-        <mat-label>Filter by Status</mat-label>
+        <mat-label>Status</mat-label>
         <mat-select (selectionChange)="onChangeStatus($event)">
-          <mat-option value="all">All Classes</mat-option>
-          <mat-option value="active">Active</mat-option>
-          <mat-option value="pending">Pending</mat-option>
-          <mat-option value="overdue">Overdue</mat-option>
+          <mat-option value="all">Todas</mat-option>
+          <mat-option value="Active">Ativa</mat-option>
+          <mat-option value="Pending">Pendente</mat-option>
+          <mat-option value="Overdue">Atrasada</mat-option>
         </mat-select>
       </mat-form-field>
-
-      <button mat-flat-button
-              color="primary"
-              (click)="openDialog()">
-        Novo
-      </button>
+      <button mat-flat-button color="primary" (click)="openDialog()">Novo</button>
     </section>
   </section>
 
-  <!--Listagem de cards de sala-->
-  <section class="flex flex-column">
-    <div class="grid gap-5">
-      @for (item of paginatedClasses; track item.id) {
-        <app-class-card
-          [title]="item.title"
-          [schedule]="item.schedule"
-          [studentCount]="item.studentCount"
-          [gradeAverage]="item.gradeAverage"
-          [assignmentsCount]="item.assignmentsCount"
-          [progressPercentage]="item.progressPercentage"
-          [status]="item.status"
-          [id]="item.id"
-          (click)="onNavigate('class/classroom')">
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+    @for (classroom of paginatedClasses; track classroom.id) {
+      <app-class-card
+        [classroom]="classroom"
+        (click)="onNavigate('class/classroom/' + classroom.id)">
+      </app-class-card>
+    }
+  </section>
 
-        </app-class-card>
-      }
-    </div>
-
-    <section class="pagination flex justify-content-end align-items-center mt-4">
-      <mat-paginator
-        [pageSizeOptions]="[5, 10, 20]"
-        showFirstLastButtons
-        [length]="filteredClasses.length"
-        (page)="onPageChange($event)">
-      </mat-paginator>
-    </section>
+  <section class="pagination flex justify-content-end align-items-center mt-4">
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      [length]="filteredClasses.length"
+      (page)="onPageChange($event)">
+    </mat-paginator>
   </section>
 </section>
-

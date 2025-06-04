@@ -1,2 +1,36 @@
-<mat-dialog-container>
-</mat-dialog-container>
+<mat-dialog-content class="p-4">
+  <form [formGroup]="classForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-3">
+    <mat-card-header>
+      <mat-card-title>Nova Sala</mat-card-title>
+    </mat-card-header>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Nome da sala</mat-label>
+      <input matInput
+             formControlName="name"
+             placeholder="Digite o nome da sala">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput
+                formControlName="description"
+                placeholder="Digite a descrição da sala"
+                rows="3">
+      </textarea>
+    </mat-form-field>
+
+    <div class="flex justify-content-end gap-2">
+      <button mat-button
+              type="button" (click)="closeDialog()">
+        Cancelar
+      </button>
+      <button mat-raised-button
+              color="primary"
+              type="submit"
+      >
+        Salvar
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

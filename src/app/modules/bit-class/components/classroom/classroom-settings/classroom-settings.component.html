@@ -1,93 +1,68 @@
-<mat-toolbar class="w-full justify-content-between">
-  <span class="mat-title">{{ this.classroom?.name }}</span>
-  <span class="toolbar-spacer"></span>
-  <div class="justify-content-evenly">
-    <button mat-icon-button color="primary"
-            (click)="onEdit()"
-            [matTooltip]="editMode ? 'Editar' : 'Cancelar'">
-      <mat-icon>{{ editMode ? 'edit' : 'close' }}</mat-icon>
-    </button>
-    <button mat-icon-button color="warn"
-            (click)="onDelete()"
-            matTooltip="Excluir"
-            [disabled]="!editMode">
-      <mat-icon>delete</mat-icon>
-    </button>
-  </div>
-</mat-toolbar>
+<section class="w-full">
+  <mat-toolbar class="w-full justify-content-between">
+    <span class="mat-title">{{ classroom?.name }}</span>
+    <span class="toolbar-spacer"></span>
+    <div>
+      <button mat-icon-button color="primary" (click)="toggleEditMode()"
+              [matTooltip]="editMode() ? 'Cancelar' : 'Editar'">
+        <mat-icon>{{ editMode() ? 'close' : 'edit' }}</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="onDelete()" [disabled]="!editMode()" matTooltip="Excluir">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
 
-<mat-card class="mat-elevation-z2">
-  <mat-card-content>
-    <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-3">
-      <div class="p-2">
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Nome da sala</mat-label>
-          <input matInput
-                 formControlName="name"
-                 placeholder="Digite o nome da sala"
-                 [readonly]="editMode">
-        </mat-form-field>
-      </div>
-
-      <div class="p-2">
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Descrição</mat-label>
-          <textarea matInput
-                    formControlName="description"
-                    placeholder="Digite a descrição da sala"
-                    rows="3"
-                    [readonly]="editMode">
-          </textarea>
-        </mat-form-field>
-      </div>
-
-      <div class="p-2">
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Dias de aula</mat-label>
-          <mat-select formControlName="schedule" multiple [disabled]="editMode">
-            @for (day of daysOfWeek; track day) {
-              <mat-option [value]="day">
-                {{ day }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <div class="p-2">
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Horários por semana</mat-label>
-          <mat-select formControlName="hours_per_week" [disabled]="editMode">
-            @for (hour of [1, 2, 3, 4, 5, 6]; track hour) {
-              <mat-option [value]="hour">{{ hour }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <div class="flex justify-content-end gap-2 p-3">
-        <button mat-button
-                type="button"
-                (click)="onNavigate('class/classrooms/'+this.classroom?.id)">
-          Cancelar
-        </button>
-        <button mat-raised-button
-                color="primary"
-                type="submit"
-                [disabled]="!settingsForm.valid || editMode">
-          Atualizar
-        </button>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
-
-@if (editMode) {
-  <div class="mt-4 text-center">
-    <mat-card class="mat-elevation-z1 p-3">
+  <!-- Wrapper centralizado e com largura máxima -->
+  <section class="flex flex-column align-items-center justify-content-center">
+    <mat-card class="mat-elevation-z2 w-full">
       <mat-card-content>
-        <p class="text-muted">Para editar as informações da sala, clique no botão de edição acima.</p>
+        <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-3">
+          <!-- Nome da sala -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nome da sala</mat-label>
+            <input matInput formControlName="name" placeholder="Digite o nome da sala" [readonly]="!editMode()">
+          </mat-form-field>
+
+          <!-- Descrição -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Descrição</mat-label>
+            <textarea matInput formControlName="description" rows="3" placeholder="Digite a descrição"
+                      [readonly]="!editMode()"></textarea>
+          </mat-form-field>
+
+          <!-- Dias de aula -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Dias de aula</mat-label>
+            <mat-select formControlName="days_per_week" multiple [disabled]="!editMode()">
+              @for (day of weekDayKeys; track day) {
+                <mat-option [value]="day">{{ weekDayLabel[day] }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Horas por aula -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Horas por aula</mat-label>
+            <mat-select formControlName="hours_per_class" [disabled]="!editMode()">
+              @for (hour of hoursPerClassOptions; track hour) {
+                <mat-option [value]="hour">{{ hour }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Botão Atualizar -->
+          <div class="flex justify-content-between align-items-center">
+            @if (!editMode()) {
+              <span class="text-muted">Para editar as informações da sala, clique no botão de edição acima.</span>
+            }
+            <button mat-flat-button color="primary" type="submit" [disabled]="!settingsForm.valid || !editMode()">
+              Atualizar
+            </button>
+          </div>
+        </form>
       </mat-card-content>
     </mat-card>
-  </div>
-}
+
+  </section>
+</section>

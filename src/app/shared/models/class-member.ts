@@ -1,7 +1,8 @@
 import {ModelBase} from './model-base';
+import {User} from './user';
 
-export interface ClassMember extends ModelBase{
-  id_class_role?: number;
-  id_class?: number;
-  id_user?: number;
+export interface ClassMember extends ModelBase {
+  class_id?: number;
+  student?: User;
+  joined_at?: Date;
 }

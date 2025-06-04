@@ -5,12 +5,12 @@ import {AttendanceItemComponent} from './components/attendance-item/attendance-i
 import {StudentCardComponent} from './components/student-card/student-card.component';
 import {ActivityCardComponent} from './components/activity-card/activity-card.component';
 import {MATERIAL_IMPORTS} from '../../../../shared/imports/material.imports';
-import {MaterialCardComponent} from './components/material-card/material-card.component';
 import {GeneralService} from '../../../../shared/services/general.service';
 import {Classroom} from '../../../../shared/models/class';
 import {ToastrService} from 'ngx-toastr';
 import {EndpointsService} from '../../../../shared/services/endpoints.service';
 import {ClassroomSettingsComponent} from './classroom-settings/classroom-settings.component';
+import {ClassroomStudentsComponent} from './classroom-students/classroom-students.component';
 
 @Component({
   selector: 'app-classroom',
@@ -20,13 +20,14 @@ import {ClassroomSettingsComponent} from './classroom-settings/classroom-setting
     AttendanceItemComponent,
     ActivityCardComponent,
     StudentCardComponent,
-    MaterialCardComponent,
     ClassroomSettingsComponent,
+    ClassroomStudentsComponent,
   ],
+  standalone: true,
   templateUrl: './classroom.component.html',
   styleUrl: './classroom.component.scss'
 })
-export class ClassroomComponent implements OnInit{
+export class ClassroomComponent implements OnInit {
   public attendanceList = [
     {name: 'Ana Maria', initials: 'AM', status: 'present'},
     {name: 'Bruno Silva', initials: 'BS', status: 'present'},

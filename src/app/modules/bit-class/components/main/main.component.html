@@ -6,9 +6,14 @@
     <div class="flex align-items-center justify-content-center py-4 border-bottom-1 border-white border-opacity-10"
          [ngClass]="{ 'px-2': isCollapsed, 'px-4': !isCollapsed }">
       @if (isCollapsed) {
-        <div class="text-xl font-bold">A</div>
+        <div class="text-xl font-bold">
+          <mat-icon class="flex-shrink-0">school</mat-icon>
+        </div>
       } @else {
-        <div class="text-xl font-bold whitespace-nowrap">App Name</div>
+        <div class="flex align-content-center gap-3 text-xl font-bold whitespace-nowrap">
+          <mat-icon class="flex-shrink-0">school</mat-icon>
+          {{ appNameTxt }}
+        </div>
       }
     </div>
 
@@ -17,8 +22,9 @@
       @for (item of menuItems; track item.label) {
         <a (click)="onNavigate(item.route)"
            [class.active-menu-item]="activeRoute === item.route"
-           class="cursor-pointer border-round-md hover:bg-primary-700 flex align-items-center transition-all no-underline text-white"
-           [ngClass]="{ 'justify-content-center p-2': isCollapsed, 'justify-content-start p-3': !isCollapsed }">
+           class="cursor-pointer border-round-md hover:bg-primary-700 flex align-items-center
+            transition-all no-underline text-white"
+           [ngClass]="{ 'justify-content-center p-2 align-itemns-center': isCollapsed, 'justify-content-start p-3': !isCollapsed }">
           <mat-icon class="flex-shrink-0">{{ item.icon }}</mat-icon>
           @if (!isCollapsed) {
             <span class="text-sm font-medium whitespace-nowrap ml-3">
@@ -59,8 +65,8 @@
       </div>
     </header>
 
-    <!-- Page Content -->
-    <main class="flex-grow-1 h-fit p-4 bg-gray-50">
+    <!-- Page Content (agora com scroll liberado no conteúdo!) -->
+    <main class="flex-grow-1 overflow-auto p-4 bg-gray-50">
       <router-outlet></router-outlet>
     </main>
   </div>

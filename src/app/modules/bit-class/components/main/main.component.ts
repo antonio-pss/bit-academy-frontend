@@ -1,10 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
-import {MatSidenav, MatSidenavContainer} from '@angular/material/sidenav';
-import {MatListItem, MatNavList} from '@angular/material/list';
-import {MatIcon} from '@angular/material/icon';
-import {MatDivider} from '@angular/material/divider';
-import {MatToolbar} from '@angular/material/toolbar';
 import {AuthBaseService} from '../../../../shared/services/auth-base.service';
 import {ToastrService} from 'ngx-toastr';
 import {filter} from 'rxjs';
@@ -22,8 +17,9 @@ interface MenuItem {
   imports: [
     ...MATERIAL_IMPORTS,
     RouterOutlet,
-    NgClass
+    NgClass,
   ],
+  standalone: true,
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
@@ -33,6 +29,7 @@ export class MainComponent {
   private _currentTitle: string = 'Início'
   public activeRoute = ''
   public isCollapsed = false;
+  public appNameTxt: string = 'BitClass';
 
 
   constructor(
@@ -57,7 +54,7 @@ export class MainComponent {
       {label: 'Material', icon: 'book_2', route: '#'},
       {label: 'Avaliação', icon: 'library_books', route: '#'},
       {label: 'Perfil', icon: 'person', route: '#'},
-      {label: 'Configurações', icon: 'settings', route: '#'}
+      {label: 'Configurações', icon: 'settings', route: 'settings'}
     ]
   }
 

@@ -1,0 +1,30 @@
+<section class="flex flex-column p-3">
+  <mat-toolbar color="primary" class="shadow-sm border-round-lg justify-content-between w-full h-fit">
+    <mat-form-field class="w-20rem" appearance="outline">
+      <mat-label>Buscar aluno</mat-label>
+      <input
+        matInput
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+        placeholder="Digite o nome do aluno"
+      >
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <button mat-flat-button color="accent"
+            (click)="openAddStudentDialog()">
+      <mat-icon>person_add</mat-icon>
+      Adicionar Aluno
+    </button>
+  </mat-toolbar>
+
+  <!-- Lista de alunos -->
+  <section class="grid grid-nogutter md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+    @for (student of filteredStudents; track student.id) {
+      <app-student-card
+        [student]="student"
+        (click)="openStudentDialog(student)">
+      </app-student-card>
+    }
+  </section>
+</section>
