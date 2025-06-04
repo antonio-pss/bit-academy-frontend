@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {FormsModule} from '@angular/forms';
 import {MatButton, MatButtonModule} from '@angular/material/button';
@@ -9,27 +9,28 @@ import {MatOption, MatSelect, MatSelectChange} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialog, MatDialogContainer} from '@angular/material/dialog';
-import {ClassItemDialogComponent} from './class-item-dialog/class-item-dialog.component';
-import {GeneralService} from '../../../../../shared/services/general.service';
-import {EndpointsService} from '../../../../../shared/services/endpoints.service';
-import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
-import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
-import {Classroom} from '../../../../../shared/models/class';
-
+import {ClassFormComponent} from './class-form/class-form.component';
 
 @Component({
   selector: 'app-class-list',
-  standalone: true,
   templateUrl: './class-list.component.html',
-  styleUrls: ['./class-list.component.scss'],
   imports: [
     FormsModule,
+    MatButton,
     ClassCardComponent,
-    ...MATERIAL_IMPORTS
-  ]
+    MatPaginator,
+    MatFormField,
+    MatIcon,
+    MatSelect,
+    MatOption,
+    MatInputModule,
+    MatPaginatorModule,
+    MatButtonModule,
+    MatCardModule
+  ],
+  styleUrls: ['./class-list.component.scss']
 })
-export class ClassListComponent implements OnInit {
+export class ClassListComponent {
   @Output() open = new EventEmitter<boolean>();
 
   public displayedClasses: any[] = []; // Lista inicial de classes
@@ -44,22 +45,18 @@ export class ClassListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private dialog: MatDialog,
-    private readonly classService: GeneralService,
-    private readonly toastr: ToastrService,
-    private readonly endpoint: EndpointsService,
-    private readonly router: Router
+    private dialog: MatDialog
   ) {
     // Exemplo de dados iniciais
     this.displayedClasses = [
       {
         id: 1,
-        title: 'Math', // título da aula
-        schedule: 'Mon 9AM', // dias de aula
-        studentCount: 30, // número de alunos
-        gradeAverage: 85, //a média notas pode ser feito aqui
-        assignmentsCount: 5, // número de tarefas
-        progressPercentage: 80, // porcentagem de progresso da sala
+        title: 'Math',
+        schedule: 'Mon 9AM',
+        studentCount: 30,
+        gradeAverage: 85,
+        assignmentsCount: 5,
+        progressPercentage: 80,
         status: 'Active'
       },
       {
@@ -118,34 +115,28 @@ export class ClassListComponent implements OnInit {
     this.updatePaginatedClasses();
   }
 
-  ngOnInit(): void {
-    this.loadClasses();
-    this.getClassroomList();
-  }
-
-  public getClassroomList(): void {
-    this.classService.getPaginated(this.endpoint.path.class, 1, 10).subscribe({
-      next: (classrooms: Classroom[]) => {
-        console.log('Lista de turmas:', classrooms);
-      },
-      error: (error: Error) => {
-        console.error('Erro ao obter lista de turmas:', error);
-      }
-    });
-  }
-
+  /**
+   * Atualiza os dados paginados com base na página atual e no número de itens por página
+   */
   public updatePaginatedClasses(): void {
     const startIndex = this.currentPageIndex * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     this.paginatedClasses = this.filteredClasses.slice(startIndex, endIndex);
   }
 
+  /**
+   * Gerencia a troca de página quando o paginator dispara o evento (página ou tamanho).
+   * @param event Evento de mudança gerado pelo paginator.
+   */
   public onPageChange(event: PageEvent): void {
     this.itemsPerPage = event.pageSize;
     this.currentPageIndex = event.pageIndex;
     this.updatePaginatedClasses();
   }
 
+  /**
+   * Filtra as classes com base no termo de busca fornecido pelo usuário.
+   */
   public onSearch(): void {
     if (!this.searchTerm.trim()) {
       this.filteredClasses = [...this.displayedClasses];
@@ -160,6 +151,10 @@ export class ClassListComponent implements OnInit {
     this.updatePaginatedClasses();
   }
 
+  /**
+   * Aplica um filtro às classes com base no status selecionado.
+   * @param event Evento de alteração do select
+   */
   public onChangeStatus(event: MatSelectChange): void {
     const selectedStatus = event.value;
 
@@ -174,42 +169,28 @@ export class ClassListComponent implements OnInit {
     this.updatePaginatedClasses();
   }
 
+  // Exemplos de ações futuras
+  public isOpen(): void {
+    this.open.emit(true);
+  }
+
+  public onClose() {
+    this.open.emit(false);
+  }
+
   public openDialog(): void {
-    const dialogRef = this.dialog.open(ClassItemDialogComponent, {
+    const dialogRef = this.dialog.open(ClassFormComponent, {
       width: '500px',
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(success => {
-      if (success) {
-        this.loadClasses();
-      }
+    dialogRef.componentInstance.onClose.subscribe(() => {
+      dialogRef.close();
+      // Adicione lógica adicional aqui, se necessário
     });
   }
 
-  public loadClasses() {
-    this.classService.get(this.endpoint.path.class).subscribe({
-      next: (classes) => {
-        this.displayedClasses = classes;
-        this.filteredClasses = [...this.displayedClasses];
-        this.updatePaginatedClasses();
-      },
-      error: (error) => {
-        console.error('Erro ao carregar classes:', error);
-        this.toastr.error('Erro ao carregar as salas');
-      }
-    });
-  }
-
-  public onNavigate(action: string) {
-    return this.router.navigate([action]).then(
-      () => {
-        this.open.emit(false);
-      },
-      (error) => {
-        console.error('Erro ao navegar:', error);
-        this.toastr.error('Erro ao navegar para a página desejada');
-      }
-    );
+  onNavigate(classClassroom: string) {
+    
   }
 }
