@@ -4,12 +4,12 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {GeneralService} from '../../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../../shared/services/endpoints.service';
 import {Router} from '@angular/router';
-import {Classroom} from '../../../../../../shared/models/class';
+import {Class} from '../../../../../../shared/models/bit-class-models/class';
 import {takeUntil} from 'rxjs';
 import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
 import {ToastrService} from 'ngx-toastr';
-import {WeekDay} from '../../../../../../shared/models/week-day';
-import {WeekDayLabel} from '../../../../../../shared/models/week-day-label';
+import {WeekDay} from '../../../../../../shared/models/bit-class-models/week-day';
+import {WeekDayLabel} from '../../../../../../shared/models/bit-class-models/week-day-label';
 
 @Component({
   selector: 'app-class-item-dialog',
@@ -38,7 +38,6 @@ export class ClassItemDialogComponent implements OnInit{
       description: ['', Validators.required],
       days_per_week: [[], Validators.required],        // armazena ['MONDAY', 'WEDNESDAY', ...]
       hours_per_class: [1, [Validators.required, Validators.min(1)]],
-      teacher: [this.generalService.userId, Validators.required]
     });
   }
 
@@ -71,19 +70,18 @@ export class ClassItemDialogComponent implements OnInit{
       return;
     }
 
-    const payload: Partial<Classroom> = {
+    const payload: Partial<Class> = {
       name: this.classForm.value.name,
       description: this.classForm.value.description,
       days_per_week: this.classForm.value.days_per_week, // array de códigos
       hours_per_class: this.classForm.value.hours_per_class,
-      teacher: this.classForm.value.teacher
     };
 
     this.generalService
       .post(this.endpoint.path.class, payload)
       .pipe(takeUntil(this.generalService.unsubscribe))
       .subscribe({
-        next: (response: Classroom) => {
+        next: (response: Class) => {
           const classId = response.id;
           this.closeDialog(true);
           this.onNavigate(`class/classroom/${classId}`);

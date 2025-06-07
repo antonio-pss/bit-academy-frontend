@@ -10,7 +10,7 @@ import {EndpointsService} from '../../../../../shared/services/endpoints.service
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
-import {Classroom} from '../../../../../shared/models/class';
+import {Class} from '../../../../../shared/models/bit-class-models/class';
 
 @Component({
   selector: 'app-class-list',
@@ -26,9 +26,9 @@ import {Classroom} from '../../../../../shared/models/class';
 export class ClassListComponent implements OnInit {
   @Output() open = new EventEmitter<boolean>();
 
-  public displayedClasses: Classroom[] = [];
-  public filteredClasses: Classroom[] = [];
-  public paginatedClasses: Classroom[] = [];
+  public displayedClasses: Class[] = [];
+  public filteredClasses: Class[] = [];
+  public paginatedClasses: Class[] = [];
   public searchTerm: string = '';
   public itemsPerPage: number = 5;
   public currentPageIndex: number = 0;
@@ -100,7 +100,7 @@ export class ClassListComponent implements OnInit {
 
   public loadClasses() {
     this.classService.get(this.endpoint.path.class).subscribe({
-      next: (classes: Classroom[]) => {
+      next: (classes: Class[]) => {
         this.displayedClasses = classes;
         this.filteredClasses = [...this.displayedClasses];
         this.updatePaginatedClasses();

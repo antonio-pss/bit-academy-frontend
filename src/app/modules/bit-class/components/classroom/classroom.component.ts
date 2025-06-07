@@ -6,7 +6,7 @@ import {StudentCardComponent} from './components/student-card/student-card.compo
 import {ActivityCardComponent} from './components/activity-card/activity-card.component';
 import {MATERIAL_IMPORTS} from '../../../../shared/imports/material.imports';
 import {GeneralService} from '../../../../shared/services/general.service';
-import {Classroom} from '../../../../shared/models/class';
+import {Class} from '../../../../shared/models/bit-class-models/class';
 import {ToastrService} from 'ngx-toastr';
 import {EndpointsService} from '../../../../shared/services/endpoints.service';
 import {ClassroomSettingsComponent} from './classroom-settings/classroom-settings.component';
@@ -124,7 +124,7 @@ export class ClassroomComponent implements OnInit {
     }
   ]
 
-  public classroom?: Classroom
+  public classroom?: Class
 
   constructor(
     private readonly routeActivatedRoute: ActivatedRoute,
@@ -144,7 +144,7 @@ export class ClassroomComponent implements OnInit {
 
   public getClassroom(): void {
     this.classroomService.getById(this.endpointService.path.classById, Number(this.classId)).subscribe({
-      next: (classroom: Classroom) => {
+      next: (classroom: Class) => {
         this.classroom = classroom;
         this.toastr.success('Turma carregada com sucesso!');
         console.log('Turma carregada com sucesso:', this.classroom);

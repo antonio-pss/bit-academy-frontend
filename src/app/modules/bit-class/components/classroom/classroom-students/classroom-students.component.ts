@@ -8,6 +8,7 @@ import {EndpointsService} from '../../../../../shared/services/endpoints.service
 import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
 import {FormsModule} from '@angular/forms';
 import {StudentCardComponent} from './student-card/student-card.component';
+import {ClassMember} from '../../../../../shared/models/bit-class-models/class-member';
 
 @Component({
   selector: 'app-classroom-students',
@@ -22,8 +23,8 @@ import {StudentCardComponent} from './student-card/student-card.component';
 })
 export class ClassroomStudentsComponent implements OnInit {
   public searchTerm = '';
-  public students: any[] = [];
-  public filteredStudents: any[] = [];
+  public students: ClassMember[] = [];
+  public filteredStudents: ClassMember[] = [];
 
   constructor(
     private dialog: MatDialog,
@@ -58,7 +59,7 @@ export class ClassroomStudentsComponent implements OnInit {
       return;
     }
     this.filteredStudents = this.students.filter(s =>
-      (s.student?.name ?? '').toLowerCase().includes(t)
+      (s.user_id?.name ?? '').toLowerCase().includes(t)
     );
   }
 

@@ -5,7 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
 import {GeneralService} from '../../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../../shared/services/endpoints.service';
-import {User} from '../../../../../../shared/models/user';
+import {User} from '../../../../../../shared/models/core/user';
+import {ClassMemberRole} from '../../../../../../shared/models/bit-class-models/class-member';
 
 export interface StudentItemDialogData {
   classId: number;
@@ -21,9 +22,10 @@ export interface StudentItemDialogData {
   styleUrls: ['./student-item-dialog.component.scss'],
   standalone: true,
 })
+
 export class StudentItemDialogComponent implements OnInit {
   public classMemberForm: FormGroup;
-  public availableStudents: any[] = [];
+  public availableStudents: User[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<StudentItemDialogComponent>,
@@ -34,22 +36,15 @@ export class StudentItemDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: StudentItemDialogData,
   ) {
     this.classMemberForm = this.formBuilder.group({
-      student: ['', Validators.required],        // ID do aluno
+      user_id: ['', Validators.required], //
       class_id: [data.classId, Validators.required],
       joined_at: [new Date(), Validators.required],
+      role: [ClassMemberRole.STUDENTS, Validators.required], // campo role adicionado
     });
   }
 
   ngOnInit() {
-    this.loadStudents();
-    // Aqui você pode usar um endpoint para buscar todos os alunos disponíveis para a sala
-    // Substitua pelo endpoint correto se for diferente
-    this.generalService
-      .get(this.endpoint.path.addStudent(this.data.classId)) // Supondo que retorna alunos disponíveis para matrícula
-      .subscribe({
-        next: (students) => this.availableStudents = students,
-        error: () => this.toastr.error('Erro ao buscar alunos disponíveis')
-      });
+    this.loadAvailableStudents();
   }
 
   public closeDialog(success: boolean = false): void {
@@ -61,9 +56,11 @@ export class StudentItemDialogComponent implements OnInit {
       this.classMemberForm.markAllAsTouched();
       return;
     }
-    const payload = this.classMemberForm.value;
+    const payload = {
+      ...this.classMemberForm.value,
+      user_id: this.classMemberForm.value.user_id // já será só o id
+    };
 
-    // Endpoint para adicionar aluno à sala
     this.generalService
       .post(this.endpoint.path.addStudent(this.data.classId), payload)
       .subscribe({
@@ -78,17 +75,12 @@ export class StudentItemDialogComponent implements OnInit {
       });
   }
 
-  students: User[] = []; // lista vinda da API
-
-  loadStudents(): void {
-    const url = this.endpoint.path.user; // Ex: /user/ ou /students/
-    this.generalService.get(url).subscribe({
-      next: (users: User[]) => {
-        this.students = users;
-      },
-      error: () => {
-        this.toastr.error('Erro ao carregar alunos');
-      }
-    });
+  loadAvailableStudents(): void {
+    this.generalService
+      .get(this.endpoint.path.addStudent(this.data.classId))
+      .subscribe({
+        next: (students: User[]) => this.availableStudents = students,
+        error: () => this.toastr.error('Erro ao buscar alunos disponíveis')
+      });
   }
 }
