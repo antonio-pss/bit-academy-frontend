@@ -1,4 +1,4 @@
-import { ModelBase } from './model-base';
+import { ModelBase } from '../core/model-base';
 import {WeekDay} from './week-day';
 
 export interface Classroom extends ModelBase {

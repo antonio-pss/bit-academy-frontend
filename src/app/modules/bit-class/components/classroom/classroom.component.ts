@@ -6,7 +6,7 @@ import {StudentCardComponent} from './components/student-card/student-card.compo
 import {ActivityCardComponent} from './components/activity-card/activity-card.component';
 import {MATERIAL_IMPORTS} from '../../../../shared/imports/material.imports';
 import {GeneralService} from '../../../../shared/services/general.service';
-import {Classroom} from '../../../../shared/models/class';
+import {Classroom} from '../../../../shared/models/bit-class-models/class';
 import {ToastrService} from 'ngx-toastr';
 import {EndpointsService} from '../../../../shared/services/endpoints.service';
 import {ClassroomSettingsComponent} from './classroom-settings/classroom-settings.component';

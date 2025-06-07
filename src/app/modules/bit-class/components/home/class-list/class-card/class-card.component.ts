@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { NgClass, DecimalPipe } from '@angular/common';
 import { MatCard, MatCardContent } from '@angular/material/card';
-import { Classroom} from '../../../../../../shared/models/class';
-import {WeekDayLabel} from '../../../../../../shared/models/week-day-label';
-import {WeekDay} from '../../../../../../shared/models/week-day';
+import { Classroom} from '../../../../../../shared/models/bit-class-models/class';
+import {WeekDayLabel} from '../../../../../../shared/models/bit-class-models/week-day-label';
+import {WeekDay} from '../../../../../../shared/models/bit-class-models/week-day';
 
 @Component({
   selector: 'app-class-card',

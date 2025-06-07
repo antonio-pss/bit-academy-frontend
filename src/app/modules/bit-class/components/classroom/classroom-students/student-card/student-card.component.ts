@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, signal} from '@angular/core';
-import {ClassMember} from '../../../../../../shared/models/class-member';
+import {ClassMember} from '../../../../../../shared/models/bit-class-models/class-member';
 import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GeneralService} from '../../../../../../shared/services/general.service';

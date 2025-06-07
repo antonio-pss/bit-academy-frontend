@@ -4,12 +4,12 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {GeneralService} from '../../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../../shared/services/endpoints.service';
 import {Router} from '@angular/router';
-import {Classroom} from '../../../../../../shared/models/class';
+import {Classroom} from '../../../../../../shared/models/bit-class-models/class';
 import {takeUntil} from 'rxjs';
 import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
 import {ToastrService} from 'ngx-toastr';
-import {WeekDay} from '../../../../../../shared/models/week-day';
-import {WeekDayLabel} from '../../../../../../shared/models/week-day-label';
+import {WeekDay} from '../../../../../../shared/models/bit-class-models/week-day';
+import {WeekDayLabel} from '../../../../../../shared/models/bit-class-models/week-day-label';
 
 @Component({
   selector: 'app-class-item-dialog',

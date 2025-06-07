@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {EndpointsService} from './endpoints.service';
 import {catchError, Observable, tap, throwError} from 'rxjs';
-import {User} from '../models/user';
+import {User} from '../models/core/user';
 import {jwtDecode} from 'jwt-decode';
 
 interface LoginResponse {

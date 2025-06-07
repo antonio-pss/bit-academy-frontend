@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {GeneralService} from '../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../shared/services/endpoints.service';
 import {ToastrService} from 'ngx-toastr';
-import {User} from '../../../../shared/models/user';
+import {User} from '../../../../shared/models/core/user';
 import {Router} from '@angular/router';
 import {MATERIAL_IMPORTS} from '../../../../shared/imports/material.imports';
 import {NgIf} from '@angular/common';

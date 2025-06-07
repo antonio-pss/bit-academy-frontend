@@ -1,13 +1,13 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { MATERIAL_IMPORTS } from '../../../../../shared/imports/material.imports';
-import { Classroom} from '../../../../../shared/models/class';
+import { Classroom} from '../../../../../shared/models/bit-class-models/class';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GeneralService } from '../../../../../shared/services/general.service';
 import { EndpointsService } from '../../../../../shared/services/endpoints.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import {WeekDay} from '../../../../../shared/models/week-day';
-import {WeekDayLabel} from '../../../../../shared/models/week-day-label';
+import {WeekDay} from '../../../../../shared/models/bit-class-models/week-day';
+import {WeekDayLabel} from '../../../../../shared/models/bit-class-models/week-day-label';
 
 @Component({
   selector: 'app-classroom-settings',

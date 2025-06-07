@@ -1,4 +1,4 @@
-import {ModelBase} from './model-base';
+import {ModelBase} from '../core/model-base';
 
 export interface CourseModuleDiscipline extends ModelBase {
   id_course?: number;

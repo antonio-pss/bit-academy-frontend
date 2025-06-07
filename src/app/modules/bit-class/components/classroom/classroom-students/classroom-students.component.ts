@@ -8,7 +8,7 @@ import {EndpointsService} from '../../../../../shared/services/endpoints.service
 import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
 import {FormsModule} from '@angular/forms';
 import {StudentCardComponent} from './student-card/student-card.component';
-import {ClassMember} from '../../../../../shared/models/class-member';
+import {ClassMember} from '../../../../../shared/models/bit-class-models/class-member';
 
 @Component({
   selector: 'app-classroom-students',

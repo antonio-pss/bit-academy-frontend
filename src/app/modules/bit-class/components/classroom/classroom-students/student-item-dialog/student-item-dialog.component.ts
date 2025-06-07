@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
 import {GeneralService} from '../../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../../shared/services/endpoints.service';
-import {User} from '../../../../../../shared/models/user';
+import {User} from '../../../../../../shared/models/core/user';
 
 export interface StudentItemDialogData {
   classId: number;
