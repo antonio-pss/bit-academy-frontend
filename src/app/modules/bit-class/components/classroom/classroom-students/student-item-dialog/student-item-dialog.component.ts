@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
 import {GeneralService} from '../../../../../../shared/services/general.service';
 import {EndpointsService} from '../../../../../../shared/services/endpoints.service';
+import {User} from '../../../../../../shared/models/user';
 
 export interface StudentItemDialogData {
   classId: number;
@@ -40,6 +41,7 @@ export class StudentItemDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadStudents();
     // Aqui você pode usar um endpoint para buscar todos os alunos disponíveis para a sala
     // Substitua pelo endpoint correto se for diferente
     this.generalService
@@ -74,5 +76,19 @@ export class StudentItemDialogComponent implements OnInit {
           console.error(err);
         }
       });
+  }
+
+  students: User[] = []; // lista vinda da API
+
+  loadStudents(): void {
+    const url = this.endpoint.path.user; // Ex: /user/ ou /students/
+    this.generalService.get(url).subscribe({
+      next: (users: User[]) => {
+        this.students = users;
+      },
+      error: () => {
+        this.toastr.error('Erro ao carregar alunos');
+      }
+    });
   }
 }

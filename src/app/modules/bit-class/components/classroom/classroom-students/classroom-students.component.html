@@ -20,11 +20,9 @@
 
   <!-- Lista de alunos -->
   <section class="grid grid-nogutter md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-    @for (student of filteredStudents; track student.id) {
-      <app-student-card
-        [student]="student"
-        (click)="openStudentDialog(student)">
+<!--    @for (student of filteredStudents; track student.id) {-->
+      <app-student-card>
       </app-student-card>
-    }
+<!--    }-->
   </section>
 </section>

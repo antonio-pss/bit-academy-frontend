@@ -1,8 +1,14 @@
-<!--<mat-card class="student-card cursor-pointer p-3 flex flex-row align-items-center gap-3 hover:shadow-3 transition-shadow">-->
-<!--  <img [src]="student.avatarUrl" class="rounded-full" width="48" height="48" alt="Avatar do aluno"/>-->
-<!--  <div class="flex flex-column flex-1">-->
-<!--    <span class="font-bold text-lg">{{ student.name }}</span>-->
-<!--    <mat-progress-bar mode="determinate" [value]="student.performance" color="primary"></mat-progress-bar>-->
-<!--    <small class="text-secondary">Desempenho: {{ student.performance | number: '1.0-2' }}%</small>-->
-<!--  </div>-->
-<!--</mat-card>-->
+@for (student of students; track student.id) {
+
+<mat-accordion class="flex w-full">
+<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ student.student }} </mat-panel-title>
+      <mat-panel-description>
+         {{panelOpenState() ? 'open' : 'closed'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>I'm visible because I am open</p>
+  </mat-expansion-panel>
+</mat-accordion>
+}
