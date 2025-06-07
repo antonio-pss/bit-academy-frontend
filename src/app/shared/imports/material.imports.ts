@@ -103,5 +103,6 @@ export const MATERIAL_IMPORTS = [
   MatPaginatorModule,
   MatButtonModule,
   MatCardModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatExpansionModule
 ]

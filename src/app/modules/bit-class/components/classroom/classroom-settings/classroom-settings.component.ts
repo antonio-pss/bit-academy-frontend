@@ -1,13 +1,13 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { MATERIAL_IMPORTS } from '../../../../../shared/imports/material.imports';
-import { Classroom} from '../../../../../shared/models/class';
+import { Class } from '../../../../../shared/models/bit-class-models/class';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GeneralService } from '../../../../../shared/services/general.service';
 import { EndpointsService } from '../../../../../shared/services/endpoints.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import {WeekDay} from '../../../../../shared/models/week-day';
-import {WeekDayLabel} from '../../../../../shared/models/week-day-label';
+import {WeekDay} from '../../../../../shared/models/bit-class-models/week-day';
+import {WeekDayLabel} from '../../../../../shared/models/bit-class-models/week-day-label';
 
 @Component({
   selector: 'app-classroom-settings',
@@ -22,7 +22,7 @@ export class ClassroomSettingsComponent implements OnInit {
   public editMode = signal(false);
 
   public settingsForm: FormGroup;
-  public classroom?: Classroom;
+  public classroom?: Class;
 
   public weekDayKeys = Object.keys(WeekDay) as WeekDay[];
   public weekDayLabel = WeekDayLabel;
@@ -59,14 +59,13 @@ export class ClassroomSettingsComponent implements OnInit {
 
   public loadClassroom(): void {
     this.classroomService.getById(this.endpoints.path.classById, Number(this.classId)).subscribe({
-      next: (classroom: Classroom) => {
+      next: (classroom: Class) => {
         this.classroom = classroom;
         this.settingsForm.patchValue({
           name: classroom.name,
           description: classroom.description,
           days_per_week: classroom.days_per_week || [],
           hours_per_class: classroom.hours_per_class || 1,
-          teacher: classroom.teacher,
         });
       },
       error: () => {
@@ -84,7 +83,6 @@ export class ClassroomSettingsComponent implements OnInit {
         description: this.classroom.description,
         days_per_week: this.classroom.days_per_week || [],
         hours_per_class: this.classroom.hours_per_class || 1,
-        teacher: this.classroom.teacher,
       });
     }
   }

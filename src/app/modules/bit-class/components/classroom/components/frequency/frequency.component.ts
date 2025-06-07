@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ClassMember} from '../../../../../../shared/models/class-member';
+import {ClassMember} from '../../../../../../shared/models/bit-class-models/class-member';
 import {MatListOption, MatSelectionList} from '@angular/material/list';
 import {MatButton} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';

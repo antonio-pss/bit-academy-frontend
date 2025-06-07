@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { NgClass, DecimalPipe } from '@angular/common';
 import { MatCard, MatCardContent } from '@angular/material/card';
-import { Classroom} from '../../../../../../shared/models/class';
-import {WeekDayLabel} from '../../../../../../shared/models/week-day-label';
-import {WeekDay} from '../../../../../../shared/models/week-day';
+import { Class } from '../../../../../../shared/models/bit-class-models/class';
+import {WeekDayLabel} from '../../../../../../shared/models/bit-class-models/week-day-label';
+import {WeekDay} from '../../../../../../shared/models/bit-class-models/week-day';
 
 @Component({
   selector: 'app-class-card',
@@ -13,7 +13,7 @@ import {WeekDay} from '../../../../../../shared/models/week-day';
   styleUrl: './class-card.component.scss'
 })
 export class ClassCardComponent {
-  @Input() classroom!: Classroom; // O card espera o objeto inteiro
+  @Input() classroom!: Class; // O card espera o objeto inteiro
 
   @Input() studentCount?: number = 0;
   @Input() gradeAverage?: number = 0;
@@ -28,9 +28,10 @@ export class ClassCardComponent {
     if (this.classroom?.days_display?.length) {
       return this.classroom.days_display.join(', ');
     }
-    // Caso não venha, converte o array de codes com o enum
+    // Caso não venha, converte a string separada por vírgulas em array
     if (this.classroom?.days_per_week?.length) {
       return this.classroom.days_per_week
+        .split(',')
         .map(day => this.weekDayLabels[day as WeekDay])
         .join(', ');
     }
