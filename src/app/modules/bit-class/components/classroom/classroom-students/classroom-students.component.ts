@@ -24,7 +24,7 @@ import {ClassMember} from '../../../../../shared/models/bit-class-models/class-m
 export class ClassroomStudentsComponent implements OnInit {
   public searchTerm = '';
   public students: ClassMember[] = [];
-  public filteredStudents: any[] = [];
+  public filteredStudents: ClassMember[] = [];
 
   constructor(
     private dialog: MatDialog,
