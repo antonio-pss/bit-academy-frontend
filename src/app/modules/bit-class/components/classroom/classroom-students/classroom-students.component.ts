@@ -59,7 +59,7 @@ export class ClassroomStudentsComponent implements OnInit {
       return;
     }
     this.filteredStudents = this.students.filter(s =>
-      (s.student?.name ?? '').toLowerCase().includes(t)
+      (s.user_id?.name ?? '').toLowerCase().includes(t)
     );
   }
 

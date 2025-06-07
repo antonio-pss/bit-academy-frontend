@@ -3,7 +3,7 @@
 <mat-accordion class="flex w-full">
 <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
     <mat-expansion-panel-header>
-      <mat-panel-title>{{ student.student }} </mat-panel-title>
+      <mat-panel-title>{{ student }} </mat-panel-title>
       <mat-panel-description>
          {{panelOpenState() ? 'open' : 'closed'}}
       </mat-panel-description>

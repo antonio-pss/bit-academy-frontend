@@ -1,7 +1,7 @@
 <form [formGroup]="classMemberForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-4 p-4">
   <mat-form-field appearance="outline" class="w-full">
     <mat-label>Selecione o aluno</mat-label>
-    <mat-select formControlName="student" required>
+    <mat-select formControlName="user_id" required>
       @for (student of availableStudents; track student.id) {
         <mat-option [value]="student.id">
           {{ student.name }} ({{ student.email }})
