@@ -7,5 +7,4 @@ export interface Classroom extends ModelBase {
   days_per_week: WeekDay[];
   days_display?: string[];
   hours_per_class: number;
-  teacher: number;
 }

@@ -8,6 +8,7 @@ import {EndpointsService} from '../../../../../shared/services/endpoints.service
 import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
 import {FormsModule} from '@angular/forms';
 import {StudentCardComponent} from './student-card/student-card.component';
+import {ClassMember} from '../../../../../shared/models/class-member';
 
 @Component({
   selector: 'app-classroom-students',
@@ -22,7 +23,7 @@ import {StudentCardComponent} from './student-card/student-card.component';
 })
 export class ClassroomStudentsComponent implements OnInit {
   public searchTerm = '';
-  public students: any[] = [];
+  public students: ClassMember[] = [];
   public filteredStudents: any[] = [];
 
   constructor(

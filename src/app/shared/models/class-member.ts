@@ -3,7 +3,7 @@ import {User} from './user';
 
 export interface ClassMember extends ModelBase {
   class_id?: number;
-  student?: User;
+  user_id?: User;
   joined_at?: Date;
   role?: String;
 }
