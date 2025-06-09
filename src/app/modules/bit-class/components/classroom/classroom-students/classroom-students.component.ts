@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-import { StudentDetailDialogComponent } from './student-detail-dialog/student-detail-dialog.component';
-import { StudentItemDialogComponent } from './student-item-dialog/student-item-dialog.component';
-import { GeneralService } from '../../../../../shared/services/general.service';
-import { EndpointsService } from '../../../../../shared/services/endpoints.service';
-import { MATERIAL_IMPORTS } from '../../../../../shared/imports/material.imports';
-import { FormsModule } from '@angular/forms';
-import { StudentCardComponent } from './student-card/student-card.component';
-import { ClassMember, ClassMemberRole } from '../../../../../shared/models/bit-class-models/class-member';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {ActivatedRoute} from '@angular/router';
+import {StudentDetailDialogComponent} from './student-detail-dialog/student-detail-dialog.component';
+import {StudentItemDialogComponent} from './student-item-dialog/student-item-dialog.component';
+import {GeneralService} from '../../../../../shared/services/general.service';
+import {EndpointsService} from '../../../../../shared/services/endpoints.service';
+import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
+import {FormsModule} from '@angular/forms';
+import {ClassMember, ClassMemberRole} from '../../../../../shared/models/bit-class-models/class-member';
+import {ToastrService} from 'ngx-toastr';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-classroom-students',
@@ -18,8 +18,8 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [
     ...MATERIAL_IMPORTS,
+    MatIcon,
     FormsModule,
-    StudentCardComponent,
   ]
 })
 export class ClassroomStudentsComponent implements OnInit {
@@ -64,7 +64,7 @@ export class ClassroomStudentsComponent implements OnInit {
 
   public isCurrentUserProfessor(student: ClassMember): boolean {
     return (
-      student.user_id?.id === this.currentUserId &&
+      student.user?.id === this.currentUserId &&
       student.role === ClassMemberRole.TEACHERS
     );
   }
@@ -83,7 +83,9 @@ export class ClassroomStudentsComponent implements OnInit {
       .subscribe({
         next: (members) => {
           this.students = members;
+          console.log(this.students);
           this.filteredStudents = [...members];
+          console.log(this.filteredStudents);
         }
       });
   }
@@ -95,7 +97,7 @@ export class ClassroomStudentsComponent implements OnInit {
       return;
     }
     this.filteredStudents = this.students.filter(s =>
-      (s.user_id?.name ?? '').toLowerCase().includes(t)
+      (s.user?.name ?? '').toLowerCase().includes(t)
     );
   }
 
@@ -122,10 +124,10 @@ export class ClassroomStudentsComponent implements OnInit {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((newStudent) => {
-      if (newStudent) {
+    dialogRef.afterClosed().subscribe((member) => {
+      if (member) {
         // Adiciona o novo aluno à lista existente
-        this.students = [...this.students, newStudent];
+        this.students = [...this.students, member];
         this.onSearch(); // Atualiza a lista filtrada
       }
     });

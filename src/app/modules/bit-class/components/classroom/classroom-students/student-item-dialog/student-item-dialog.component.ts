@@ -36,14 +36,17 @@ export class StudentItemDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: StudentItemDialogData,
   ) {
     this.classMemberForm = this.formBuilder.group({
-      user_id: [this.generalService.userId, Validators.required], //
+      user_id: ['', Validators.required], //
       class_id: [data.classId, Validators.required],
       joined_at: [new Date(), Validators.required],
       role: [ClassMemberRole.STUDENTS, Validators.required], // campo role adicionado
     });
   }
 
-  ngOnInit() {
+  public onSelect() {}
+
+
+  public ngOnInit() {
     this.loadAvailableStudents();
   }
 
@@ -57,8 +60,7 @@ export class StudentItemDialogComponent implements OnInit {
       return;
     }
     const payload = {
-      ...this.classMemberForm.value,
-      user_id: this.classMemberForm.value.user_id // já será só o id
+      ...this.classMemberForm.value
     };
 
     this.generalService
@@ -75,7 +77,7 @@ export class StudentItemDialogComponent implements OnInit {
       });
   }
 
-  loadAvailableStudents(): void {
+  public loadAvailableStudents(): void {
     this.generalService
       .get(this.endpoint.path.addStudent(this.data.classId))
       .subscribe({
