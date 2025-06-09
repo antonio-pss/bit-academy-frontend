@@ -7,11 +7,12 @@ import {URLS} from '../urls';
 })
 
 /* Exemplo de uso
-this.endpoints.path.classDetail(classId)
-this.endpoints.path.classMembers(classId)
-this.endpoints.path.addStudent(classId)
-this.endpoints.path.classActivityDetail(classId, activityId)
-this.endpoints.path.attendanceReport(classId)
+this.endpoints.path.classDetail(class_id)
+this.endpoints.path.classMembers(class_member_Id)
+this.endpoints.path.addStudent(class_id, user_id)
+
+this.endpoints.path.classActivityDetail(class_id, activity_id)
+this.endpoints.path.attendanceReport(class_id)
 */
 
 

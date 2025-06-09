@@ -54,6 +54,15 @@ export class GeneralService {
   }
 
 
+  public list(path: string): Observable<any> {
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.get(path, {headers})
+      )
+    );
+  }
+
+
   public getById(path: string, id:number): Observable<any> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
@@ -103,6 +112,16 @@ export class GeneralService {
     return this.getHeaders().pipe(
       switchMap((headers) =>
         this.httpClient.delete(path + id + '/', { headers }).pipe(
+          tap((response: any) => response),
+        )
+      )
+    );
+  }
+
+  public onDelete(path: string): Observable<HttpResponse<any>> {
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.delete(path, { headers }).pipe(
           tap((response: any) => response),
         )
       )

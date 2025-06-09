@@ -12,7 +12,7 @@ export enum ClassMemberRole {
 export interface ClassMember extends ModelBase {
   id: number;
   class_id: Class;
-  user_id: User;
+  user: User;
   role: ClassMemberRole;
   joined_at: Date;
 }
