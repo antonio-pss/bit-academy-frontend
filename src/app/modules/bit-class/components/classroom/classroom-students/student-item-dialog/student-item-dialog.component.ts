@@ -36,7 +36,7 @@ export class StudentItemDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: StudentItemDialogData,
   ) {
     this.classMemberForm = this.formBuilder.group({
-      user_id: ['', Validators.required], //
+      user_id: [this.generalService.userId, Validators.required], //
       class_id: [data.classId, Validators.required],
       joined_at: [new Date(), Validators.required],
       role: [ClassMemberRole.STUDENTS, Validators.required], // campo role adicionado

@@ -55,10 +55,11 @@ export class ClassroomStudentsComponent implements OnInit {
           this.onSearch();
         },
         error: (err) => {
-          this.toastr.error('Membro não encontrado na sala.');
+          this.toastr.error('Não é permitido remover o professor da sala.');
           console.error(err);
         }
       });
+    return this.students;
   }
 
   public isCurrentUserProfessor(student: ClassMember): boolean {
@@ -78,7 +79,7 @@ export class ClassroomStudentsComponent implements OnInit {
 
   public fetchStudents() {
     this.generalService
-      .get(this.endpoint.path.classMembers(this.classId))
+      .list(this.endpoint.path.classMembers(this.classId))
       .subscribe({
         next: (members) => {
           this.students = members;

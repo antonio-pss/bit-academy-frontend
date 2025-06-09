@@ -54,6 +54,15 @@ export class GeneralService {
   }
 
 
+  public list(path: string): Observable<any> {
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.get(path, {headers})
+      )
+    );
+  }
+
+
   public getById(path: string, id:number): Observable<any> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
