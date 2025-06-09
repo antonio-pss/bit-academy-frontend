@@ -24,7 +24,37 @@
       <app-student-card
         [student]="student"
         (click)="openStudentDialog(student)">
+
       </app-student-card>
     }
   </section>
+  <!-- Substitua a seção de listagem por esta tabela -->
+  <table mat-table [dataSource]="filteredStudents" class="mat-elevation-z2 w-full mt-4">
+
+    <!-- Nome -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let student">{{ student.user_id?.name }}</td>
+    </ng-container>
+
+    <!-- Email -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let student">{{ student.user_id?.email }}</td>
+    </ng-container>
+
+    <!-- Ações -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let student">
+        <button mat-icon-button color="warn" (click)="removeStudent(student)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
 </section>

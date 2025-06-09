@@ -10,6 +10,7 @@ import {URLS} from '../urls';
 this.endpoints.path.classDetail(classId)
 this.endpoints.path.classMembers(classId)
 this.endpoints.path.addStudent(classId)
+
 this.endpoints.path.classActivityDetail(classId, activityId)
 this.endpoints.path.attendanceReport(classId)
 */

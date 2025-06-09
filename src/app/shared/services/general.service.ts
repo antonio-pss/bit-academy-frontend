@@ -108,4 +108,14 @@ export class GeneralService {
       )
     );
   }
+
+  public onDelete(path: string): Observable<HttpResponse<any>> {
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.delete(path, { headers }).pipe(
+          tap((response: any) => response),
+        )
+      )
+    );
+  }
 }

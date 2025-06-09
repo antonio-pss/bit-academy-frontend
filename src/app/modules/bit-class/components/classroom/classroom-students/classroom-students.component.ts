@@ -33,6 +33,19 @@ export class ClassroomStudentsComponent implements OnInit {
     private endpoint: EndpointsService,
   ) {}
 
+  public displayedColumns = ['name', 'email', 'actions'];
+
+  public removeStudent(student: ClassMember) {
+    this.generalService
+      .onDelete(this.endpoint.path.classMemberDetail(this.classId, student.id))
+      .subscribe({
+        next: () => {
+          this.students = this.students.filter(s => s.id !== student.id);
+          this.onSearch();
+        }
+      });
+  }
+
   ngOnInit() {
     this.fetchStudents();
   }
@@ -86,9 +99,11 @@ export class ClassroomStudentsComponent implements OnInit {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(success => {
-      if (success) {
-        this.fetchStudents();
+    dialogRef.afterClosed().subscribe((newStudent) => {
+      if (newStudent) {
+        // Adiciona o novo aluno à lista existente
+        this.students = [...this.students, newStudent];
+        this.onSearch(); // Atualiza a lista filtrada
       }
     });
   }
