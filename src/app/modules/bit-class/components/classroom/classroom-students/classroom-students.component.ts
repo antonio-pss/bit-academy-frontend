@@ -19,7 +19,7 @@ import {MatIcon} from '@angular/material/icon';
   imports: [
     ...MATERIAL_IMPORTS,
     MatIcon,
-    FormsModule,
+    FormsModule
   ]
 })
 export class ClassroomStudentsComponent implements OnInit {
