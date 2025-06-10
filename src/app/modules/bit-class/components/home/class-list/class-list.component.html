@@ -26,6 +26,10 @@
         [classroom]="classroom"
         (click)="onNavigate('class/classroom/' + classroom.id)">
       </app-class-card>
+    } @empty {
+      <p>
+        <strong>Não há salas cadastradas.</strong>
+      </p>
     }
   </section>
 
