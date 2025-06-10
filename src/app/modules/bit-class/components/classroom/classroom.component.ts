@@ -3,7 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 import {ClassroomStatCardComponent} from './components/classroom-stat-card/classroom-stat-card.component';
 import {AttendanceItemComponent} from './components/attendance-item/attendance-item.component';
 import {StudentCardComponent} from './components/student-card/student-card.component';
-import {ActivityCardComponent} from './components/activity-card/activity-card.component';
 import {MATERIAL_IMPORTS} from '../../../../shared/imports/material.imports';
 import {GeneralService} from '../../../../shared/services/general.service';
 import {Class} from '../../../../shared/models/bit-class-models/class';
@@ -11,6 +10,8 @@ import {ToastrService} from 'ngx-toastr';
 import {EndpointsService} from '../../../../shared/services/endpoints.service';
 import {ClassroomSettingsComponent} from './classroom-settings/classroom-settings.component';
 import {ClassroomStudentsComponent} from './classroom-students/classroom-students.component';
+import {ActivityComponent} from './activity/activity.component';
+import {Activity} from '../../../../shared/models/bit-class-models/activity';
 
 @Component({
   selector: 'app-classroom',
@@ -18,10 +19,10 @@ import {ClassroomStudentsComponent} from './classroom-students/classroom-student
     ...MATERIAL_IMPORTS,
     ClassroomStatCardComponent,
     AttendanceItemComponent,
-    ActivityCardComponent,
     StudentCardComponent,
     ClassroomSettingsComponent,
     ClassroomStudentsComponent,
+    ActivityComponent,
   ],
   standalone: true,
   templateUrl: './classroom.component.html',
@@ -37,29 +38,31 @@ export class ClassroomComponent implements OnInit {
     {name: 'Fernanda Souza', initials: 'FS', status: 'present'}
   ];
 
-  public activities = [
-    {
-      title: 'Prova Bimestral - Álgebra',
-      description: 'Avaliação sobre equações do 2º grau e funções quadráticas',
-      date: '15/06',
-      completed: '0/32',
-      status: 'pending'
-    },
-    {
-      title: 'Trabalho em Grupo',
-      description: 'Projeto sobre aplicações de funções no cotidiano',
-      date: '22/06',
-      completed: '5/32',
-      status: 'pending'
-    },
-    {
-      title: 'Lista de Exercícios',
-      description: 'Exercícios sobre sistemas de equações',
-      date: '10/06',
-      completed: '25/32',
-      status: 'overdue'
-    }
-  ];
+
+
+  // public activities = [
+  //   {
+  //     title: 'Prova Bimestral - Álgebra',
+  //     description: 'Avaliação sobre equações do 2º grau e funções quadráticas',
+  //     date: '15/06',
+  //     completed: '0/32',
+  //     status: 'pending'
+  //   },
+  //   {
+  //     title: 'Trabalho em Grupo',
+  //     description: 'Projeto sobre aplicações de funções no cotidiano',
+  //     date: '22/06',
+  //     completed: '5/32',
+  //     status: 'pending'
+  //   },
+  //   {
+  //     title: 'Lista de Exercícios',
+  //     description: 'Exercícios sobre sistemas de equações',
+  //     date: '10/06',
+  //     completed: '25/32',
+  //     status: 'overdue'
+  //   }
+  // ];
 
   public topStudents = [
     {
@@ -125,6 +128,8 @@ export class ClassroomComponent implements OnInit {
   ]
 
   public classroom?: Class
+  public classroomId: any
+  public activities: Activity[] = [];
 
   constructor(
     private readonly routeActivatedRoute: ActivatedRoute,
@@ -139,7 +144,16 @@ export class ClassroomComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.getClassroom()
+    this.classroomId = Number(this.classId)
+    this.getClassroom();
+    this.loadActivities();
+  }
+
+  loadActivities() {
+    this.classroomService.get(this.endpointService.path.classActivities(this.classroomId)).subscribe({
+      next: (data) => this.activities = data,
+      error: (err) => console.error(err)
+    });
   }
 
   public getClassroom(): void {

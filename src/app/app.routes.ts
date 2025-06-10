@@ -21,10 +21,17 @@ export const routes: Routes = [
   },
   {
     path: 'class',
-    canActivate: [authGuard], // Adicionando proteção na rota pai também
+    canActivate: [authGuard],
     canActivateChild: [authChildrenGuard],
     loadChildren: () =>
       import('./modules/bit-class/bit-class.module').then(m => m.BitClassModule),
+  },
+  {
+    path: 'activity',
+    canActivate: [authGuard],
+    canActivateChild: [authChildrenGuard],
+    loadChildren: () =>
+      import('./modules/bit-class/components/classroom/activity/activity.component').then(m => m.ActivityComponent),
   },
   {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
   {path: 'not-found', component: NotFoundComponent},

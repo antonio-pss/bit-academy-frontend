@@ -20,6 +20,7 @@ import {MatIcon} from '@angular/material/icon';
     ...MATERIAL_IMPORTS,
     MatIcon,
     FormsModule,
+    StudentCardComponent,
   ]
 })
 export class ClassroomStudentsComponent implements OnInit {
@@ -111,7 +112,7 @@ export class ClassroomStudentsComponent implements OnInit {
         const idx = this.students.findIndex(s => s.id === result.id);
         if (idx >= 0) {
           this.students[idx] = result;
-          this.onSearch();
+          this.fetchStudents();
         }
       }
     });
@@ -126,11 +127,9 @@ export class ClassroomStudentsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((member) => {
       if (member) {
-        // Adiciona o novo aluno à lista existente
         this.students = [...this.students, member];
-        this.onSearch(); // Atualiza a lista filtrada
+        this.fetchStudents();
       }
     });
   }
-
 }
