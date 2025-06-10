@@ -52,7 +52,7 @@ export class MainComponent {
       {label: 'Minhas salas', icon: 'co_present', route: '#'},
       {label: 'Calendário', icon: 'calendar_month', route: '#'},
       {label: 'Material', icon: 'book_2', route: '#'},
-      {label: 'Avaliação', icon: 'library_books', route: '#'},
+      {label: 'Avaliação', icon: 'library_books', route: 'activity'},
       {label: 'Perfil', icon: 'person', route: '#'},
       {label: 'Configurações', icon: 'settings', route: 'settings'}
     ]

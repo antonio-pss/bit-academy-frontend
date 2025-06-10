@@ -19,5 +19,4 @@ export class ActivityCardComponent {
     date: string;
     completed: string;
     status: string }
-
 }

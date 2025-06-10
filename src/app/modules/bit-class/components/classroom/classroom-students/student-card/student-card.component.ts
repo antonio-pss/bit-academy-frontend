@@ -71,7 +71,7 @@ export class StudentCardComponent implements OnInit {
     if (!this.isEditMode && this.user) {
       this.settingsForm.patchValue({
         class_id: this.user.class_id,
-        user_id: this.user.user_id, // alterado de student para user_id
+        user_id: this.user,
         joined_at: this.user.joined_at,
         role: this.user.role,
       });
