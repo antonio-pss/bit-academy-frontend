@@ -18,8 +18,8 @@ import {MatIcon} from '@angular/material/icon';
   standalone: true,
   imports: [
     ...MATERIAL_IMPORTS,
-    MatIcon,
-    FormsModule
+    MatIcon, 
+    FormsModule,  
   ]
 })
 export class ClassroomStudentsComponent implements OnInit {

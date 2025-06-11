@@ -14,7 +14,7 @@ export interface Class extends ModelBase {
   id: number;
   name: string;
   description: string;
-  days_per_week: string; // Ex: "MONDAY,TUESDAY,FRIDAY"
+  days_per_week: string;
   hours_per_class: number;
   days_display?: string[]; // Propriedade opcional para a exibição dos dias
 }
