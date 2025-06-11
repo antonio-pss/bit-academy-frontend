@@ -57,7 +57,7 @@ export class ClassroomComponent implements OnInit {
     this.loadTopStudents();
   }
 
-  loadStudents() {
+  public loadStudents() {
     const path = this.endpointService.path.classMembers(this.classroomId); // <-- é função!
     this.classroomService.get(path).subscribe({
       next: (data) => this.studentList = data,
@@ -68,7 +68,7 @@ export class ClassroomComponent implements OnInit {
     });
   }
 
-  loadActivities(): void {
+  public loadActivities(): void {
     const path = this.endpointService.path.classActivities(this.classroomId);
     this.classroomService.get(path).subscribe({
       next: (data) => this.activities = data,
@@ -79,18 +79,19 @@ export class ClassroomComponent implements OnInit {
     });
   }
 
-  loadTopStudents() {
+  public loadTopStudents() {
     // Reutilize os alunos já carregados ou faça um GET específico se seu backend fornecer.
     // Aqui vamos usar os 3 primeiros só como exemplo.
     this.topStudents = this.studentList.slice(0, 3);
   }
 
-  getClassroom(): void {
+  public getClassroom(): void {
     // path.classDetail é uma função!
     const path = this.endpointService.path.classDetail(this.classroomId);
     this.classroomService.get(path).subscribe({
       next: (classroom: Class) => {
         this.classroom = classroom;
+        console.log("OLHA PRA CA",  this.classroom.active,)
         this.toastr.success('Turma carregada com sucesso!');
       },
       error: (error) => {
@@ -100,7 +101,7 @@ export class ClassroomComponent implements OnInit {
     });
   }
 
-  openActivityDialog(): void {
+  public openActivityDialog(): void {
     const dialogRef = this.dialog.open(ActivityItemDialogComponent, {
       data: { classId: this.classroomId },
       width: '450px',

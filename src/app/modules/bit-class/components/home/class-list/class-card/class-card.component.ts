@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NgClass, DecimalPipe, NgIf} from '@angular/common';
-import { MatCard, MatCardContent } from '@angular/material/card';
-import { Class } from '../../../../../../shared/models/bit-class-models/class';
+import {MatCard, MatCardContent} from '@angular/material/card';
+import {Class} from '../../../../../../shared/models/bit-class-models/class';
 import {WeekDayLabel} from '../../../../../../shared/models/bit-class-models/week-day-label';
 import {WeekDay} from '../../../../../../shared/models/bit-class-models/week-day';
 
@@ -35,18 +35,18 @@ export class ClassCardComponent {
   }
 
   get status(): string {
-    // Considera 'Active' se is_active (ou active) for true, senão 'Deactivated'
-    return this.classroom?.active ?? this.classroom?.active ? 'Active' : 'Deactivated';
+    return this.classroom?.active === false
+      ? 'Deactivated'
+      : 'Active';
   }
 
-  get badgeClass(): string {
+  public get badgeClass(): string {
     return this.status === 'Active'
       ? 'badge-success'
       : 'badge-danger';
   }
 
-  showClassData() {
+  public showClassData() {
     console.log(this.classroom);
   }
-
 }

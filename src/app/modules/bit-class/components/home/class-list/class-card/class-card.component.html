@@ -51,12 +51,11 @@
           <i class="pi pi-file-edit text-secondary"></i>
           <span class="text-sm">{{ assignmentsCount ?? 0 }} Atividades</span>
         </div>
-        <span
-          class="badge"
-          [ngClass]="badgeClass"
-        >
-          {{ status === 'Active' ? 'Ativo' : 'Desativado' }}
+        <span class="badge"
+              [ngClass]="classroom?.active === false ? 'badge-danger' : 'badge-success'">
+            {{ classroom?.active === false ? 'Desativado' : 'Ativo' }}
         </span>
+
       </div>
     </mat-card-content>
   </mat-card>
