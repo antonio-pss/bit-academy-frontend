@@ -6,7 +6,6 @@ import {MaterialsListComponent} from './materials-list/materials-list.component'
   selector: 'app-home',
   imports: [
     ClassListComponent,
-    MaterialsListComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

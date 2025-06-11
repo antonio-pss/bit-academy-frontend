@@ -49,7 +49,7 @@ export class MainComponent {
 
     this.menuItems = [
       {label: 'Início', icon: 'home', route: 'home'},
-      {label: 'Minhas salas', icon: 'co_present', route: '#'},
+      {label: 'Minhas salas', icon: 'co_present', route: 'my-class'},
       {label: 'Calendário', icon: 'calendar_month', route: '#'},
       {label: 'Material', icon: 'book_2', route: '#'},
       {label: 'Avaliação', icon: 'library_books', route: 'activity'},
