@@ -55,6 +55,7 @@ export class ClassroomSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadClassroom();
+    console.log(this.settingsForm.value)
   }
 
   public loadClassroom(): void {
@@ -93,17 +94,24 @@ export class ClassroomSettingsComponent implements OnInit {
 
   public onDelete() {
     if (this.classroom && this.classroom.id) {
-      this.classroomService.delete(this.endpoints.path.classById, this.classroom.id).subscribe({
-        next: () => {
-          this.toastr.success('Sala excluída com sucesso');
+      // Monta o objeto para o PATCH
+      const updateData = {
+        ...this.classroom, // pega tudo
+        active: false,      // seta o active como false
+      };
+
+      this.classroomService.patch(updateData, this.endpoints.path.classById).subscribe({
+        next: (response) => {
+          this.toastr.success('Sala desativada com sucesso');
           this.onNavigate('class/home');
         },
         error: () => {
-          this.toastr.error('Erro ao excluir a sala');
+          this.toastr.error('Erro ao desativar a sala');
         }
       });
     }
   }
+
 
   public onSubmit() {
     if (this.settingsForm.valid && this.classroom?.id) {
