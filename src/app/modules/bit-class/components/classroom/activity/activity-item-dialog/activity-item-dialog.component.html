@@ -1,28 +1,28 @@
-<form [formGroup]="avaliationForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-4 p-4">
-  <mat-form-field appearance="outline" class="w-full">
-    <mat-label>Nome da avaliação</mat-label>
-    <input matInput formControlName="name" required>
-  </mat-form-field>
+<form [formGroup]="activityForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-4 p-4">
+    <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Nome da atividade</mat-label>
+        <input matInput formControlName="name" required>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline" class="w-full">
-    <mat-label>Descrição</mat-label>
-    <textarea matInput formControlName="description"></textarea>
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline" class="w-full">
-    <mat-label>Valor</mat-label>
-    <input matInput type="number" formControlName="value" required min="0">
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Valor</mat-label>
+        <input matInput type="number" formControlName="value" required min="0">
+    </mat-form-field>
 
-  <mat-form-field appearance="outline" class="w-full">
-    <mat-label>Data de entrega</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="due_date" required>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Data de entrega</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="due_date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
-  <div class="flex justify-content-end gap-2">
-    <button mat-button type="button" (click)="closeDialog(false)">Cancelar</button>
-    <button mat-flat-button color="primary" type="submit" [disabled]="avaliationForm.invalid">Salvar</button>
-  </div>
+    <div class="flex justify-content-end gap-2">
+        <button mat-button type="button" (click)="closeDialog(false)">Cancelar</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="activityForm.invalid">Salvar</button>
+    </div>
 </form>

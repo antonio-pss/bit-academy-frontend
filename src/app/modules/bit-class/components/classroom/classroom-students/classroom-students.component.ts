@@ -20,7 +20,6 @@ import {MatIcon} from '@angular/material/icon';
     ...MATERIAL_IMPORTS,
     MatIcon,
     FormsModule,
-    StudentCardComponent,
   ]
 })
 export class ClassroomStudentsComponent implements OnInit {

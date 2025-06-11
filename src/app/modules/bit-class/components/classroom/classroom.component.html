@@ -1,14 +1,12 @@
 <section class="flex flex-column h-screen">
   <!-- Top Navigation -->
-  <mat-toolbar color="primary" >
+  <mat-toolbar color="primary">
     <div class="flex justify-content-between align-items-center w-full px-3 py-2">
       <div class="flex align-items-center">
-        <h2 class="text-xl font-semibold">
-          {{ classroom?.name || 'Turma de Exemplo' }}
-        </h2>
+        <h2 class="text-xl font-semibold">{{ classroom?.name || 'Turma de Exemplo' }}</h2>
       </div>
       <div class="flex align-items-center gap-3">
-        <button mat-raised-button color="accent" class="flex align-items-center">
+        <button mat-raised-button color="accent" class="flex align-items-center" (click)="openActivityDialog()">
           <mat-icon>add</mat-icon>
           <span>Nova Atividade</span>
         </button>
@@ -16,7 +14,7 @@
     </div>
   </mat-toolbar>
 
-  <!-- Toolbar with Class Information -->
+  <!-- Informações da turma -->
   <section class="bg-indigo-50 w-full">
     <mat-toolbar class="flex flex-wrap justify-content-between align-items-center gap-4">
       <section class="flex gap-3">
@@ -80,19 +78,7 @@
                 </div>
               </mat-card-header>
               <mat-card-content class="pt-3">
-                <div class="flex align-items-center justify-content-between mb-4">
-                  <div>
-                    <span class="text-sm font-medium text-gray-500">Presentes</span>
-                    <p class="text-2xl font-bold text-gray-800 flex align-items-center gap-2">
-                      28<small class="text-base font-normal text-gray-500">/32 alunos</small>
-                    </p>
-                  </div>
-                  <div class="w-8 flex flex-column align-items-end">
-                    <span class="text-sm font-medium text-primary-600">87.5%</span>
-                    <mat-progress-bar mode="determinate" value="87.5" color="primary"
-                                      class="mt-1 h-2 border-round"></mat-progress-bar>
-                  </div>
-                </div>
+                <!-- Aqui pode listar frequência/alunos -->
                 <div class="mb-3">
                   <div class="flex align-items-center justify-content-between mb-2 px-2">
                     <h3 class="text-sm font-medium text-gray-500">Lista de Alunos</h3>
@@ -128,11 +114,7 @@
               <button mat-button color="primary" class="ml-auto">Ver todas</button>
             </mat-card-header>
             <mat-card-content>
-              <div class="grid grid-nogutter md:grid-cols-2 lg:grid-cols-3 gap-4">
-                @for (activity of activities; track activity) {
-                  <app-activity [activity]="activity"></app-activity>
-                }
-              </div>
+              <app-activity [activities]="activities"></app-activity>
             </mat-card-content>
           </mat-card>
 
@@ -159,19 +141,25 @@
               </div>
             </mat-card-content>
           </mat-card>
-
-
         </div>
       </mat-tab>
 
       <!-- ALUNOS -->
       <mat-tab label="Alunos">
-          <app-classroom-students></app-classroom-students>
+        <app-classroom-students></app-classroom-students>
       </mat-tab>
       <!-- ATIVIDADES -->
       <mat-tab label="Atividades">
         <div class="flex flex-column flex-1 overflow-auto p-3" style="height:100%">
-          <!-- Conteúdo da aba Atividades -->
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Próximas Atividades</mat-card-title>
+              <button mat-button color="primary" class="ml-auto">Ver todas</button>
+            </mat-card-header>
+            <mat-card-content>
+              <app-activity [activities]="activities"></app-activity>
+            </mat-card-content>
+          </mat-card>
         </div>
       </mat-tab>
       <!-- MATERIAIS -->

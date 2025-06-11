@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {provideToastr} from 'ngx-toastr';
 import {provideHttpClient} from '@angular/common/http';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -12,5 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideToastr(),
     provideHttpClient(),
+    provideNativeDateAdapter()
   ]
 };

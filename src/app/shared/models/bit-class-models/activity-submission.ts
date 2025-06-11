@@ -5,7 +5,7 @@ import {Activity} from './activity';
 export interface ActivitySubmission extends ModelBase {
   id: number;
   activity_id: Activity;
-  student: ClassMember;
+  class_member: ClassMember;
   submitted_at: Date;
   grade: number | null;
 }
