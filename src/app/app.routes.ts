@@ -33,6 +33,13 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./modules/bit-class/components/classroom/activity/activity.component').then(m => m.ActivityComponent),
   },
+  {
+    path: 'school',
+    canActivate: [authGuard],
+    canActivateChild: [authChildrenGuard],
+    loadChildren: () =>
+      import('./modules/bit-school/bit-school.module').then(m => m.BitSchoolModule),
+  },
   {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
   {path: 'not-found', component: NotFoundComponent},
   {path: '**', redirectTo: 'not-found'},

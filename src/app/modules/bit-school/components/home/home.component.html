@@ -1,0 +1,30 @@
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+  @for (classroom of paginatedClasses; track classroom.id) {
+    <app-class-card
+      [classroom]="classroom"
+      (click)="onNavigate('class/classroom/' + classroom.id)">
+    </app-class-card>
+  } @empty {
+    <p>
+      <strong>Não há salas cadastradas.</strong>
+    </p>
+  }
+</section>
+
+<div class="example-flex-container">
+  <button mat-fab extended>
+    <mat-icon>chat icon</mat-icon>
+    Chat
+  </button>
+</div>
+
+<section class="pagination flex justify-content-end align-items-center mt-4">
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    [length]="filteredClasses.length"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+
+</section>
+

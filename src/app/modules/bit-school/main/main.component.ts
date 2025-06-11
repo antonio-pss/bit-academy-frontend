@@ -25,13 +25,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class MainComponent {
   menuItems = [
-    {label: 'Início', icon: 'home', route: '#'},
-    {label: 'Minhas salas', icon: 'co_present', route: '#'},
-    {label: 'Calendário', icon: 'calendar_month', route: '#'},
-    {label: 'Material', icon: 'book_2', route: '#'},
-    {label: 'Avaliação', icon: 'library_books', route: '#'},
-    {label: 'Perfil', icon: 'person', route: '#'},
-    {label: 'Configurações', icon: 'settings', route: '#'}
+    {label: 'Início', icon: 'home', route: 'home'},
   ];
 
   public currentTitle: string = '';
