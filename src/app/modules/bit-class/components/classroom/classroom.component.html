@@ -20,9 +20,11 @@
       <section class="flex gap-3">
         <div class="flex align-items-center">
           <mat-icon class="text-indigo-600 mr-2">event</mat-icon>
+          <span class="text-sm">{{ classroom?.days_per_week || 0 }} </span>
         </div>
         <div class="flex align-items-center">
           <mat-icon class="text-indigo-600 mr-2">calendar_today</mat-icon>
+          <span class="text-sm">{{ classroom?.hours_per_class || 0 }} horas </span>
         </div>
         <div class="flex align-items-center">
           <mat-icon class="text-indigo-600 mr-2">people</mat-icon>
@@ -148,7 +150,6 @@
           </mat-card>
         </div>
       </mat-tab>
-
       <!-- ALUNOS -->
       <mat-tab label="Alunos">
         <app-classroom-students></app-classroom-students>
