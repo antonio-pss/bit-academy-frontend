@@ -17,14 +17,14 @@ export interface AvaliationItemDialogData {
     ...MATERIAL_IMPORTS,
     ReactiveFormsModule,
   ],
-  templateUrl: './avaliation-item-dialog.component.html',
-  styleUrls: ['./avaliation-item-dialog.component.scss'],
+  templateUrl: './activity-item-dialog.component.html',
+  styleUrls: ['./activity-item-dialog.component.scss'],
 })
-export class AvaliationItemDialogComponent implements OnInit {
+export class ActivityItemDialogComponent implements OnInit {
   public avaliationForm: FormGroup;
 
   constructor(
-    private dialogRef: MatDialogRef<AvaliationItemDialogComponent>,
+    private dialogRef: MatDialogRef<ActivityItemDialogComponent>,
     private formBuilder: FormBuilder,
     private generalService: GeneralService,
     private endpoint: EndpointsService,
