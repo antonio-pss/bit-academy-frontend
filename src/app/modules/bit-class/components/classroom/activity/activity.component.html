@@ -7,6 +7,9 @@
                 <p>{{ activity.description }}</p>
                 <span>Valor: {{ activity.value }}</span>
             </mat-card-content>
+            <mat-card-actions>
+                <button mat-button color="primary" (click)="openSubmissionDialog(activity)">Responder</button>
+            </mat-card-actions>
         </mat-card>
     </div>
 }

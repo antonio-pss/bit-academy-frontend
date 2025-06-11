@@ -1,0 +1,12 @@
+<form [formGroup]="submissionForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-4 p-4">
+  <!-- Adicione campos conforme sua necessidade -->
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Resposta (link ou texto)</mat-label>
+    <input matInput formControlName="answer" placeholder="Coloque o link da resposta ou digite...">
+  </mat-form-field>
+
+  <div class="flex justify-content-end gap-2">
+    <button mat-button type="button" (click)="closeDialog(false)">Cancelar</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="submissionForm.invalid">Enviar</button>
+  </div>
+</form>

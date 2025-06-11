@@ -15,6 +15,7 @@ import {ClassroomStudentsComponent} from './classroom-students/classroom-student
 import {AttendanceItemComponent} from './components/attendance-item/attendance-item.component';
 import {ClassroomStatCardComponent} from './components/classroom-stat-card/classroom-stat-card.component';
 import {ClassMember} from '../../../../shared/models/bit-class-models/class-member';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-classroom',
@@ -28,7 +29,8 @@ import {ClassMember} from '../../../../shared/models/bit-class-models/class-memb
     StudentCardComponent,
     ClassroomStudentsComponent,
     AttendanceItemComponent,
-    ClassroomStatCardComponent
+    ClassroomStatCardComponent,
+    DatePipe
   ]
 })
 export class ClassroomComponent implements OnInit {
@@ -37,6 +39,7 @@ export class ClassroomComponent implements OnInit {
   public activities: Activity[] = [];
   public studentList: ClassMember[] = [];
   public topStudents: ClassMember[] = [];
+  public today: Date = new Date();
 
   constructor(
     private route: ActivatedRoute,
