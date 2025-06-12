@@ -58,6 +58,8 @@ export class EndpointsService {
     attendanceBulk: URLS.BIT_CLASS.ATTENDANCE_BULK,        // POST
     attendanceReport: URLS.BIT_CLASS.ATTENDANCE_REPORT,    // GET
     attendanceDetail: URLS.BIT_CLASS.ATTENDANCE_DETAIL,    // GET, PUT, DELETE
+
+    classAttendance: URLS.BIT_CLASS.CLASS_ATTENDANCE,
   }
 
   constructor() {

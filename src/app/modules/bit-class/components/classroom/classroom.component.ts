@@ -39,6 +39,7 @@ export class ClassroomComponent implements OnInit {
   public activities: Activity[] = [];
   public studentList: ClassMember[] = [];
   public topStudents: ClassMember[] = [];
+
   public today: Date = new Date();
 
   constructor(

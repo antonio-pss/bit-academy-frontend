@@ -1,13 +1,13 @@
 import { ModelBase } from '../core/model-base';
 
 export enum WeekDays {
-  MONDAY = 'MONDAY',
-  TUESDAY = 'TUESDAY',
-  WEDNESDAY = 'WEDNESDAY',
-  THURSDAY = 'THURSDAY',
-  FRIDAY = 'FRIDAY',
-  SATURDAY = 'SATURDAY',
-  SUNDAY = 'SUNDAY',
+  MONDAY = 'Seg',
+  TUESDAY = 'Ter',
+  WEDNESDAY = 'Qua',
+  THURSDAY = 'Qui',
+  FRIDAY = 'Sex',
+  SATURDAY = 'Sab',
+  SUNDAY = 'Dom',
 }
 
 export interface Class extends ModelBase {

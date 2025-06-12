@@ -79,7 +79,7 @@ export class MainComponent {
         (item.route.startsWith('/') && currentUrl.includes(item.route.substring(1)));
     });
 
-    this._currentTitle = matchingItem?.label || 'Página não encontrada';
+    this._currentTitle = matchingItem?.label || '';
   }
 
   public get currentTitle(): string {
