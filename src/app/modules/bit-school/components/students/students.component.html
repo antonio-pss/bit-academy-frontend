@@ -1,2 +1,15 @@
-<p>students works!</p>
-<app-list-students></app-list-students>
+<section>
+    @for (members of members; track members.id) {
+      <mat-card class="m-4 p-4 card">
+          <h3>Sala: {{members.class_id}}</h3>
+        <div class="m-4">
+          <h3 class="">Aluno:</h3>
+          <p>{{members.user.name}}</p>
+        </div>
+        <div class="m-4">
+          <h3>E-mail</h3>
+          <p>{{members.user.email}}</p>
+        </div>
+      </mat-card>
+    }
+</section>

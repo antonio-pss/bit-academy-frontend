@@ -1,62 +1,66 @@
-<section class="col-12 lg:col-12">
-  <mat-card class="card p-2 h-full cursor-pointer class-card" (click)="showClassData()">
-    <mat-card-content class="card-body">
-      <div class="flex justify-content-between align-items-start mb-4">
-        <div>
-          <h3 class="m-0 font-medium">{{ classroom.name || 'Sem título' }}</h3>
-          <p class="m-0 text-secondary text-sm mt-1">
-            <strong>Dias:</strong>
-            <span *ngIf="daysDisplay !== 'Não agendado'; else naoAgendado">{{ daysDisplay }}</span>
-            <ng-template #naoAgendado><span>Não agendado</span></ng-template>
-          </p>
-          <p class="m-0 text-secondary text-xs mt-1">
-            <strong>Descrição:</strong> {{ classroom.description || 'Sem descrição' }}
-          </p>
-          <p class="m-0 text-secondary text-xs mt-1">
-            <strong>Carga horária:</strong> {{ classroom.hours_per_class }}h
-          </p>
-        </div>
-        <div class="flex align-items-center gap-1">
-          <i class="pi pi-users text-secondary"></i>
-          <span class="text-sm">{{ studentCount ?? 0 }}</span>
-        </div>
-      </div>
+<!--<div class="course-list">-->
+<!--  <h2>Turmas</h2>-->
 
-      <div class="flex justify-content-between align-items-center mb-4">
-        <div>
-          <span class="text-secondary text-xs">Nota Média</span>
-          <div class="flex align-items-center gap-1 mt-1">
-            <i class="pi pi-star-fill text-yellow-500"></i>
-            <span class="text-sm font-medium">{{ gradeAverage | number: '1.1-2' }}</span>
-          </div>
-        </div>
-        <div class="progress-ring">
-          <svg viewBox="0 0 36 36">
-            <circle class="progress-ring-bg" cx="18" cy="18" r="16"></circle>
-            <circle
-              class="progress-ring-fill"
-              cx="18"
-              cy="18"
-              r="16"
-              [attr.stroke-dasharray]="progressPercentage + ', 100'"
-              stroke-dashoffset="22"
-            ></circle>
-          </svg>
-          <div class="progress-text">{{ progressPercentage }}%</div>
-        </div>
-      </div>
+<!--  <mat-list *ngIf="courses.length > 0; else emptyList">-->
+<!--    <mat-list-item *ngFor="let course of courses">-->
+<!--      <h3 matLine>{{ course.name }}</h3>-->
+<!--      <p matLine>{{ course.description }}</p>-->
+<!--    </mat-list-item>-->
+<!--  </mat-list>-->
 
-      <div class="flex justify-content-between align-items-center">
-        <div class="flex align-items-center gap-1">
-          <i class="pi pi-file-edit text-secondary"></i>
-          <span class="text-sm">{{ assignmentsCount ?? 0 }} Atividades</span>
-        </div>
-        <span class="badge"
-              [ngClass]="classroom?.active === false ? 'badge-danger' : 'badge-success'">
-            {{ classroom?.active === false ? 'Desativado' : 'Ativo' }}
-        </span>
+<!--  <ng-template #emptyList>-->
+<!--    <p>Nenhuma turma cadastrada.</p>-->
+<!--  </ng-template>-->
+<!--</div>-->
 
-      </div>
-    </mat-card-content>
-  </mat-card>
+<section class="card h-full">
+
+  <section class="card-header flex flex-row justify-content-between align-items-center">
+    <div class="flex flex-row align-items-center gap-3">
+      <mat-form-field class="w-full sm:w-auto" appearance="outline">
+        <mat-label>Buscar salas...</mat-label>
+        <input matInput [(ngModel)]="searchTerm" (input)="onSearch()">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="w-full sm:w-auto" appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select (selectionChange)="onChangeStatus($event)">
+          <mat-option value="all">Todas</mat-option>
+          <mat-option value="Active">Ativa</mat-option>
+          <mat-option value="Pending">Pendente</mat-option>
+          <mat-option value="Overdue">Atrasada</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button mat-flat-button color="primary">Chat IA</button>
+  </section>
+
+  <section class="flex flex-column h-full justify-content-between">
+    <section class="gap-4 mt-4">
+      @for (classroom of paginatedClasses; track classroom.id) {
+        <app-class-card
+          [classroom]="classroom"
+          (click)="onNavigate('school/courses/' + classroom.id)">
+        </app-class-card>
+      } @empty {
+        <div class="flex justify-content-center align-items-center w-full">
+          <p>
+            <strong>Não há salas cadastradas.</strong>
+          </p>
+        </div>
+      }
+    </section>
+
+    <section class="pagination flex justify-content-end align-items-center mt-4">
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        [length]="filteredClasses.length"
+        (page)="onPageChange($event)">
+      </mat-paginator>
+    </section>
+  </section>
 </section>
+

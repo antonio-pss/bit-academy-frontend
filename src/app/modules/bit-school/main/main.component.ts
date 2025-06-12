@@ -29,7 +29,7 @@ export class MainComponent {
 
   menuItems = [
     {label: 'Início', icon: 'home', route: 'home'},
-    {label: 'Salas', icon: 'co_present', route: 'classes'},
+    {label: 'Salas', icon: 'co_present', route: 'courses'},
     {label: 'Alunos', icon: 'person', route: 'students'},
   ];
 
