@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #fb8c00, #ef6c00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.color-button {
+  background-color: #fb8c00;
+
+
+  &:hover {
+    background-color: #ef6c00;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

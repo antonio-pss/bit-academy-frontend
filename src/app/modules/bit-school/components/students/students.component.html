@@ -1,0 +1,16 @@
+<section>
+    @for (members of members; track members.id) {
+      <mat-card class="m-4 p-4 card">
+        <h3>{{members.user.name}}</h3>
+          <h3>Sala: {{members.class_id}}</h3>
+          <h3>Sala: {{members.class_name}}</h3>
+        <div class="m-4">
+
+        <div class="m-4">
+          <h3>E-mail</h3>
+          <p>{{members.user.email}}</p>
+        </div>
+        </div>
+      </mat-card>
+    }
+</section>

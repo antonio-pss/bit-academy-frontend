@@ -43,7 +43,7 @@
         <input matInput placeholder="Digite sua senha" formControlName="password" type="password" class="text-white"
                required/>
         @if (registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)) {
-          <small class="text-white">Minímo de 6 caracteres</small>
+          <small class="text-white">Minímo de 8 caracteres</small>
         }
       </mat-form-field>
 

@@ -1,0 +1,140 @@
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-success {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+
+.badge-warning {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #ff9800;
+}
+
+.badge-danger {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+.progress-ring {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.progress-ring circle {
+  fill: none;
+  stroke-width: 4;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.progress-ring-bg {
+  stroke: #e0e0e0;
+}
+
+.progress-ring-fill {
+  stroke: var(--primary-color);
+  transition: stroke-dashoffset 0.5s;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-success {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+
+.badge-warning {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #ff9800;
+}
+
+.badge-danger {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+.progress-ring {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.progress-ring circle {
+  fill: none;
+  stroke-width: 4;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.progress-ring-bg {
+  stroke: #e0e0e0;
+}
+
+.progress-ring-fill {
+  stroke: var(--primary-color);
+  transition: stroke-dashoffset 0.5s;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}

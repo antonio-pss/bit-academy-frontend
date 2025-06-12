@@ -1,5 +1,7 @@
-const API_BASE_URL = 'http://18.117.154.106:8000/core';
-const API_BASE_DEFAULT_URL = 'http://18.117.154.106:8000';
+const API_BASE_URL = 'http://localhost:8000/core';
+const API_BASE_DEFAULT_URL = 'http://localhost:8000';
+
+// 18.117.154.106
 
 export const URLS = {
   BASE: API_BASE_URL,
@@ -41,5 +43,29 @@ export const URLS = {
     ATTENDANCE_BULK: (classId: number) => `${API_BASE_DEFAULT_URL}/class/${classId}/attendance/bulk/`, // POST
     ATTENDANCE_REPORT: (classId: number) => `${API_BASE_DEFAULT_URL}/class/${classId}/attendance/report/`, // GET
     ATTENDANCE_DETAIL: (classId: number, attendanceId: number) => `${API_BASE_DEFAULT_URL}/class/${classId}/attendance/${attendanceId}/`, // GET | PUT | DELETE
+    CLASS_ATTENDANCE: (classId: number) => `${API_BASE_DEFAULT_URL}/class/${classId}/attendance/`,
+  },
+
+  BIT_SCHOOL: {
+    // Cursos (Turmas)
+    COURSES: `${API_BASE_DEFAULT_URL}/school/courses/`, // GET | POST
+    COURSE_DETAIL: (id: number) => `${API_BASE_DEFAULT_URL}/school/courses/${id}/`, // GET | PUT | DELETE
+
+    // Instituições
+    INSTITUTIONS: `${API_BASE_DEFAULT_URL}/school/institutions/`, // GET | POST
+    INSTITUTION_DETAIL: (id: number) => `${API_BASE_DEFAULT_URL}/school/institutions/${id}/`, // GET | PUT | DELETE
+
+    // Módulos
+    MODULES: `${API_BASE_DEFAULT_URL}/school/modules/`, // GET | POST
+    MODULE_DETAIL: (id: number) => `${API_BASE_DEFAULT_URL}/school/modules/${id}/`, // GET | PUT | DELETE
+
+    // Disciplinas
+    DISCIPLINES: `${API_BASE_DEFAULT_URL}/school/disciplines/`, // GET | POST
+    DISCIPLINE_DETAIL: (id: number) => `${API_BASE_DEFAULT_URL}/school/disciplines/${id}/`, // GET | PUT | DELETE
+
+    // Relação Curso-Módulo-Disciplina
+    CMD_LINKS: `${API_BASE_DEFAULT_URL}/school/course-module-discipline/`, // GET | POST
+    CMD_DETAIL: (id: number) => `${API_BASE_DEFAULT_URL}/school/course-module-discipline/${id}/`, // GET | PUT | DELETE
+
   }
 };

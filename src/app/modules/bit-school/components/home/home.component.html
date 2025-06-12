@@ -1,0 +1,28 @@
+<section class="welcome-container flex flex-column md:flex-row align-items-center justify-content-center text-center md:text-left px-4 py-8 gap-6">
+  <!-- Texto e botões -->
+  <div class="welcome-text flex-1">
+    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+      Seja bem-vindo ao <span class="text-gradient">BitSchool</span>
+    </h1>
+
+    <p class="text-xl text-orange-600 font-medium mb-6">
+      Gerencie suas turmas, alunos e atividades com tecnologia e simplicidade.
+    </p>
+
+    <div class="flex flex-wrap gap-3 justify-content-center md:justify-content-start">
+      <button mat-raised-button class="active:bg-orange-500 color-button px-5 py-2 font-bold text-white rounded-full" (click)="onNavigate('/school/courses')">
+        <mat-icon>co_present</mat-icon>
+        Acessar Turmas
+      </button>
+      <button mat-stroked-button class="px-5 py-2 font-bold rounded-full text-orange-600 border-orange-600" (click)="onNavigate('/school/students')">
+        <mat-icon>person</mat-icon>
+        Ver Alunos
+      </button>
+    </div>
+  </div>
+
+  <!-- Ilustração -->
+  <div class="welcome-illustration flex-1">
+    <img src=".\assets\School.svg" alt="Ilustração BitClass" class="w-full max-w-30rem" />
+  </div>
+</section>

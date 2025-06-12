@@ -35,6 +35,24 @@ export class EndpointsService {
 
     // School actions
     school: URLS.SCHOOL,
+    bitSchoolCourses: URLS.BIT_SCHOOL.COURSES,
+    bitSchoolCourseDetail: URLS.BIT_SCHOOL.COURSE_DETAIL,
+
+    // BitSchool – Instituições
+    bitSchoolInstitutions: URLS.BIT_SCHOOL.INSTITUTIONS,
+    bitSchoolInstitutionDetail: URLS.BIT_SCHOOL.INSTITUTION_DETAIL,
+
+    // BitSchool – Módulos
+    bitSchoolModules: URLS.BIT_SCHOOL.MODULES,
+    bitSchoolModuleDetail: URLS.BIT_SCHOOL.MODULE_DETAIL,
+
+    // BitSchool – Disciplinas
+    bitSchoolDisciplines: URLS.BIT_SCHOOL.DISCIPLINES,
+    bitSchoolDisciplineDetail: URLS.BIT_SCHOOL.DISCIPLINE_DETAIL,
+
+    // BitSchool – Relacionamento Curso-Módulo-Disciplina
+    bitSchoolCMDLinks: URLS.BIT_SCHOOL.CMD_LINKS,
+    bitSchoolCMDDetail: URLS.BIT_SCHOOL.CMD_DETAIL,
 
     // Membros
     classMembers: URLS.BIT_CLASS.MEMBERS,                  // GET, POST
@@ -58,7 +76,12 @@ export class EndpointsService {
     attendanceBulk: URLS.BIT_CLASS.ATTENDANCE_BULK,        // POST
     attendanceReport: URLS.BIT_CLASS.ATTENDANCE_REPORT,    // GET
     attendanceDetail: URLS.BIT_CLASS.ATTENDANCE_DETAIL,    // GET, PUT, DELETE
+
+    classAttendance: URLS.BIT_CLASS.CLASS_ATTENDANCE,
   }
+
+
+
 
   constructor() {
   }
