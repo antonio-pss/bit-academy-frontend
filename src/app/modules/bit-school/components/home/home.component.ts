@@ -12,11 +12,11 @@ import {
   ClassItemDialogComponent
 } from '../../../bit-class/components/home/class-list/class-item-dialog/class-item-dialog.component';
 import {ClassCardComponent} from '../../../bit-class/components/home/class-list/class-card/class-card.component';
-import {ListStudentsComponent} from './list-students/list-students.component';
+import {ClassComponent} from '../class/class.component';
 
 @Component({
   selector: 'app-home',
-  imports: [MATERIAL_IMPORTS, ClassCardComponent, ListStudentsComponent],
+  imports: [MATERIAL_IMPORTS, ClassComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   public currentPageIndex: number = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
 
   constructor(
     private dialog: MatDialog,

@@ -18,17 +18,21 @@ import {ToastrService} from 'ngx-toastr';
     MatIcon,
     MatDivider,
     MatSidenav,
-    MatToolbar
+    MatToolbar,
+
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
+  public currentTitle: string = '';
+
   menuItems = [
     {label: 'Início', icon: 'home', route: 'home'},
+    {label: 'Salas', icon: 'co_present', route: 'classes'},
+    {label: 'Alunos', icon: 'person', route: 'students'},
   ];
 
-  public currentTitle: string = '';
 
   constructor(private readonly router: Router,
               private readonly authService: AuthBaseService,

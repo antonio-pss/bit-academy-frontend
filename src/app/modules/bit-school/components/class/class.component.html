@@ -1,0 +1,62 @@
+<section class="col-12 lg:col-12">
+  <mat-card class="card p-2 h-full cursor-pointer class-card" (click)="showClassData()">
+    <mat-card-content class="card-body">
+      <div class="flex justify-content-between align-items-start mb-4">
+        <div>
+          <h3 class="m-0 font-medium">{{ classroom.name || 'Sem título' }}</h3>
+          <p class="m-0 text-secondary text-sm mt-1">
+            <strong>Dias:</strong>
+            <span *ngIf="daysDisplay !== 'Não agendado'; else naoAgendado">{{ daysDisplay }}</span>
+            <ng-template #naoAgendado><span>Não agendado</span></ng-template>
+          </p>
+          <p class="m-0 text-secondary text-xs mt-1">
+            <strong>Descrição:</strong> {{ classroom.description || 'Sem descrição' }}
+          </p>
+          <p class="m-0 text-secondary text-xs mt-1">
+            <strong>Carga horária:</strong> {{ classroom.hours_per_class }}h
+          </p>
+        </div>
+        <div class="flex align-items-center gap-1">
+          <i class="pi pi-users text-secondary"></i>
+          <span class="text-sm">{{ studentCount ?? 0 }}</span>
+        </div>
+      </div>
+
+      <div class="flex justify-content-between align-items-center mb-4">
+        <div>
+          <span class="text-secondary text-xs">Nota Média</span>
+          <div class="flex align-items-center gap-1 mt-1">
+            <i class="pi pi-star-fill text-yellow-500"></i>
+            <span class="text-sm font-medium">{{ gradeAverage | number: '1.1-2' }}</span>
+          </div>
+        </div>
+        <div class="progress-ring">
+          <svg viewBox="0 0 36 36">
+            <circle class="progress-ring-bg" cx="18" cy="18" r="16"></circle>
+            <circle
+              class="progress-ring-fill"
+              cx="18"
+              cy="18"
+              r="16"
+              [attr.stroke-dasharray]="progressPercentage + ', 100'"
+              stroke-dashoffset="22"
+            ></circle>
+          </svg>
+          <div class="progress-text">{{ progressPercentage }}%</div>
+        </div>
+      </div>
+
+      <div class="flex justify-content-between align-items-center">
+        <div class="flex align-items-center gap-1">
+          <i class="pi pi-file-edit text-secondary"></i>
+          <span class="text-sm">{{ assignmentsCount ?? 0 }} Atividades</span>
+        </div>
+        <span class="badge"
+              [ngClass]="classroom?.active === false ? 'badge-danger' : 'badge-success'">
+            {{ classroom?.active === false ? 'Desativado' : 'Ativo' }}
+        </span>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>
