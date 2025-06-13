@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Atribuir Nota</h2>
+
+<mat-dialog-content [formGroup]="gradeForm">
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Nota (0 a 100)</mat-label>
+    <input
+      matInput
+      formControlName="grade"
+      type="number"
+      min="0"
+      max="100"
+      placeholder="Digite a nota"
+    />
+    <mat-error *ngIf="gradeForm.get('grade')?.hasError('required')">
+      A nota é obrigatória.
+    </mat-error>
+    <mat-error *ngIf="gradeForm.get('grade')?.hasError('min') || gradeForm.get('grade')?.hasError('max')">
+      A nota deve estar entre 0 e 100.
+    </mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" [disabled]="loading">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="submit()" [disabled]="loading || gradeForm.invalid">
+    {{ loading ? 'Salvando...' : 'Salvar Nota' }}
+  </button>
+</mat-dialog-actions>

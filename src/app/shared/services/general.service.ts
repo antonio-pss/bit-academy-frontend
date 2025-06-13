@@ -118,6 +118,7 @@ export class GeneralService {
     );
   }
 
+
   public onDelete(path: string): Observable<HttpResponse<any>> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
@@ -127,6 +128,4 @@ export class GeneralService {
       )
     );
   }
-
-
 }

@@ -52,6 +52,7 @@ export class EndpointsService {
     // Submissão de Atividade
     activitySubmissions: URLS.BIT_CLASS.SUBMISSIONS,       // GET, POST
     activitySubmissionDetail: URLS.BIT_CLASS.SUBMISSION_DETAIL, // GET, PUT, DELETE
+    activityGrade: URLS.BIT_CLASS.ACTIVITY_GRADE, //
 
     // Frequência
     attendance: URLS.BIT_CLASS.ATTENDANCE,                 // GET, POST
