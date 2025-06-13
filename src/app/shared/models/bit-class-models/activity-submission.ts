@@ -9,4 +9,5 @@ export interface ActivitySubmission extends ModelBase {
   submitted_at: Date;
   grade: number | null;
   answer: string;
+  file_submission: string;
 }

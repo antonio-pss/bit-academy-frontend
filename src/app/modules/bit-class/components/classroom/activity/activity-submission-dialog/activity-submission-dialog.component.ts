@@ -26,6 +26,8 @@ export interface ActivitySubmissionDialogData {
 })
 export class ActivitySubmissionDialogComponent {
   public submissionForm: FormGroup;
+  public loading = false;
+  public file: File | null = null;
 
   constructor(
     private dialogRef: MatDialogRef<ActivitySubmissionDialogComponent>,
@@ -39,7 +41,15 @@ export class ActivitySubmissionDialogComponent {
       activity: [data.activityId, Validators.required],
       class_member: [data.classMemberId, Validators.required],
       answer: ['', Validators.required],
+      submission_file: [null,]
     });
+  }
+
+  public onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input?.files?.length) {
+      this.file = input.files[0];
+    }
   }
 
   closeDialog(success: boolean = false): void {
@@ -51,10 +61,27 @@ export class ActivitySubmissionDialogComponent {
       this.submissionForm.markAllAsTouched();
       return;
     }
-    const payload = this.submissionForm.value;
-    const path = this.endpoint.path.activitySubmissions(this.data.classId, this.data.activityId);
 
-    this.generalService.post(path, payload).subscribe({
+    const answer = this.submissionForm.value.answer;
+
+    if (!answer && !this.file) {
+      this.toastr.error('Forneça uma resposta de texto ou envie um arquivo.');
+      return;
+    }
+
+    const url = this.endpoint.path.activitySubmissions(this.data.classId, this.data.activityId);
+    const formData = new FormData();
+
+    formData.append('answer', answer || '');
+    formData.append('activity', String(this.data.activityId));
+    formData.append('class_member', String(this.data.classMemberId));
+
+    if (this.file) {
+      formData.append('submission_file', this.file); // ✅ File garantido como não-null aqui
+    }
+
+    this.loading = true;
+    this.generalService.postFormData(url, formData).subscribe({
       next: () => {
         this.toastr.success('Resposta enviada com sucesso!');
         this.closeDialog(true);
@@ -62,7 +89,11 @@ export class ActivitySubmissionDialogComponent {
       error: (err) => {
         this.toastr.error('Erro ao enviar resposta');
         console.error(err);
+      },
+      complete: () => {
+        this.loading = false;
       }
     });
   }
+
 }

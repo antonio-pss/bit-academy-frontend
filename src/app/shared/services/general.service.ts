@@ -45,6 +45,21 @@ export class GeneralService {
   }
 
 
+  public postFormData(path: string, formData: FormData): Observable<any> {
+    return this.getHeaders().pipe(
+      switchMap((headers) => {
+        // Remove o 'Content-Type' para permitir que o browser defina com boundary corretamente
+        headers = headers.delete('Content-Type');
+
+        return this.httpClient.post(path, formData, {
+          headers,
+          withCredentials: true
+        });
+      })
+    );
+  }
+
+
   public get(path: string): Observable<any> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
