@@ -1,5 +1,7 @@
-const API_BASE_URL = 'http://18.117.154.106:8000/core';
-const API_BASE_DEFAULT_URL = 'http://18.117.154.106:8000';
+const API_BASE_URL = 'http://localhost:8000/core';
+const API_BASE_DEFAULT_URL = 'http://localhost:8000';
+
+// 18.117.154.106
 
 export const URLS = {
   BASE: API_BASE_URL,

@@ -13,7 +13,7 @@
 
     <mat-form-field class="w-14rem ml-2" appearance="outline">
       <mat-label>Data da chamada</mat-label>
-      <input matInput type="date" [(ngModel)]="attendanceDate" (ngModelChange)="onAttendanceDateChange()" />
+      <input matInput type="date" [(ngModel)]="attendanceDate" />
     </mat-form-field>
 
     <button mat-flat-button color="accent"
@@ -23,11 +23,10 @@
     </button>
 
     <button mat-flat-button color="accent"
-            (click)="sendAttendance()"
-            [disabled]="attendanceExists || !attendanceLoaded">
+            (click)="confirmAndSendAttendance()"
+            [disabled]="attendanceButtonDisabled">
       Registrar chamada
     </button>
-
   </mat-toolbar>
 
   <table mat-table [dataSource]="filteredStudents" class="mat-elevation-z2 w-full mt-4">

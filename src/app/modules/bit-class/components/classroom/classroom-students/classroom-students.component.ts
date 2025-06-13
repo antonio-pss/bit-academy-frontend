@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ClassMember, ClassMemberRole } from '../../../../../shared/models/bit-class-models/class-member';
 import { ToastrService } from 'ngx-toastr';
 import { MatIcon } from '@angular/material/icon';
+import {ConfirmAttendanceDialogComponent} from './confirm-attendance-dialog/confirm-attendance-dialog.component';
 
 @Component({
   selector: 'app-classroom-students',
@@ -22,6 +23,7 @@ import { MatIcon } from '@angular/material/icon';
     FormsModule,
   ]
 })
+
 export class ClassroomStudentsComponent implements OnInit {
   public searchTerm = '';
   public member: ClassMember = {} as ClassMember;
@@ -32,12 +34,8 @@ export class ClassroomStudentsComponent implements OnInit {
 
   public attendance: { [classMemberId: number]: boolean } = {};
   public attendanceDate: string = this.todayISO();
-  public attendanceSentDate: string | null = null;
 
-  public attendanceLoaded = false;
-  public attendanceExists = false;
-  public attendanceIds: number[] = [];
-
+  public attendanceBlocked = false; // flag para bloquear o botão permanentemente após envio
 
   constructor(
     private dialog: MatDialog,
@@ -98,7 +96,7 @@ export class ClassroomStudentsComponent implements OnInit {
           this.currentUserClassMemberId = member?.id ?? null;
           this.students.forEach(s => {
             if (s.role === ClassMemberRole.STUDENTS && !(s.id in this.attendance)) {
-              this.attendance[s.id] = false; // padrão: AUSENTE
+              this.attendance[s.id] = false;
             }
           });
         }
@@ -156,50 +154,21 @@ export class ClassroomStudentsComponent implements OnInit {
   }
 
   public get attendanceButtonDisabled(): boolean {
-    return this.attendanceSentDate === this.attendanceDate;
+    return this.attendanceBlocked;
   }
 
-  public onAttendanceDateChange() {
-    this.attendanceLoaded = false;
-    this.attendanceExists = false;
-    this.attendanceIds = [];
-    // Limpa estado local
-    this.students.forEach(s => {
-      if (s.role === ClassMemberRole.STUDENTS) {
-        this.attendance[s.id] = false;
-      }
+  // Método para confirmação antes de enviar chamada
+  public confirmAndSendAttendance() {
+    const dialogRef = this.dialog.open(ConfirmAttendanceDialogComponent, {
+      width: '340px'
     });
 
-    // Só faz a chamada se já sabe o id do membro do professor
-    if (this.currentUserClassMemberId) {
-      this.generalService
-        .list(
-          this.endpoint.path.classAttendance(this.classId)
-          + `?date=${this.attendanceDate}&registered_by=${this.currentUserClassMemberId}`
-        )
-        .subscribe({
-          next: (attendances: any[]) => {
-            if (attendances.length > 0) {
-              // Já existe chamada nessa data
-              this.attendanceExists = true;
-              this.attendanceIds = attendances.map(a => a.id);
-              attendances.forEach(a => {
-                this.attendance[a.class_member] = a.is_present;
-              });
-            } else {
-              // Não existe chamada nessa data
-              this.attendanceExists = false;
-            }
-            this.attendanceLoaded = true;
-          },
-          error: () => { this.attendanceLoaded = true; }
-        });
-    } else {
-      this.attendanceLoaded = true;
-      this.attendanceExists = false;
-    }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.sendAttendance();
+      }
+    });
   }
-
 
   public sendAttendance() {
     const attendances = this.students
@@ -217,7 +186,7 @@ export class ClassroomStudentsComponent implements OnInit {
     ).subscribe({
       next: () => {
         this.toastr.success('Chamada registrada com sucesso!');
-        this.attendanceSentDate = this.attendanceDate;
+        this.attendanceBlocked = true; // Bloqueia permanentemente na tela
       },
       error: (err) => {
         this.toastr.error('Erro ao registrar chamada.');
