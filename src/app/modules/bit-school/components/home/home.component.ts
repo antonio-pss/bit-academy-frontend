@@ -16,7 +16,7 @@ import {ClassComponent} from '../class/class.component';
 
 @Component({
   selector: 'app-home',
-  imports: [MATERIAL_IMPORTS, ClassComponent],
+  imports: [MATERIAL_IMPORTS],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

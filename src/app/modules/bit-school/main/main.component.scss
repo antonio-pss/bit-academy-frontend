@@ -1,0 +1,20 @@
+.menu {
+  background: linear-gradient(135deg, #ffa726, #fb8c00, #f57c00);
+  color: #fff;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s ease-in-out, transform 0.2s;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+
+  }
+}
+
+.menu-white {
+  color: white;
+  text-decoration-color: white;
+}
+

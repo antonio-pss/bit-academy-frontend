@@ -91,6 +91,7 @@ export class MainComponent {
   }
 
 
+
   public onNavigate(action: string): void {
     if (action === '#') {
       this.toastr.info('Funcionalidade em desenvolvimento');

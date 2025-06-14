@@ -1,24 +1,28 @@
-<section class="flex w-full h-full gap-4 mt-4">
-  @for (classroom of paginatedClasses; track classroom.id) {
-<!--    <app-class-->
-<!--&lt;!&ndash;      [classroom]="classroom"&ndash;&gt;-->
-<!--      (click)="onNavigate('school/home/' + classroom.id)">-->
-<!--    </app-class>-->
-  } @empty {
-    <p>
-      <strong>Não há salas cadastradas.</strong>
+<section class="welcome-container flex flex-column md:flex-row align-items-center justify-content-center text-center md:text-left px-4 py-8 gap-6">
+  <!-- Texto e botões -->
+  <div class="welcome-text flex-1">
+    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+      Seja bem-vindo ao <span class="text-gradient">BitSchool</span>
+    </h1>
+
+    <p class="text-xl text-orange-600 font-medium mb-6">
+      Gerencie suas turmas, alunos e atividades com tecnologia e simplicidade.
     </p>
-  }
+
+    <div class="flex flex-wrap gap-3 justify-content-center md:justify-content-start">
+      <button mat-raised-button class="color-button px-5 py-2 font-bold text-white rounded-full">
+        <mat-icon>co_present</mat-icon>
+        Acessar Turmas
+      </button>
+      <button mat-stroked-button class="px-5 py-2 font-bold rounded-full text-orange-600 border-orange-600">
+        <mat-icon>person</mat-icon>
+        Ver Alunos
+      </button>
+    </div>
+  </div>
+
+  <!-- Ilustração -->
+  <div class="welcome-illustration flex-1">
+    <img src=".\assets\School.svg" alt="Ilustração BitClass" class="w-full max-w-30rem" />
+  </div>
 </section>
-
-
-<section class="pagination flex justify-content-end align-items-center mt-4">
-  <mat-paginator
-    [pageSizeOptions]="[5, 10, 20]"
-    showFirstLastButtons
-    [length]="filteredClasses.length"
-    (page)="onPageChange($event)">
-  </mat-paginator>
-</section>
-
-

@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #f9fdf9;
+  font-family: 'Poppins', sans-serif;
+  color: #1b5e20; // verde escuro global para texto padrão
+}
+
+h1 {
+  color: #2e7d32; // verde mais vibrante para títulos
+}
+
+p {
+  color: #388e3c; // tom médio para parágrafos
+}
+
+button {
+  font-weight: 600;
+}
+
+.welcome-container {
+  padding: 4rem 2rem;
+}
+
+.welcome-illustration img {
+  max-width: 100%;
+  height: auto;
+}
