@@ -19,6 +19,8 @@ export const URLS = {
     NEW: `${API_BASE_DEFAULT_URL}/class/new/`,                        // GET(list) | POST(create)
     DETAIL: (id: number) => `${API_BASE_DEFAULT_URL}/class/${id}/`,   // GET | PUT | DELETE
     METRICS: (id: number) => `${API_BASE_DEFAULT_URL}/class/${id}/metrics/`, // GET
+    MY_STUDENTS_CLASS: `${API_BASE_DEFAULT_URL}/class/my-students/`,   // GET
+    MY_TEACHERS_CLASS: `${API_BASE_DEFAULT_URL}/class/my-teachers/`,   // GET
 
     // Membros (Alunos)
     MEMBERS: (classId: number) => `${API_BASE_DEFAULT_URL}/class/${classId}/members/`,  // GET | POST

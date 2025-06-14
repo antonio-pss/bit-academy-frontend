@@ -31,7 +31,10 @@ export class EndpointsService {
     classById: URLS.CLASS,
     class: URLS.BIT_CLASS.NEW,                         // GET (lista), POST (cria)
     classDetail: URLS.BIT_CLASS.DETAIL,                    // GET, PUT, DELETE
-    classMetrics: URLS.BIT_CLASS.METRICS,
+    classMetrics: URLS.BIT_CLASS.METRICS,                  // GET
+    myStudentClass: URLS.BIT_CLASS.MY_STUDENTS_CLASS,      // GET
+    myTeacherClass: URLS.BIT_CLASS.MY_TEACHERS_CLASS,      // GET
+
 
     // School actions
     school: URLS.SCHOOL,
@@ -39,7 +42,7 @@ export class EndpointsService {
     // Membros
     classMembers: URLS.BIT_CLASS.MEMBERS,                  // GET, POST
     classMemberDetail: URLS.BIT_CLASS.MEMBER_DETAIL,       // GET, PUT, DELETE
-    classMemberMetrics: URLS.BIT_CLASS.MEMBER_METRICS,     // GET
+    classMemberMetrics: URLS.BIT_CLASS.MEMBER_METRICS,    // GET
 
     // Adicionar aluno
     addStudent: URLS.BIT_CLASS.ADD_STUDENT,                // POST
