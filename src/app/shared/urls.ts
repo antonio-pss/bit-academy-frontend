@@ -22,6 +22,14 @@ export const URLS = {
     MY_STUDENT_CLASS: `${API_BASE_DEFAULT_URL}/class/my-student-class/`,   // GET
     MY_TEACHER_CLASS: `${API_BASE_DEFAULT_URL}/class/my-teacher-class/`,   // GET
 
+    ADVANCED_FILTER: `${API_BASE_DEFAULT_URL}/class/advanced-filter/`, // GET com query params
+
+    TEACHER_KPIS:  `${API_BASE_DEFAULT_URL}/class/teacher-performance/`,
+    TEACHER_HISTORY: `${API_BASE_DEFAULT_URL}/class/teacher-performance/history/`,
+    TEACHER_DISTRIBUTION: `${API_BASE_DEFAULT_URL}/class/teacher-performance/distribution/`,
+    TEACHER_RANKING: `${API_BASE_DEFAULT_URL}/class/teacher-performance/ranking/`,
+    TEACHER_COMPARISON: `${API_BASE_DEFAULT_URL}/class/teacher-performance/comparison/`,
+
     // Membros (Alunos)
     MEMBERS: (classId: number) => `${API_BASE_DEFAULT_URL}/class/${classId}/members/`,  // GET | POST
     MEMBER_DETAIL: (classId: number, memberId: number) => `${API_BASE_DEFAULT_URL}/class/${classId}/members/${memberId}/`, // GET | PUT | DELETE

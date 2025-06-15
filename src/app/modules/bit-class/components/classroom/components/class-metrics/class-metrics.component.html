@@ -1,0 +1,37 @@
+<section class="flex justify-content-start gap-6 w-full">
+  @if (metrics) {
+
+      <div class="card text-center p-4 rounded-2xl shadow bg-white">
+        <div class="text-xs uppercase text-gray-500 mb-1">Alunos</div>
+        <div class="text-3xl font-bold">{{ metrics.total_students - 1 }}</div>
+      </div>
+
+      <div class="card text-center p-4 rounded-2xl shadow bg-white">
+        <div class="text-xs uppercase text-gray-500 mb-1">Atividades</div>
+        <div class="text-3xl font-bold">{{ metrics.total_activities }}</div>
+      </div>
+
+
+    <section
+      class="card text-center p-4 rounded-2xl shadow bg-white
+      flex flex-column align-items-center justify-content-center">
+      <section class="flex flex-column align-items-center gap-2 w-full">
+        <div class="flex gap-2">
+          <div class="font-bold">Frequência média</div>
+          <div>
+            {{ metrics.attendance_rate | number: '1.0-1' }}%
+          </div>
+        </div>
+        <div style="width:100%; height:1rem; background:#e5e7eb; border-radius:0.5rem; overflow:hidden;">
+          <div
+            style="height:1rem; background:#22c55e; border-radius:0.5rem; transition:width 0.5s;"
+            [style.width.%]="metrics.attendance_rate"></div>
+        </div>
+      </section>
+    </section>
+  } @else {
+    <div class="w-full text-center text-gray-400 py-8">
+      Métricas não disponíveis
+    </div>
+  }
+</section>

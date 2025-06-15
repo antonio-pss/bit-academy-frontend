@@ -36,6 +36,14 @@ export class EndpointsService {
     myTeacherClass: URLS.BIT_CLASS.MY_TEACHER_CLASS,      // GET
 
 
+    advancedFilterClass: URLS.BIT_CLASS.ADVANCED_FILTER,
+
+    teacherPerformance: URLS.BIT_CLASS.TEACHER_KPIS,
+    teacherPerformanceHistory: URLS.BIT_CLASS.TEACHER_HISTORY,
+    teacherPerformanceDistribution: URLS.BIT_CLASS.TEACHER_DISTRIBUTION,
+    teacherPerformanceRanking: URLS.BIT_CLASS.TEACHER_RANKING,
+    teacherPerformanceComparison: URLS.BIT_CLASS.TEACHER_COMPARISON,
+
     // School actions
     school: URLS.SCHOOL,
 

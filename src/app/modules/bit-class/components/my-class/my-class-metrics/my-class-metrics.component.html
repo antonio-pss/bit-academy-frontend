@@ -1,0 +1,71 @@
+<section class="w-full h-full flex flex-column justify-content-center p-2">
+
+  <!-- Filtros por período -->
+  <div class="flex gap-2 mb-4 align-items-end">
+    <mat-form-field appearance="outline">
+      <mat-label>Início</mat-label>
+      <input matInput type="date" [(ngModel)]="period.start" (change)="onPeriodChange()">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Fim</mat-label>
+      <input matInput type="date" [(ngModel)]="period.end" (change)="onPeriodChange()">
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="loadDashboard()" [disabled]="loading">
+      Atualizar
+    </button>
+  </div>
+
+  <!-- Gráficos de evolução -->
+  <app-teacher-performance-history></app-teacher-performance-history>
+
+  <!-- Distribuicao por sala-->
+  <app-teacher-performance-distribution></app-teacher-performance-distribution>
+
+
+  <!--Comparacao de salas-->
+  <app-teacher-performance-comparison></app-teacher-performance-comparison>
+
+  <!-- Ranking dos alunos -->
+  <div class="w-full max-w-3xl mb-6">
+    <h4 class="mt-4 mb-2 font-semibold text-primary-900">Ranking de Participação</h4>
+    <table mat-table [dataSource]="ranking" class="w-full bg-white border-round shadow-md animate__fadeIn">
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let el; let i = index">{{ i + 1 }}</td>
+      </ng-container>
+      <ng-container matColumnDef="student_name">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let el">{{ el.student_name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="activities_submitted">
+        <th mat-header-cell *matHeaderCellDef>Entregas</th>
+        <td mat-cell *matCellDef="let el">{{ el.activities_submitted }}</td>
+      </ng-container>
+      <ng-container matColumnDef="attendance">
+        <th mat-header-cell *matHeaderCellDef>Frequência (%)</th>
+        <td mat-cell *matCellDef="let el">{{ el.attendance }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['position','student_name','activities_submitted','attendance']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['position','student_name','activities_submitted','attendance'];"></tr>
+    </table>
+    @if (ranking.length === 0) {
+      <div class="text-center text-secondary py-2">
+        Nenhum aluno encontrado para o período selecionado.
+      </div>
+    }
+  </div>
+
+  <!-- Visual moderno / animação -->
+  <div class="w-full text-center py-3">
+    <div
+      class="bg-gradient-to-r from-blue-50 via-green-50 to-purple-50 border-round-xl p-4 shadow-md w-full max-w-2xl mx-auto animate__fadeIn">
+      <span class="text-lg font-semibold">
+        {{
+          (teacherPerformance?.average_class_attendance ?? 0) > 80
+            ? 'Parabéns! Sua frequência está excelente!'
+            : 'Continue acompanhando os dados para melhorar sempre!'
+        }}
+    </span>
+    </div>
+  </div>
+</section>

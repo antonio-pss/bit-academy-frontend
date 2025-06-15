@@ -1,0 +1,6 @@
+<div class="bg-white border-round-lg p-4 shadow-lg w-full" style="min-width:250px;">
+  <h4 class="text-lg font-medium mb-3 text-gray-800">Distribuição de Alunos por Sala</h4>
+  @if (pieOptions) {
+    <div echarts [options]="pieOptions" class="w-full" style="height:280px;"></div>
+  }
+</div>

@@ -34,7 +34,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
 import {MatBadge} from '@angular/material/badge';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
+import {MatFormField, MatLabel, MatSuffix} from '@angular/material/form-field';
 
 
 export const MATERIAL_IMPORTS = [
@@ -104,5 +104,14 @@ export const MATERIAL_IMPORTS = [
   MatButtonModule,
   MatCardModule,
   MatProgressBarModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatButton,
+  MatFormField,
+  MatIcon,
+  MatInput,
+  MatLabel,
+  MatOption,
+  MatPaginator,
+  MatSelect,
+  MatSuffix,
 ]

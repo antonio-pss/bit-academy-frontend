@@ -1,52 +1,102 @@
-import {Component, Input} from '@angular/core';
-import {NgClass, DecimalPipe, NgIf} from '@angular/common';
-import {MatCard, MatCardContent} from '@angular/material/card';
-import {Class} from '../../../../../../shared/models/bit-class-models/class';
-import {WeekDayLabel} from '../../../../../../shared/models/bit-class-models/week-day-label';
-import {WeekDay} from '../../../../../../shared/models/bit-class-models/week-day';
+import {Component, Input, OnInit} from '@angular/core';
+import {ClassMetrics} from '../../../../../../shared/models/bit-class-models/class-metrics';
+import {GeneralService} from '../../../../../../shared/services/general.service';
+import {EndpointsService} from '../../../../../../shared/services/endpoints.service';
+import {MATERIAL_IMPORTS} from '../../../../../../shared/imports/material.imports';
+import {DecimalPipe} from '@angular/common';
+import {MatProgressBar} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-class-card',
-  standalone: true,
-  imports: [NgClass, DecimalPipe, MatCardContent, MatCard, NgIf],
   templateUrl: './class-card.component.html',
-  styleUrl: './class-card.component.scss'
+  imports: [
+    MATERIAL_IMPORTS,
+    DecimalPipe,
+    MatProgressBar,
+  ],
+  styleUrls: ['./class-card.component.scss']
 })
-export class ClassCardComponent {
-  @Input() classroom!: Class;
-  @Input() studentCount?: number = 0;
-  @Input() gradeAverage?: number = 0;
-  @Input() assignmentsCount?: number = 0;
-  @Input() progressPercentage?: number = 0;
+export class ClassCardComponent implements OnInit {
+  @Input() classroom!: any;
 
-  public weekDayLabels = WeekDayLabel;
+  public metrics?: ClassMetrics;
+  public loading = false;
+  public donutOptions: any = {};
 
-  get daysDisplay(): string {
-    if (this.classroom?.days_display?.length) {
+  constructor(
+    private readonly generalService: GeneralService,
+    private readonly endpoint: EndpointsService
+  ) {
+  }
+
+  public ngOnInit(): void {
+    this.getClassMetrics();
+  }
+
+  private getClassMetrics(): void {
+    this.loading = true;
+    const url = this.endpoint.path.classMetrics(this.classroom.id);
+    this.generalService.get(url).subscribe({
+      next: (data: ClassMetrics) => {
+        this.metrics = data;
+        this.loading = false;
+        this.updateDonut();
+      },
+      error: () => {
+        this.metrics = undefined;
+        this.loading = false;
+      }
+    });
+  }
+
+  private updateDonut(): void {
+    if (!this.metrics) {
+      return;
+    }
+    this.donutOptions = {
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b}: {c} ({d}%)'
+      },
+      legend: {
+        orient: 'vertical',
+        left: 10,
+        data: ['Média de Notas', 'Frequência (%)']
+      },
+      series: [
+        {
+          name: 'Desempenho',
+          type: 'pie',
+          radius: ['55%', '80%'],
+          avoidLabelOverlap: false,
+          label: {
+            show: true,
+            position: 'center',
+            formatter: '{b}',
+            fontSize: 14,
+            fontWeight: 'bold'
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 18,
+              fontWeight: 'bold'
+            }
+          },
+          labelLine: {show: false},
+          data: [
+            {value: this.metrics.average_grade ?? 0, name: 'Média de Notas'},
+            {value: this.metrics.attendance_rate ?? 0, name: 'Frequência (%)'}
+          ]
+        }
+      ]
+    };
+  }
+
+  public get daysOfWeek(): string {
+    if (this.classroom?.days_display?.length > 0) {
       return this.classroom.days_display.join(', ');
     }
-    if (this.classroom?.days_per_week?.length) {
-      return this.classroom.days_per_week
-        .split(',')
-        .map(day => this.weekDayLabels[day as WeekDay])
-        .join(', ');
-    }
     return 'Não agendado';
-  }
-
-  get status(): string {
-    return this.classroom?.active === false
-      ? 'Deactivated'
-      : 'Active';
-  }
-
-  public get badgeClass(): string {
-    return this.status === 'Active'
-      ? 'badge-success'
-      : 'badge-danger';
-  }
-
-  public showClassData() {
-    console.log(this.classroom);
   }
 }

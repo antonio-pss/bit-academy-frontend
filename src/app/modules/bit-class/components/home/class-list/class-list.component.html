@@ -20,7 +20,7 @@
     </section>
   </section>
 
-  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+  <section class="grid grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
     @for (classroom of paginatedClasses; track classroom.id) {
       <app-class-card
         [classroom]="classroom"

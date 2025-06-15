@@ -1,21 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
-import { GeneralService } from '../../../../shared/services/general.service';
-import { EndpointsService } from '../../../../shared/services/endpoints.service';
-import { Class } from '../../../../shared/models/bit-class-models/class';
-import { Activity } from '../../../../shared/models/bit-class-models/activity';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {ToastrService} from 'ngx-toastr';
+import {GeneralService} from '../../../../shared/services/general.service';
+import {EndpointsService} from '../../../../shared/services/endpoints.service';
+import {Class} from '../../../../shared/models/bit-class-models/class';
+import {Activity} from '../../../../shared/models/bit-class-models/activity';
 import {ActivityComponent} from './activity/activity.component';
 import {MATERIAL_IMPORTS} from '../../../../shared/imports/material.imports';
 import {ActivityItemDialogComponent} from './activity/activity-item-dialog/activity-item-dialog.component';
 import {ClassroomSettingsComponent} from './classroom-settings/classroom-settings.component';
-import {StudentCardComponent} from './classroom-students/student-card/student-card.component';
 import {ClassroomStudentsComponent} from './classroom-students/classroom-students.component';
-import {AttendanceItemComponent} from './components/attendance-item/attendance-item.component';
-import {ClassroomStatCardComponent} from './components/classroom-stat-card/classroom-stat-card.component';
 import {ClassMember} from '../../../../shared/models/bit-class-models/class-member';
-import {DatePipe} from '@angular/common';
+import {ClassroomGeneralComponent} from './classroom-general/classroom-general.component';
 
 @Component({
   selector: 'app-classroom',
@@ -24,13 +21,10 @@ import {DatePipe} from '@angular/common';
   standalone: true,
   imports: [
     ActivityComponent,
-    MATERIAL_IMPORTS,
     ClassroomSettingsComponent,
-    StudentCardComponent,
     ClassroomStudentsComponent,
-    AttendanceItemComponent,
-    ClassroomStatCardComponent,
-    DatePipe
+    ClassroomGeneralComponent,
+    MATERIAL_IMPORTS
   ]
 })
 export class ClassroomComponent implements OnInit {
@@ -92,7 +86,6 @@ export class ClassroomComponent implements OnInit {
     this.classroomService.get(path).subscribe({
       next: (classroom: Class) => {
         this.classroom = classroom;
-        console.log("OLHA PRA CA",  this.classroom.active,)
         this.toastr.success('Turma carregada com sucesso!');
       },
       error: (error) => {

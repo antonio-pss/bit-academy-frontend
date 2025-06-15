@@ -1,62 +1,72 @@
-<section class="col-12 lg:col-12">
-  <mat-card class="card p-2 h-full cursor-pointer class-card" (click)="showClassData()">
-    <mat-card-content class="card-body">
-      <div class="flex justify-content-between align-items-start mb-4">
-        <div>
-          <h3 class="m-0 font-medium">{{ classroom.name || 'Sem título' }}</h3>
-          <p class="m-0 text-secondary text-sm mt-1">
-            <strong>Dias:</strong>
-            <span *ngIf="daysDisplay !== 'Não agendado'; else naoAgendado">{{ daysDisplay }}</span>
-            <ng-template #naoAgendado><span>Não agendado</span></ng-template>
-          </p>
-          <p class="m-0 text-secondary text-xs mt-1">
-            <strong>Descrição:</strong> {{ classroom.description || 'Sem descrição' }}
-          </p>
-          <p class="m-0 text-secondary text-xs mt-1">
-            <strong>Carga horária:</strong> {{ classroom.hours_per_class }}h
-          </p>
-        </div>
-        <div class="flex align-items-center gap-1">
-          <i class="pi pi-users text-secondary"></i>
-          <span class="text-sm">{{ studentCount ?? 0 }}</span>
-        </div>
-      </div>
+<mat-card
+  class="class-card p-2"
+  [matTooltip]="classroom.description || 'Sem descrição'"
+  matTooltipPosition="below"
+>
+  <mat-card-content>
 
-      <div class="flex justify-content-between align-items-center mb-4">
-        <div>
-          <span class="text-secondary text-xs">Nota Média</span>
-          <div class="flex align-items-center gap-1 mt-1">
-            <i class="pi pi-star-fill text-yellow-500"></i>
-            <span class="text-sm font-medium">{{ gradeAverage | number: '1.1-2' }}</span>
-          </div>
-        </div>
-        <div class="progress-ring">
-          <svg viewBox="0 0 36 36">
-            <circle class="progress-ring-bg" cx="18" cy="18" r="16"></circle>
-            <circle
-              class="progress-ring-fill"
-              cx="18"
-              cy="18"
-              r="16"
-              [attr.stroke-dasharray]="progressPercentage + ', 100'"
-              stroke-dashoffset="22"
-            ></circle>
-          </svg>
-          <div class="progress-text">{{ progressPercentage }}%</div>
-        </div>
-      </div>
+    <!-- Nome da sala -->
+    <div class="w-full text-center mb-2">
+      <h3 class="font-bold text-lg text-truncate">{{ classroom.name || 'Sem título' }}</h3>
+    </div>
 
-      <div class="flex justify-content-between align-items-center">
-        <div class="flex align-items-center gap-1">
-          <i class="pi pi-file-edit text-secondary"></i>
-          <span class="text-sm">{{ assignmentsCount ?? 0 }} Atividades</span>
-        </div>
-        <span class="badge"
-              [ngClass]="classroom?.active === false ? 'badge-danger' : 'badge-success'">
-            {{ classroom?.active === false ? 'Desativado' : 'Ativo' }}
+    <!-- Alunos e Atividades -->
+    <div class="flex justify-content-between align-items-center mb-2">
+      <div class="flex flex-column align-items-center" style="flex: 1;">
+        <span class="font-bold text-xl">{{ metrics?.total_students ?? '--' }}</span>
+        <span class="text-xs text-secondary">Alunos</span>
+      </div>
+      <div class="flex flex-column align-items-center" style="flex: 1;">
+        <span class="font-bold text-xl">{{ metrics?.total_activities ?? '--' }}</span>
+        <span class="text-xs text-secondary">Atividades</span>
+      </div>
+    </div>
+
+    <!-- Dias da semana como chips -->
+    <div class="flex flex-wrap justify-content-center gap-2 mb-2 mt-1">
+      @if (classroom?.days_display?.length > 0) {
+        @for (dia of classroom.days_display; track dia) {
+          <span
+            class="bg-green-100 text-green-900 border-round-md px-2 py-1 text-xs"
+            style="white-space:nowrap;"
+          >
+        {{ dia }}
+      </span>
+        }
+      } @else {
+        <span class="bg-gray-100 text-gray-400 border-round-md px-2 py-1 text-xs">Não agendado</span>
+      }
+    </div>
+
+    <!-- Média da turma e barra de frequência -->
+    <div class="flex flex-column gap-1 px-1 mt-2">
+      <div class="flex align-items-center gap-2 mb-1">
+        <span class="text-xs">Média da Turma:</span>
+        <span class="font-bold">
+          @if (metrics?.average_grade !== undefined && metrics?.average_grade !== null) {
+            {{ metrics?.average_grade | number:'1.1-2' }}
+          } @else {
+            --
+          }
         </span>
-
       </div>
-    </mat-card-content>
-  </mat-card>
-</section>
+      <div class="flex align-items-center gap-2">
+        <span class="text-xs">Frequência média:</span>
+        <span class="font-bold min-w-3rem text-right">
+          @if (metrics?.attendance_rate !== undefined && metrics?.attendance_rate !== null) {
+            {{ metrics?.attendance_rate | number:'1.0-1' }}%
+          } @else {
+            --
+          }
+        </span>
+        <mat-progress-bar
+          class="flex-1 ml-2 min-w-6rem"
+          [value]="metrics?.attendance_rate ?? 0"
+          mode="determinate"
+          color="accent"
+        ></mat-progress-bar>
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>

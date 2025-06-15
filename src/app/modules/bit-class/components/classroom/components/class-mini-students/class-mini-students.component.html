@@ -1,0 +1,34 @@
+<section class="p-3 border-round-2xl">
+  <div class="flex align-items-center justify-content-between mb-1">
+    <span class="text-base font-semibold">Alunos</span>
+    <button
+      class="p-0 m-0 text-sm text-primary hover:underline font-bold bg-transparent border-none cursor-pointer"
+      type="button"
+      (click)="goToTab.emit()"
+    >
+      Ver todos
+    </button>
+  </div>
+  <ul class="m-0 p-0 flex flex-column gap-2">
+    @if (students.length === 0) {
+      <li class="text-sm text-gray-400">Nenhum aluno encontrado</li>
+    } @else {
+      @for (student of students.slice(1, 6); track student.id) {
+        <li class="flex align-items-center gap-2">
+          <div
+            class="flex align-items-center justify-content-center bg-gray-200 text-gray-700 border-round-lg"
+            style="width: 2.25rem; height: 2.25rem; min-width: 2.25rem; font-size: 1rem;"
+          >
+            {{ student.user.name?.[1] }}
+          </div>
+          <div class="flex flex-column">
+            <span class="font-medium text-sm text-black-alpha-90 line-height-1">{{ student.user?.name }}</span>
+            <span class="text-xs text-gray-500 line-height-1">
+              {{ roleLabels?.[student.role] ?? student.role }}
+            </span>
+          </div>
+        </li>
+      }
+    }
+  </ul>
+</section>

@@ -1,0 +1,32 @@
+<section class="p-3 surface-card border-round-2xl shadow-2 ">
+  <h3 class="text-base font-semibold mb-3">Melhores desempenhos</h3>
+  <ul class="m-0 p-0 flex flex-column gap-2">
+    @if (bestStudents.length === 0) {
+      <p class="flex justify-content-center text-sm text-gray-400 text-center w-full">
+        Ainda não há dados de desempenho.
+      </p>
+    } @else {
+      @for (student of bestStudents; track student.id) {
+        <li class="flex align-items-center gap-3 border-round p-2 bg-gray-100">
+          <div
+            class="flex align-items-center justify-content-center bg-gray-200 text-gray-700 border-round-lg"
+            style="width: 2.25rem; height: 2.25rem; min-width: 2.25rem; font-size: 1rem;"
+          >
+            {{ student.name[0] }}
+          </div>
+          <div class="flex flex-column">
+            <span class="font-medium text-sm text-black-alpha-90 line-height-1">{{ student.name }}</span>
+            <span class="text-xs text-gray-500 line-height-1">{{ student.email }}</span>
+          </div>
+          <div class="ml-auto flex flex-column align-items-end text-right">
+            <span class="font-bold text-green-600 text-base">
+              {{ student.average_grade | number: '1.1-1' }}/10
+            </span>
+            <span class="text-xs text-gray-500">Média</span>
+            <span class="text-xs text-blue-500">Freq: {{ student.attendance_rate | number: '1.0-0' }}%</span>
+          </div>
+        </li>
+      }
+    }
+  </ul>
+</section>

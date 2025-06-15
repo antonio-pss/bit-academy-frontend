@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -6,6 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {provideToastr} from 'ngx-toastr';
 import {provideHttpClient} from '@angular/common/http';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -13,6 +14,11 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideToastr(),
     provideHttpClient(),
-    provideNativeDateAdapter()
+    provideNativeDateAdapter(),
+    importProvidersFrom(
+      NgxEchartsModule.forRoot({
+        echarts: () => import('echarts')
+      })
+    )
   ]
 };

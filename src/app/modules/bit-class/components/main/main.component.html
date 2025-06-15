@@ -1,7 +1,7 @@
 <div class="flex flex-row h-screen overflow-hidden">
   <!-- Sidebar (parte fixa do layout) -->
-  <aside class="bg-primary text-white flex flex-column transition-all duration-300 ease-in-out"
-         [ngClass]="{ 'w-3rem': isCollapsed, 'w-15rem': !isCollapsed }">
+  <aside class="bg-primary text-white flex flex-column transition-all duration-300 ease-in-out "
+         [ngClass]="{ 'w-5rem': isCollapsed, 'w-15rem': !isCollapsed }">
     <!-- Logo Section -->
     <div class="flex align-items-center justify-content-center py-4 border-bottom-1 border-white border-opacity-10"
          [ngClass]="{ 'px-2': isCollapsed, 'px-4': !isCollapsed }">
@@ -18,7 +18,7 @@
     </div>
 
     <!-- Menu Items -->
-    <nav class="flex flex-column gap-1 w-full flex-grow-1 p-2">
+    <nav class="flex flex-column gap-1 w-full flex-grow-1">
       @for (item of menuItems; track item.label) {
         <a (click)="onNavigate(item.route)"
            [class.active-menu-item]="activeRoute === item.route"

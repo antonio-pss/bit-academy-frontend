@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable, of, Subject, switchMap, tap, throwError} from 'rxjs';
 import {jwtDecode} from 'jwt-decode';
 
@@ -9,7 +9,8 @@ import {jwtDecode} from 'jwt-decode';
 })
 export class GeneralService {
 
-  constructor(private httpClient: HttpClient,) {}
+  constructor(private httpClient: HttpClient,) {
+  }
 
   public unsubscribe = new Subject();
 
@@ -32,14 +33,14 @@ export class GeneralService {
     if (!token) {
       return throwError(() => new Error('Token não encontrado no armazenamento.'));
     }
-    return of(new HttpHeaders({ "Authorization": "Bearer ".concat(token) }));
+    return of(new HttpHeaders({"Authorization": "Bearer ".concat(token)}));
   }
 
 
   public post(path: string, body: any): Observable<any> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
-        this.httpClient.post(path, body, { headers, withCredentials: true })
+        this.httpClient.post(path, body, {headers, withCredentials: true})
       )
     );
   }
@@ -78,7 +79,7 @@ export class GeneralService {
   }
 
 
-  public getById(path: string, id:number): Observable<any> {
+  public getById(path: string, id: number): Observable<any> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
         this.httpClient.get(path + id + '/', {headers})
@@ -90,7 +91,7 @@ export class GeneralService {
   public patch(body: any, path: string): Observable<HttpResponse<any>> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
-        this.httpClient.patch(path + body.id + '/', body, { headers }).pipe(
+        this.httpClient.patch(path + body.id + '/', body, {headers}).pipe(
           tap((response: any) => response),
         )
       )
@@ -115,7 +116,7 @@ export class GeneralService {
   public update(path: string, id: number, body: any): Observable<HttpResponse<any>> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
-        this.httpClient.put(`${path}${id}/`, body, { headers, observe: 'response', withCredentials: true }).pipe(
+        this.httpClient.put(`${path}${id}/`, body, {headers, observe: 'response', withCredentials: true}).pipe(
           tap((response: any) => response)
         )
       )
@@ -126,21 +127,37 @@ export class GeneralService {
   public delete(path: string, id: number): Observable<HttpResponse<any>> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
-        this.httpClient.delete(path + id + '/', { headers }).pipe(
+        this.httpClient.delete(path + id + '/', {headers}).pipe(
           tap((response: any) => response),
         )
       )
     );
   }
-
 
   public onDelete(path: string): Observable<HttpResponse<any>> {
     return this.getHeaders().pipe(
       switchMap((headers) =>
-        this.httpClient.delete(path, { headers }).pipe(
+        this.httpClient.delete(path, {headers}).pipe(
           tap((response: any) => response),
         )
       )
     );
   }
+
+
+  public getWithParams<T>(url: string, paramsObj: any = {}): Observable<T> {
+    let params = new HttpParams();
+    for (const key in paramsObj) {
+      if (paramsObj[key] !== undefined && paramsObj[key] !== null && paramsObj[key] !== '') {
+        params = params.set(key, paramsObj[key]);
+      }
+    }
+    return this.getHeaders().pipe(
+      switchMap((headers) =>
+        this.httpClient.get<T>(url, {headers, params})
+      )
+    );
+  }
+
+
 }

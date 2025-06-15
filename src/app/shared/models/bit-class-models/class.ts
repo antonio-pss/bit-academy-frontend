@@ -17,4 +17,9 @@ export interface Class extends ModelBase {
   days_per_week: string;
   hours_per_class: number;
   days_display?: string[]; // Propriedade opcional para a exibição dos dias
+
+  total_students: number;
+  total_activities: number;
+  average_grade: number;
+  attendance_rate: number;
 }

@@ -1,31 +1,26 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {Class} from '../../../../shared/models/bit-class-models/class';
-import {GeneralService} from '../../../../shared/services/general.service';
-import {EndpointsService} from '../../../../shared/services/endpoints.service';
-import {MATERIAL_IMPORTS} from '../../../../shared/imports/material.imports';
+import {TeacherPerformance} from '../../../../../shared/models/bit-class-models/teacher-performance';
+import {Class} from '../../../../../shared/models/bit-class-models/class';
 import {MatDialog} from '@angular/material/dialog';
+import {GeneralService} from '../../../../../shared/services/general.service';
+import {EndpointsService} from '../../../../../shared/services/endpoints.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {ClassItemDialogComponent} from '../home/class-list/class-item-dialog/class-item-dialog.component';
-import {TeacherPerformance} from '../../../../shared/models/bit-class-models/teacher-performance';
-import {MyClassGeneralComponent} from './my-class-general/my-class-general.component';
-import {MyClassMetricsComponent} from './my-class-metrics/my-class-metrics.component';
-import {TeacherKpiCardsComponent} from './components/teacher-kpi-cards/teacher-kpi-cards.component';
+import {ClassItemDialogComponent} from '../../home/class-list/class-item-dialog/class-item-dialog.component';
+import {ClassCardComponent} from '../../home/class-list/class-card/class-card.component';
+import {FormsModule} from '@angular/forms';
+import {MATERIAL_IMPORTS} from '../../../../../shared/imports/material.imports';
 
 @Component({
-  selector: 'app-my-class',
-  imports: [
+  selector: 'app-my-class-general',
+  imports: [ClassCardComponent,
     FormsModule,
-    ...MATERIAL_IMPORTS,
-    MyClassGeneralComponent,
-    MyClassMetricsComponent,
-    TeacherKpiCardsComponent,
+    ...MATERIAL_IMPORTS
   ],
-  templateUrl: './my-class.component.html',
-  styleUrl: './my-class.component.scss'
+  templateUrl: './my-class-general.component.html',
+  styleUrl: './my-class-general.component.scss'
 })
-export class MyClassComponent implements OnInit {
+export class MyClassGeneralComponent implements OnInit {
   @Output() open = new EventEmitter<boolean>();
 
   public teacherPerformance: TeacherPerformance | null = null;
