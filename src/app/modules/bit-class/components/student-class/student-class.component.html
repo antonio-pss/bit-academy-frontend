@@ -1,0 +1,49 @@
+<div class="p-4">
+  <h2 class="text-xl font-semibold mb-4">Minhas Salas (Sou aluno)</h2>
+
+  <!-- Campo de busca -->
+  <mat-form-field appearance="outline" class="w-full mb-4">
+    <mat-label>Buscar sala</mat-label>
+    <input
+      matInput
+      placeholder="Digite o nome da sala"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+    />
+    <button matSuffix mat-icon-button aria-label="Limpar">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <!-- Lista de salas -->
+  @if (filteredClasses.length > 0) {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      @for (classItem of filteredClasses; track classItem.id) {
+        <mat-card class="mb-4 shadow-lg">
+          <mat-card-title class="text-lg">{{ classItem.name }}</mat-card-title>
+          <mat-card-content>
+            <p>{{ classItem.description || 'Sem descrição' }}</p>
+            <p class="text-sm text-gray-500">
+              <strong>Dias:</strong> {{ classItem.days_per_week || 'Não informado' }}
+            </p>
+            <p class="text-sm text-gray-500">
+              <strong>Horas/aula:</strong> {{ classItem.hours_per_class }}h
+            </p>
+          </mat-card-content>
+          <mat-card-actions class="flex justify-end">
+            <button
+              mat-stroked-button
+              color="warn"
+              (click)="onLeaveClass(classItem.id)">
+              Sair da sala
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  } @else {
+    <div class="text-center text-gray-500 mt-8">
+      <p>Você não está em nenhuma sala como aluno.</p>
+    </div>
+  }
+</div>

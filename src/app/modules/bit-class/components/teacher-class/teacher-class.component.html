@@ -1,0 +1,34 @@
+<section class="card">
+  <section class="card-header flex flex-row justify-content-between align-items-center">
+    <h2 class="m-0 text-xl font-bold">Minhas salas (Sou professor)</h2>
+    <mat-form-field class="w-full sm:w-30rem" appearance="outline">
+      <mat-label>Buscar salas...</mat-label>
+      <input matInput type="text" [(ngModel)]="searchTerm" (input)="onSearch()">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </section>
+
+  @if (paginatedClasses.length > 0) {
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+      @for (classroom of paginatedClasses; track classroom.id) {
+        <app-class-card
+          [classroom]="classroom"
+          (click)="onNavigate('class/classroom/' + classroom.id)">
+        </app-class-card>
+      }
+    </section>
+  } @else {
+    <div class="flex justify-content-center align-items-center w-full mt-4">
+      <p class="text-gray-500"><strong>Nenhuma sala encontrada para você como professor.</strong></p>
+    </div>
+  }
+
+  <section class="pagination flex justify-content-end align-items-center mt-4">
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      [length]="filteredClasses.length"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </section>
+</section>

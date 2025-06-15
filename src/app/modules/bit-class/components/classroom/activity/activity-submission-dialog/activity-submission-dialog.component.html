@@ -1,12 +1,37 @@
-<form [formGroup]="submissionForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-4 p-4">
-  <!-- Adicione campos conforme sua necessidade -->
-  <mat-form-field appearance="outline" class="w-full">
-    <mat-label>Resposta (link ou texto)</mat-label>
-    <input matInput formControlName="answer" placeholder="Coloque o link da resposta ou digite...">
-  </mat-form-field>
+<h2 mat-dialog-title>Responder Atividade</h2>
 
-  <div class="flex justify-content-end gap-2">
-    <button mat-button type="button" (click)="closeDialog(false)">Cancelar</button>
-    <button mat-flat-button color="primary" type="submit" [disabled]="submissionForm.invalid">Enviar</button>
-  </div>
-</form>
+<mat-dialog-content class="p-4">
+  <form [formGroup]="submissionForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-4">
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Resposta (texto)</mat-label>
+      <textarea
+        matInput
+        formControlName="answer"
+        rows="4"
+        placeholder="Digite sua resposta textual aqui (opcional caso anexe arquivo)"
+      ></textarea>
+    </mat-form-field>
+
+    <div class="flex flex-column gap-1">
+      <label for="fileInput">Anexar Arquivo (opcional):</label>
+      <input
+        type="file"
+        id="fileInput"
+        (change)="onFileSelected($event)"
+        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp4,.avi,.txt"
+      />
+      @if (file !== null) {
+        <small>Arquivo selecionado: {{ file.name }}</small>
+      }
+    </div>
+
+    <div class="flex justify-content-end gap-3 mt-4">
+      <button mat-button type="button" (click)="closeDialog()">Cancelar</button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="loading">
+        {{ loading ? 'Enviando...' : 'Enviar Resposta' }}
+      </button>
+    </div>
+
+  </form>
+</mat-dialog-content>

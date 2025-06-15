@@ -59,7 +59,7 @@ export class ActivityItemDialogComponent {
             this.closeDialog(true);
           },
           error: (err) => {
-            this.toastr.error('Erro ao criar atividade');
+            this.toastr.error(err.detail,'Erro ao criar atividade');
             console.error(err);
           }
         });

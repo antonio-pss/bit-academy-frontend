@@ -19,7 +19,6 @@ import {ClassItemDialogComponent} from '../home/class-list/class-item-dialog/cla
 @Component({
   selector: 'app-my-class',
   imports: [
-    ClassCardComponent,
     FormsModule,
     MatButton,
     MatFormField,
@@ -29,7 +28,8 @@ import {ClassItemDialogComponent} from '../home/class-list/class-item-dialog/cla
     MatOption,
     MatPaginator,
     MatSelect,
-    MatSuffix
+    MatSuffix,
+    ClassCardComponent
   ],
   templateUrl: './my-class.component.html',
   styleUrl: './my-class.component.scss'
