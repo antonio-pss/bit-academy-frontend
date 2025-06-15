@@ -49,7 +49,8 @@ export class MainComponent {
 
     this.menuItems = [
       {label: 'Início', icon: 'home', route: 'home'},
-      {label: 'Minhas salas', icon: 'co_present', route: 'my-class'},
+      {label: 'Sou professor', icon: 'co_present', route: 'teacher-class'},
+      {label: 'Sou aluno', icon: 'co_present', route: 'student-class'},
       {label: 'Calendário', icon: 'calendar_month', route: '#'},
       {label: 'Material', icon: 'book_2', route: '#'},
       {label: 'Avaliação', icon: 'library_books', route: 'activity'},
