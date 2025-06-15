@@ -41,8 +41,7 @@ export class ClassListComponent implements OnInit {
     private readonly toastr: ToastrService,
     private readonly endpoint: EndpointsService,
     private readonly router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.loadClasses();
@@ -99,7 +98,7 @@ export class ClassListComponent implements OnInit {
   }
 
   public loadClasses() {
-    this.classService.get(this.endpoint.path.class).subscribe({
+    this.classService.get(this.endpoint.path.myTeacherClass).subscribe({
       next: (classes: Class[]) => {
         this.displayedClasses = classes;
         this.filteredClasses = [...this.displayedClasses];
